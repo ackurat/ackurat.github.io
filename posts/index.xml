@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on A Hugo test</title>
+    <title>Posts on Adam CL</title>
     <link>http://adamliliemark.github.io/posts/</link>
-    <description>Recent content in Posts on A Hugo test</description>
+    <description>Recent content in Posts on Adam CL</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 19 Jun 2022 16:04:15 +0200</lastBuildDate><atom:link href="http://adamliliemark.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Next</title>
+      <title>Placeholder</title>
       <link>http://adamliliemark.github.io/posts/next/</link>
       <pubDate>Sun, 19 Jun 2022 16:04:15 +0200</pubDate>
       
       <guid>http://adamliliemark.github.io/posts/next/</guid>
-      <description>Once again. Once more.</description>
-    </item>
-    
-    <item>
-      <title>Test</title>
-      <link>http://adamliliemark.github.io/posts/test/</link>
-      <pubDate>Sun, 19 Jun 2022 15:55:08 +0200</pubDate>
-      
-      <guid>http://adamliliemark.github.io/posts/test/</guid>
-      <description>This is just a test. Testing out PaperMod.</description>
+      <description>This is just a placeholder. Placeholder.</description>
     </item>
     
   </channel>
