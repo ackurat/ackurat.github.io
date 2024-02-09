@@ -27,8 +27,5 @@
 		"svelte-preprocess": "^5.0.4",
 		"vite": "^4.5.2"
 	},
-	"type": "module",
-	"dependencies": {
-		"reveal.js": "^5.0.4"
-	}
+	"type": "module"
 }
