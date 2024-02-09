@@ -44,7 +44,7 @@ const config = {
 			]
 		},
 		paths: {
-			base: dev ? '' : '/ackurat.github.io'
+			base: dev ? '' : '/'
 		}
 	}
 }
