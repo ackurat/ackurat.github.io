@@ -44,7 +44,7 @@ const config = {
 			]
 		},
 		paths: {
-			base: dev ? '' : '/fladan.se'
+			base: dev ? '' : '/ackurat.github.io'
 		}
 	}
 }
