@@ -42,9 +42,6 @@ const config = {
 				'/about',
 				'/404'
 			]
-		},
-		paths: {
-			base: dev ? '' : '/'
 		}
 	}
 }
