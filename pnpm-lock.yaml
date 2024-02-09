@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  reveal.js:
-    specifier: ^5.0.4
-    version: 5.0.4
-
 devDependencies:
   '@sveltejs/adapter-static':
     specifier: ^2.0.3
@@ -30,7 +25,7 @@ devDependencies:
     version: 2.33.2(eslint@8.49.0)(svelte@4.2.10)
   kit-monorepo:
     specifier: github:sveltejs/kit
-    version: github.com/sveltejs/kit/c749e85d2502d5eac03f739c8f18a2f3a4dcb13e
+    version: github.com/sveltejs/kit/bbdd6e2a33875f39732b7d4c246db21bf17419f8
   mdsvex:
     specifier: ^0.10.6
     version: 0.10.6(svelte@4.2.10)
@@ -1477,11 +1472,6 @@ packages:
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
     dev: true
 
-  /reveal.js@5.0.4:
-    resolution: {integrity: sha512-480pVhre9SXWuE4QbDwG0nPrip3TkifflqaKQWF8Ynf4iYIUBfgu5leeMso0srubQsZQ+G2OzktAfAkrvBY0Ww==}
-    engines: {node: '>=18.0.0'}
-    dev: false
-
   /rimraf@2.7.1:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
@@ -1906,8 +1896,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/sveltejs/kit/c749e85d2502d5eac03f739c8f18a2f3a4dcb13e:
-    resolution: {tarball: https://codeload.github.com/sveltejs/kit/tar.gz/c749e85d2502d5eac03f739c8f18a2f3a4dcb13e}
+  github.com/sveltejs/kit/bbdd6e2a33875f39732b7d4c246db21bf17419f8:
+    resolution: {tarball: https://codeload.github.com/sveltejs/kit/tar.gz/bbdd6e2a33875f39732b7d4c246db21bf17419f8}
     name: kit-monorepo
     version: 0.0.1
     engines: {pnpm: ^8.0.0}
