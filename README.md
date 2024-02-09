@@ -1,1 +1,1 @@
-Personal website.
+I'm a professional software engineer from Sweden. I work at [Klarna](https://klarna.com), a Swedish fintech company. My work revolves around backend development, specialising in event driven services backed by Kafka, SQS and Postgres. I mainly work in TypeScript, but delve into Go on my spare time.

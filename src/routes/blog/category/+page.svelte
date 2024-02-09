@@ -1,0 +1,23 @@
+<script>
+	import { base } from '$app/paths'
+
+	export let data
+	const { uniqueCategories } = data
+</script>
+
+<svelte:head>
+	<title>Blog | Categories</title>
+</svelte:head>
+
+<div class="compressed-content">
+	<h1 class="h2">Articles by category</h1>
+
+	<ul>
+		{#each uniqueCategories as category}
+			<li>
+				<a href="{base}/blog/category/{category.title}">{category.title}</a>
+				({category.count})
+			</li>
+		{/each}
+	</ul>
+</div>
