@@ -1,0 +1,23 @@
+<rss version="2.0">
+	<channel>
+		<title>Adam CL</title>
+		<link>https://ackurat.github.io/</link>
+		<description>Recent articles from Adam CL</description>
+		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
+		<language>en-us</language>
+		<lastBuildDate :text="$build.generated.formatHTTP()"></lastBuildDate>
+		<ctx :loop="$page.subpages()">
+			<item>
+				<title :text="$loop.it.title"></title>
+				<link :text="$site.host_url.addPath($loop.it.link())"></link>
+				<pubDate :text="$loop.it.date.formatHTTP()"></pubDate>
+				<guid :text="$site.host_url.addPath($loop.it.link())"></guid>
+				<description :text="$loop.it.description"></description>
+				<!-- 
+				As of now, this can't be used because it's not possible to get the content of a subpage.
+				<description :text="$site.page($loop.it.link()).content()"></description> 
+				-->
+			</item>
+		</ctx>
+	</channel>
+</rss>

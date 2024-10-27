@@ -1,0 +1,11 @@
+.{
+    .name = "ackurat.github.io",
+    .version = "0.0.0",
+    .dependencies = .{
+        .zine = .{
+            .url = "git+https://github.com/kristoff-it/zine#c3f20db491f73de504bb42867bb0f2d6f6de3116",
+            .hash = "12201cb1a2faa0cc105567709cbb88739202ca677a6eef8ed03047fd68e792ffaed6",
+        },
+    },
+    .paths = .{"."},
+}

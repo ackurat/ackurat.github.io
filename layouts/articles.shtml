@@ -1,0 +1,34 @@
+<extend template="base.shtml">
+    <title id="title">Articles</title>
+    <head id="head"></head>
+    <div id="content">
+      <style>
+        h1 {
+      text-align: left;
+    }
+        h2,
+        h3 {
+          text-align: center;
+        }
+      </style>
+      <div>
+        <h1 style="margin-bottom:0;">
+          Articles
+        </h1>
+
+        <div>
+          <div :loop="$page.subpages()">
+            <a href="$loop.it.link()" class="post-link" :text="$loop.it.title"></a>
+            <span class="post-byline" style="margin-bottom: 1rem;" :text="$loop.it.date.format('January 02, 2006')"></span>
+          </div>
+        </div>
+
+
+        <hr>
+  <div id="prev-next">
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+      </div>
+    </div>
