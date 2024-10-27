@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="head">
+    <meta charset="utf-8">
+    <title id="title">
+      Setting up a site with Zine
+      | Adam CL
+    </title>
+    <meta name="description" content="I&apos;ve started building out this simple site for myself, where I&apos;ll hopefully continue writing about programming and tech. I&apos;ve created the site using the Zine static site generator, as I&apos;ve lately found an interest in the Zig language.">
+    <meta property="og:title" content="Setting up a site with Zine">
+    <meta property="og:type" content="website">
+    <!-- <meta
+    property="og:image"
+    content="$site.host_url.addPath($site.asset('logo.png').link())"
+  > -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link type="text/css" rel="stylesheet" href="/reset.css?bust">
+    <link type="text/css" rel="stylesheet" href="/main.css?bust2">
+    <link type="text/css" rel="stylesheet" href="/highlight.css?bust">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=EB+Garamond">
+    <!-- <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script> -->
+    
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
+  </head>
+  <body>
+    <script>
+
+      /**
+       * Implements a tri-state theme switch (i.e. light/dark mode) allowing an
+       * explicit setting of one or the other, or inheriting the operating system's
+       * default and styling accordingly.
+       * 
+       * The reason this is in a template file as opposed to a separate JavaScript is
+       * so that it's parsed inline with the HTML body and given a chance to run
+       * before the page is rendered, thereby avoiding the common pitfall of briefly
+       * "flashing" the wrong theme when the page initially loads. Under this
+       * framework, there's one initial call to `setThemeFromLocalStorage()` inline,
+       * so the theme always appears correct on first render.
+       */
+      
+      const LOCAL_STORAGE_KEY_THEME = 'theme';
+      
+      const THEME_VALUE_AUTO  = 'auto';
+      const THEME_VALUE_DARK  = 'dark';
+      const THEME_VALUE_LIGHT = 'light';
+      
+      const THEME_CLASS_DARK            = 'dark';           // activates dark mode styling
+      const THEME_CLASS_DARK_OVERRIDE   = 'dark_override';  // slides toggle to dark mode
+      const THEME_CLASS_LIGHT           = 'light';          // here for consistency, but has no real effect
+      const THEME_CLASS_LIGHT_OVERRIDE  = 'light_override'; // slides toggle to light mode
+      
+      const THEME_CLASS_ALL = Object.freeze([
+          THEME_CLASS_DARK,
+          THEME_CLASS_DARK_OVERRIDE,
+          THEME_CLASS_LIGHT,
+          THEME_CLASS_LIGHT_OVERRIDE,
+      ])
+      
+      function setDocumentClasses(...classes) {
+          THEME_CLASS_ALL.forEach((themeClass) => {
+              if (classes.includes(themeClass)) {
+                  document.documentElement.classList.add(themeClass)
+              } else {
+                  document.documentElement.classList.remove(themeClass)
+              }
+          })
+      }
+      
+      // Sets light or dark mode based on a preference from local storage, or if none
+      // is set there, sets based on preference from `prefers-color-scheme` CSS.
+      function setThemeFromLocalStorageOrMediaPreference() {
+          const theme = localStorage.getItem(LOCAL_STORAGE_KEY_THEME) || THEME_VALUE_AUTO
+      
+          switch (theme) {
+              case THEME_VALUE_AUTO:
+                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                      setDocumentClasses(THEME_CLASS_DARK)
+                  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                      setDocumentClasses(THEME_CLASS_LIGHT)
+                  }
+                  break
+      
+              case THEME_VALUE_DARK:
+                  setDocumentClasses(THEME_CLASS_DARK, THEME_CLASS_DARK_OVERRIDE)
+                  break
+      
+              case THEME_VALUE_LIGHT:
+                  setDocumentClasses(THEME_CLASS_LIGHT, THEME_CLASS_LIGHT_OVERRIDE)
+                  break
+          }
+      
+          console.log(`theme is: ${theme}`)
+      
+          document.querySelectorAll(`.theme_toggle input[value='${theme}']`).forEach((toggle) => {
+          console.log(`set toggle`)
+              toggle.checked = true;
+          })
+      }
+      
+      // See comment above, but this call must be made inline to avoid briefly
+      // flashing the wrong theme on initial page load.
+      setThemeFromLocalStorageOrMediaPreference()
+      
+      // Runs on initial page load. Add change listeners to light/dark toggles that
+      // set a local storage key and trigger a theme change.
+      window.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('.theme_toggle input').forEach((toggle) => {
+              toggle.addEventListener('change', (e) => {
+                  if (e.target.checked) {
+                      if (e.target.value == THEME_VALUE_AUTO) {
+                          localStorage.removeItem(LOCAL_STORAGE_KEY_THEME)
+                      } else {
+                          localStorage.setItem(LOCAL_STORAGE_KEY_THEME, e.target.value)
+                      }
+                  }
+      
+                  setThemeFromLocalStorageOrMediaPreference()
+              }, false)
+          })
+      
+          // We already our theme "early" to avoid a flash that would occur if we only
+          // set it here on content loaded, but set it one more time so that we set
+          // the theme toggle to the appropriate value. It's not loaded yet when we
+          // set the theme the first time.
+          setThemeFromLocalStorageOrMediaPreference()
+      })
+      
+      // Listen for local storage changes on our theme key. This allows one tab to be
+      // notified if the theme is changed in another and update itself accordingly.
+      window.addEventListener("storage", (e) => {
+          if (e.key == LOCAL_STORAGE_KEY_THEME) {
+              setThemeFromLocalStorageOrMediaPreference()
+          }
+      })
+      
+      // Watch for OS-level changes in preference for light/dark mode. This will
+      // trigger for example if a user explicitly changes their OS-level light/dark
+      // configuration, or on sunrise/sunset if they have it set to automatic.
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+          setThemeFromLocalStorageOrMediaPreference()
+      })
+      
+      </script>
+    <div id="content">
+      
+  
+  <h1>Setting up a site with Zine</h1>
+  <p class="post-byline">
+    <span>October 27, 2024</span>
+    •
+    <span>2</span>
+    min read • by
+    <b>Adam CL</b>
+    <span></span>
+  </p>
+  <div id="post-description">I've started building out this simple site for myself, where I'll hopefully continue writing about programming and tech. I've created the site using the Zine static site generator, as I've lately found an interest in the Zig language.</div>
+  <!-- <div :html="$page.toc()"></div> -->
+  <div id="post-body"><h2>First Steps</h2><p>Were me just copying the Zine creator <a href="https://kristoff.it/" target="_blank">Kristoff’s</a> personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.</p><h2>What I Like About Zine</h2><p>I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. <code>SuperMD</code> and <code>SuperHTML</code> are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance <code>Templ</code> to generate HTML, so I’m excited to see how Zine compares.</p><h2>What’s Next</h2><p>There are some things with the site that are far from finished. For instance, the CSS is a mess, as I’ve used Kristoff’s CSS as a base and then just added some of my own. It needs cleaning up.</p><h3>Tags</h3><p>I’m adding tags to this post, but so far there’s no way to filter posts by tags. I’ll have to implement that.</p><h3>RSS</h3><p>I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p><p>The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code>only the main page can be rendered for now, sorry!</code>.</p><pre><code class="xml"><span class="punctuation delimiter">&lt;</span><span class="tag">ctx</span> <span class="error">:loop=&quot;$page.subpages()&quot;</span><span class="punctuation delimiter">&gt;</span><span class="markup">
+  </span><span class="punctuation delimiter">&lt;</span><span class="tag">item</span><span class="punctuation delimiter">&gt;</span><span class="markup">
+    </span><span class="comment">&lt;!-- 
+      Here goes the rest of the RSS info for the post
+    --&gt;</span><span class="markup">
+    </span><span class="punctuation delimiter">&lt;</span><span class="tag">description</span> <span class="error">:text=&quot;$loop.it.content()&quot;</span><span class="punctuation delimiter">&gt;</span><span class="punctuation delimiter">&lt;/</span><span class="tag">description</span><span class="punctuation delimiter">&gt;</span><span class="markup">
+  </span><span class="punctuation delimiter">&lt;/</span><span class="tag">item</span><span class="punctuation delimiter">&gt;</span><span class="markup">
+</span><span class="punctuation delimiter">&lt;/</span><span class="tag">ctx</span><span class="punctuation delimiter">&gt;</span>
+</code></pre>
+<h2>To Be Continued…</h2></div>
+  <hr>
+  <div id="prev-next">
+    <span></span>
+    <span></span>
+    <span></span>
+    <small></small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+
+    </div>
+  </body>
+</html>

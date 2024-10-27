@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="head">
+    <meta charset="utf-8">
+    <title id="title">
+      Home
+      | Adam CL
+    </title>
+    <meta name="description" content="Loris Cro&apos;s Blog">
+    <meta property="og:title" content="Home">
+    <meta property="og:type" content="website">
+    <!-- <meta
+    property="og:image"
+    content="$site.host_url.addPath($site.asset('logo.png').link())"
+  > -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link type="text/css" rel="stylesheet" href="/reset.css?bust">
+    <link type="text/css" rel="stylesheet" href="/main.css?bust2">
+    <link type="text/css" rel="stylesheet" href="/highlight.css?bust">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=EB+Garamond">
+    <!-- <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script> -->
+    
+  </head>
+  <body>
+    <script>
+
+      /**
+       * Implements a tri-state theme switch (i.e. light/dark mode) allowing an
+       * explicit setting of one or the other, or inheriting the operating system's
+       * default and styling accordingly.
+       * 
+       * The reason this is in a template file as opposed to a separate JavaScript is
+       * so that it's parsed inline with the HTML body and given a chance to run
+       * before the page is rendered, thereby avoiding the common pitfall of briefly
+       * "flashing" the wrong theme when the page initially loads. Under this
+       * framework, there's one initial call to `setThemeFromLocalStorage()` inline,
+       * so the theme always appears correct on first render.
+       */
+      
+      const LOCAL_STORAGE_KEY_THEME = 'theme';
+      
+      const THEME_VALUE_AUTO  = 'auto';
+      const THEME_VALUE_DARK  = 'dark';
+      const THEME_VALUE_LIGHT = 'light';
+      
+      const THEME_CLASS_DARK            = 'dark';           // activates dark mode styling
+      const THEME_CLASS_DARK_OVERRIDE   = 'dark_override';  // slides toggle to dark mode
+      const THEME_CLASS_LIGHT           = 'light';          // here for consistency, but has no real effect
+      const THEME_CLASS_LIGHT_OVERRIDE  = 'light_override'; // slides toggle to light mode
+      
+      const THEME_CLASS_ALL = Object.freeze([
+          THEME_CLASS_DARK,
+          THEME_CLASS_DARK_OVERRIDE,
+          THEME_CLASS_LIGHT,
+          THEME_CLASS_LIGHT_OVERRIDE,
+      ])
+      
+      function setDocumentClasses(...classes) {
+          THEME_CLASS_ALL.forEach((themeClass) => {
+              if (classes.includes(themeClass)) {
+                  document.documentElement.classList.add(themeClass)
+              } else {
+                  document.documentElement.classList.remove(themeClass)
+              }
+          })
+      }
+      
+      // Sets light or dark mode based on a preference from local storage, or if none
+      // is set there, sets based on preference from `prefers-color-scheme` CSS.
+      function setThemeFromLocalStorageOrMediaPreference() {
+          const theme = localStorage.getItem(LOCAL_STORAGE_KEY_THEME) || THEME_VALUE_AUTO
+      
+          switch (theme) {
+              case THEME_VALUE_AUTO:
+                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                      setDocumentClasses(THEME_CLASS_DARK)
+                  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                      setDocumentClasses(THEME_CLASS_LIGHT)
+                  }
+                  break
+      
+              case THEME_VALUE_DARK:
+                  setDocumentClasses(THEME_CLASS_DARK, THEME_CLASS_DARK_OVERRIDE)
+                  break
+      
+              case THEME_VALUE_LIGHT:
+                  setDocumentClasses(THEME_CLASS_LIGHT, THEME_CLASS_LIGHT_OVERRIDE)
+                  break
+          }
+      
+          console.log(`theme is: ${theme}`)
+      
+          document.querySelectorAll(`.theme_toggle input[value='${theme}']`).forEach((toggle) => {
+          console.log(`set toggle`)
+              toggle.checked = true;
+          })
+      }
+      
+      // See comment above, but this call must be made inline to avoid briefly
+      // flashing the wrong theme on initial page load.
+      setThemeFromLocalStorageOrMediaPreference()
+      
+      // Runs on initial page load. Add change listeners to light/dark toggles that
+      // set a local storage key and trigger a theme change.
+      window.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('.theme_toggle input').forEach((toggle) => {
+              toggle.addEventListener('change', (e) => {
+                  if (e.target.checked) {
+                      if (e.target.value == THEME_VALUE_AUTO) {
+                          localStorage.removeItem(LOCAL_STORAGE_KEY_THEME)
+                      } else {
+                          localStorage.setItem(LOCAL_STORAGE_KEY_THEME, e.target.value)
+                      }
+                  }
+      
+                  setThemeFromLocalStorageOrMediaPreference()
+              }, false)
+          })
+      
+          // We already our theme "early" to avoid a flash that would occur if we only
+          // set it here on content loaded, but set it one more time so that we set
+          // the theme toggle to the appropriate value. It's not loaded yet when we
+          // set the theme the first time.
+          setThemeFromLocalStorageOrMediaPreference()
+      })
+      
+      // Listen for local storage changes on our theme key. This allows one tab to be
+      // notified if the theme is changed in another and update itself accordingly.
+      window.addEventListener("storage", (e) => {
+          if (e.key == LOCAL_STORAGE_KEY_THEME) {
+              setThemeFromLocalStorageOrMediaPreference()
+          }
+      })
+      
+      // Watch for OS-level changes in preference for light/dark mode. This will
+      // trigger for example if a user explicitly changes their OS-level light/dark
+      // configuration, or on sunrise/sunset if they have it set to automatic.
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+          setThemeFromLocalStorageOrMediaPreference()
+      })
+      
+      </script>
+    <div id="content">
+      
+  <style>
+    h1 {
+      text-align: left;
+    }
+    h2,
+    h3 {
+      text-align: center;
+    }
+  </style>
+  <div>
+    <div class="header">
+    <h1 style="margin-bottom:0;">
+      Adam CL
+    </h1>
+      <div class="theme_toggle">
+        <input value="light" id="light" name="theme_toggle_state" type="radio">
+        <label for='light'><span>
+          <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" stroke="#ffce0d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+        </span></label>
+        <input value="auto" id="auto" name="theme_toggle_state" type="radio">
+        <label for='auto'><span>auto</span></label>
+        <input value="dark" id="dark" name="theme_toggle_state" type="radio">
+        <label for='dark'><span>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M13.589 21.659c-3.873 1.038-8.517-.545-10.98-3.632a1 1 0 0 1 .751-1.623c3.984-.118 6.662-1.485 8.17-4.098 1.51-2.613 1.354-5.616-.535-9.125a1 1 0 0 1 1.03-1.463c3.904.59 7.597 3.82 8.635 7.694 1.43 5.334-1.737 10.818-7.071 12.247z" fill="#3a70a5"></path></g></svg>
+        </span></label>
+      </div>
+  
+    </div>
+
+    <div style="margin-bottom: 1rem;">
+      <p>
+        I'm a senior software engineer at <a href="https://www.klarna.com">Klarna</a>, specializing in backend development. My main areas of expertise is in event driven architecture, TypeScript and PostgreSQL. 
+      </p>
+    </div>
+
+    
+
+      <div>
+        <p>
+          <a href="/articles">Articles</a>
+          &nbsp; • &nbsp;
+        <a href="https://github.com/ackurat">GitHub</a>
+          &nbsp; • &nbsp;
+        <a href="/index.xml" rel="alternate" type="application/rss+xml">RSS feed</a>
+        </p>
+      </div>
+
+    <div>
+      <h2 style="margin-bottom: 1.75rem;">
+        Recent articles
+      </h2>
+      <div>
+        <a href="/articles/zine/" class="post-link">Setting up a site with Zine</a>
+        <span class="post-byline" style="margin-bottom: 1rem;">October 27, 2024</span>
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </body>
+</html>
