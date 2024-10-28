@@ -12,6 +12,7 @@
   <h1 :text="$page.title"></h1>
   <p class="post-byline">
     <span :text="$page.date.format('January 02, 2006')"></span>
+    <span :if="$page.custom.get?('updated')">• Updated <b :text="$if.format('January 02, 2006')"></b></span>
     •
     <span :text="$page.wordCount().div(220).plus(1)"></span>
     min read • by
@@ -22,7 +23,6 @@
     </span>
   </p>
   <div id="post-description" :html="$page.description"></div>
-  <!-- <div :html="$page.toc()"></div> -->
   <div id="post-body" :html="$page.content()"></div>
   <hr>
   <div id="prev-next">
