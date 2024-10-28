@@ -149,6 +149,7 @@
   <h1>Setting up a site with Zine</h1>
   <p class="post-byline">
     <span>October 27, 2024</span>
+    <span>• Updated <b>October 28, 2024</b></span>
     •
     <span>2</span>
     min read • by
@@ -156,7 +157,6 @@
     <span></span>
   </p>
   <div id="post-description">I've started building out this simple site for myself, where I'll hopefully continue writing about programming and tech. I've created the site using the Zine static site generator, as I've lately found an interest in the Zig language.</div>
-  <!-- <div :html="$page.toc()"></div> -->
   <div id="post-body"><div id=cont><h2>First Steps</h2><p>Were me just copying the Zine creator <a href="https://kristoff.it/" target="_blank">Kristoff’s</a> personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.</p><h2>What I Like About Zine</h2><p>I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. <code>SuperMD</code> and <code>SuperHTML</code> are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance <code>Templ</code> to generate HTML, so I’m excited to see how Zine compares.</p><h2>What’s Next</h2><p>There are some things with the site that are far from finished. For instance, the CSS is a mess, as I’ve used Kristoff’s CSS as a base and then just added some of my own. It needs cleaning up.</p><h3>Tags</h3><p>I’m adding tags to this post, but so far there’s no way to filter posts by tags. I’ll have to implement that.</p><h3>RSS</h3><p>I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p><p>The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code>only the main page can be rendered for now, sorry!</code>.</p><pre><code class="xml"><span class="punctuation delimiter">&lt;</span><span class="tag">ctx</span> <span class="error">:loop=&quot;$page.subpages()&quot;</span><span class="punctuation delimiter">&gt;</span><span class="markup">
   </span><span class="punctuation delimiter">&lt;</span><span class="tag">item</span><span class="punctuation delimiter">&gt;</span><span class="markup">
     </span><span class="comment">&lt;!-- 
