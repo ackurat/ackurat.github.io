@@ -45,6 +45,7 @@
  h4 {
    text-transform: uppercase;
    letter-spacing: 0.140625em;
+   margin: 1rem;
  }
 
  hr {
@@ -255,6 +256,10 @@ html {
    margin-top: 1.75rem;
    display: flex;
    flex-direction: column;
+ }
+
+ #post-body p {
+  margin-bottom: 1rem;
  }
 
  #post-description {
