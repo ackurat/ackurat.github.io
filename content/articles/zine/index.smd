@@ -10,6 +10,7 @@
 }
 ---
 
+[]($section.id('cont').data('date','2024-10-28'))
 ## First Steps
 Were me just copying the Zine creator [Kristoff's](https://kristoff.it/) personal website, and then started tailoring it to my liking. I'm by no means a designer nor a frontend developer, but I'm happy with the result so far. I'll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.
 
