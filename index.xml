@@ -5,13 +5,24 @@
 		<description>Recent articles from Adam CL</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Mon, 28 Oct 2024 12:45:00 +0000</lastBuildDate>
+		<lastBuildDate>Mon, 28 Oct 2024 12:44:59 +0000</lastBuildDate>
 		
 			<item>
-				<title>Home</title>
-				<link>https://ackurat.github.io/articles/</link>
-				<pubDate>Fri, 06 Jul 2018 00:00:00 +0000</pubDate>
-				<guid>https://ackurat.github.io/articles/</guid>
+				<title>Setting up a site with Zine</title>
+				<link>https://ackurat.github.io/articles/zine/</link>
+				<pubDate>Sun, 27 Oct 2024 00:00:00 +0000</pubDate>
+				<guid>https://ackurat.github.io/articles/zine/</guid>
+				
+					<description>&lt;div id=cont&gt;&lt;h2&gt;First Steps&lt;/h2&gt;&lt;p&gt;Were me just copying the Zine creator &lt;a href=&quot;https://kristoff.it/&quot; target=&quot;_blank&quot;&gt;Kristoff’s&lt;/a&gt; personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.&lt;/p&gt;&lt;h2&gt;What I Like About Zine&lt;/h2&gt;&lt;p&gt;I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. &lt;code&gt;SuperMD&lt;/code&gt; and &lt;code&gt;SuperHTML&lt;/code&gt; are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance &lt;code&gt;Templ&lt;/code&gt; to generate HTML, so I’m excited to see how Zine compares.&lt;/p&gt;&lt;h2&gt;What’s Next&lt;/h2&gt;&lt;p&gt;There are some things with the site that are far from finished. For instance, the CSS is a mess, as I’ve used Kristoff’s CSS as a base and then just added some of my own. It needs cleaning up.&lt;/p&gt;&lt;h3&gt;Tags&lt;/h3&gt;&lt;p&gt;I’m adding tags to this post, but so far there’s no way to filter posts by tags. I’ll have to implement that.&lt;/p&gt;&lt;h3&gt;RSS&lt;/h3&gt;&lt;p&gt;I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.&lt;/p&gt;&lt;p&gt;The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with &lt;code&gt;only the main page can be rendered for now, sorry!&lt;/code&gt;.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:loop=&amp;quot;$page.subpages()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 
+      Here goes the rest of the RSS info for the post
+    --&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:text=&amp;quot;$loop.it.content()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;To Be Continued…&lt;/h2&gt;&lt;/div&gt;</description>
 				
 			</item>
 		
