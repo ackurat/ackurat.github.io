@@ -5,7 +5,17 @@
 		<description>Recent articles from Adam CL</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Mon, 28 Oct 2024 19:42:22 +0000</lastBuildDate>
+		<lastBuildDate>Mon, 28 Oct 2024 20:06:23 +0000</lastBuildDate>
+		
+			<item>
+				<title>Test</title>
+				<link>https://ackurat.github.io/articles/test/</link>
+				<pubDate>Sun, 27 Oct 2024 00:00:00 +0000</pubDate>
+				<guid>https://ackurat.github.io/articles/test/</guid>
+				
+					<description>&lt;div id=cont&gt;&lt;h2&gt;Test&lt;/h2&gt;&lt;p&gt;Just testing for a new commit.&lt;/p&gt;&lt;/div&gt;</description>
+				
+			</item>
 		
 			<item>
 				<title>Setting up a site with Zine</title>
