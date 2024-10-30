@@ -23,6 +23,7 @@
     </span>
   </p>
   <div id="post-description" :html="$page.description"></div>
+  <details><summary>Contents</summary><div :html="$page.toc()"></div></details>
   <div id="post-body" :html="$page.content()"></div>
   <hr>
   <div id="prev-next">
