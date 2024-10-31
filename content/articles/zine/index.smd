@@ -40,3 +40,30 @@ The limitation can be seen in this excerpt from the RSS template, where I'm tryi
   </item>
 </ctx>
 ```
+
+#### [Update]($section.id("rss-update"))
+I've implemented a full RSS feed, which is kind of a hack but it ain't stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:
+
+```xml
+<ctx :loop="$page.subpages()">
+  <item>
+    <title :text="$loop.it.title"></title>
+    <!-- 
+      Here goes the rest of the RSS info for the post
+    -->
+    <description :loop="$site.page($loop.it.link()).contentSections()">
+      <ctx :text="$loop.it.html()"></ctx>
+    </description>
+  </item>
+</ctx>
+```
+
+And the corresponding change to the post:
+
+```markdown
+#### [Heading]($section.id("heading"))
+
+Text goes here...
+```
+
+An added benefit of this is that the headers are clickable, which is included in the table of contents of the post.
