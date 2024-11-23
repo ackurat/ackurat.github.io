@@ -1,0 +1,44 @@
+---
+{
+    .title = "Exploring Gleam through Advent of Code",
+    .description = "I've explored the young programming language Gleam by doing `Advent of Code` 2016 using it. This post outlines my thoughts about Gleam so far, but is quite limited to the `AoC` single-problem perspective.",
+    .author = "Adam CL",
+    .layout = "post.shtml",
+    .date = @date("2024-11-11T11:31:00"),
+    .draft = false,
+    .tags = ["gleam", "advent of code", "beam"],
+}
+---
+
+## [Quick Intro to Gleam]($section.id("intro"))
+[Gleam](https://gleam.run) is a statically typed functional programming language that gets compiled to either [BEAM](https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)) or JavaScript. Its syntax is more akin to [Rust](https://rust-lang.org) than other BEAM languages such as [Elixir](https://elixir-lang.org) and [Erlang](https://erlang.org).
+
+```gleam
+pub fn split(x: String, on substring: String) -> List(String) {
+  case substring {
+    "" -> to_graphemes(x)
+    _ ->
+      x
+      |> string_builder.from_string
+      |> string_builder.split(on: substring)
+      |> list.map(with: string_builder.to_string)
+  }
+}
+```
+
+## [Why I Chose Gleam]($section.id("why"))
+First and foremost, I wanted to try something new. Gleam ticked quite a few of the boxes of things I like in a language:
+
+- Static type system
+- Immutability
+- Compiled
+- Built-in tooling
+- Decent standard library
+
+For the purpose of `AoC`, it's mainly the type system, tooling and standard library I'm choosing Gleam. I might take on doing something more complicated (and distributed) afterwards.
+
+## [First Impressions]($section.id("first-impressions"))
+
+```gleam
+todo
+```
