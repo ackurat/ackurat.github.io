@@ -3,11 +3,11 @@
   <head id="head">
     <meta charset="utf-8">
     <title id="title">
-      Articles
+      Exploring Gleam through Advent of Code
       | Adam CL
     </title>
-    <meta name="description" content="Loris Cro&apos;s Blog">
-    <meta property="og:title" content="Home">
+    <meta name="description" content="I&apos;ve explored the young programming language Gleam by doing `Advent of Code` 2016 using it. This post outlines my thoughts about Gleam so far, but is quite limited to the `AoC` single-problem perspective.">
+    <meta property="og:title" content="Exploring Gleam through Advent of Code">
     <meta property="og:type" content="website">
     <!-- <meta
     property="og:image"
@@ -21,6 +21,8 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=EB+Garamond">
     <!-- <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script> -->
     
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
   </head>
   <body>
     <script>
@@ -143,39 +145,50 @@
       </script>
     <div id="content">
       
-      <style>
-        h1 {
-      text-align: left;
-    }
-        h2,
-        h3 {
-          text-align: center;
-        }
-      </style>
-      <div>
-        <h1 style="margin-bottom:0;">
-          Articles
-        </h1>
-
-        <div>
-          <div>
-            <a href="/articles/exploring-gleam/" class="post-link">Exploring Gleam through Advent of Code</a>
-            <span class="post-byline" style="margin-bottom: 1rem;">November 11, 2024</span>
-          
-            <a href="/articles/zine/" class="post-link">Setting up a site with Zine</a>
-            <span class="post-byline" style="margin-bottom: 1rem;">October 27, 2024</span>
-          </div>
-        </div>
-
-
-        <hr>
+  
+  <h1>Exploring Gleam through Advent of Code</h1>
+  <p class="post-byline">
+    <span>November 11, 2024</span>
+    <span></span>
+    •
+    <span>1</span>
+    min read • by
+    <b>Adam CL</b>
+    <span></span>
+  </p>
+  <div id="post-description">I've explored the young programming language Gleam by doing `Advent of Code` 2016 using it. This post outlines my thoughts about Gleam so far, but is quite limited to the `AoC` single-problem perspective.</div>
+  <details><summary>Contents</summary><div><ul>
+<li>
+<ul><li>
+<a href="#intro"><a href="#intro">Quick Intro to Gleam</a></li><li><a href="#why"><a href="#why">Why I Chose Gleam</a></li><li><a href="#first-impressions"><a href="#first-impressions">First Impressions</a></li></ul></ul></div></details>
+  <div id="post-body"><div id=intro><h2><a class="" href="#intro">Quick Intro to Gleam</a></h2><p><a href="https://gleam.run" target="_blank">Gleam</a> is a statically typed functional programming language that gets compiled to either <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)" target="_blank">BEAM</a> or JavaScript. Its syntax is more akin to <a href="https://rust-lang.org" target="_blank">Rust</a> than other BEAM languages such as <a href="https://elixir-lang.org" target="_blank">Elixir</a> and <a href="https://erlang.org" target="_blank">Erlang</a>.</p><pre><code class="gleam"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function">split</span><span class="punctuation bracket">(</span><span class="variable parameter">x</span><span class="punctuation delimiter">:</span> <span class="type">String</span><span class="punctuation delimiter">,</span> <span class="property">on</span> <span class="variable parameter">substring</span><span class="punctuation delimiter">:</span> <span class="type">String</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">-&gt;</span> <span class="type">List</span><span class="punctuation bracket">(</span><span class="type">String</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+  <span class="keyword">case</span> <span class="error">substring</span> <span class="punctuation bracket">{</span>
+    <span class="string">&quot;&quot;</span> <span class="punctuation delimiter">-&gt;</span> <span class="function">to_graphemes</span><span class="punctuation bracket">(</span><span class="error">x</span><span class="punctuation bracket">)</span>
+    <span class="comment unused">_</span> <span class="punctuation delimiter">-&gt;</span>
+      <span class="error">x</span>
+      <span class="operator">|&gt;</span> <span class="error">string_builder</span><span class="punctuation delimiter">.</span><span class="function">from_string</span>
+      <span class="operator">|&gt;</span> <span class="error">string_builder</span><span class="punctuation delimiter">.</span><span class="function">split</span><span class="punctuation bracket">(</span><span class="property">on</span><span class="punctuation delimiter">:</span> <span class="error">substring</span><span class="punctuation bracket">)</span>
+      <span class="operator">|&gt;</span> <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">map</span><span class="punctuation bracket">(</span><span class="property">with</span><span class="punctuation delimiter">:</span> <span class="error">string_builder</span><span class="punctuation delimiter">.</span><span class="function">to_string</span><span class="punctuation bracket">)</span>
+  <span class="punctuation bracket">}</span>
+<span class="punctuation bracket">}</span>
+</code></pre>
+</div><div id=why><h2><a class="" href="#why">Why I Chose Gleam</a></h2><p>First and foremost, I wanted to try something new. Gleam ticked quite a few of the boxes of things I like in a language:</p><ul><li>Static type system</li><li>Immutability</li><li>Compiled</li><li>Built-in tooling</li><li>Decent standard library</li></ul><p>For the purpose of <code>AoC</code>, it’s mainly the type system, tooling and standard library I’m choosing Gleam. I might take on doing something more complicated (and distributed) afterwards.</p></div><div id=first-impressions><h2><a class="" href="#first-impressions">First Impressions</a></h2><pre><code class="gleam"><span class="keyword">todo</span>
+</code></pre>
+</div></div>
+  <hr>
   <div id="prev-next">
+    <span>
+      <a href="/articles/zine/">←
+        <span>Setting up a site with Zine</span></a>
+    </span>
+    <span></span>
+    <span></span>
+    <small>&nbsp; or &nbsp;</small>
     <small>
       <a href="/">Back to the Homepage</a>
     </small>
   </div>
-      </div>
-    
+
     </div>
   </body>
 </html>

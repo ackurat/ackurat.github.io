@@ -5,7 +5,34 @@
 		<description>Recent articles from Adam CL</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Thu, 31 Oct 2024 20:21:26 +0000</lastBuildDate>
+		<lastBuildDate>Sat, 23 Nov 2024 09:51:22 +0000</lastBuildDate>
+		
+			<item>
+				<title>Exploring Gleam through Advent of Code</title>
+				<link>https://ackurat.github.io/articles/exploring-gleam/</link>
+				<pubDate>Mon, 11 Nov 2024 11:31:00 +0000</pubDate>
+				<guid>https://ackurat.github.io/articles/exploring-gleam/</guid>
+				<description>
+					&lt;div id=intro&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#intro&quot;&gt;Quick Intro to Gleam&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://gleam.run&quot; target=&quot;_blank&quot;&gt;Gleam&lt;/a&gt; is a statically typed functional programming language that gets compiled to either &lt;a href=&quot;https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)&quot; target=&quot;_blank&quot;&gt;BEAM&lt;/a&gt; or JavaScript. Its syntax is more akin to &lt;a href=&quot;https://rust-lang.org&quot; target=&quot;_blank&quot;&gt;Rust&lt;/a&gt; than other BEAM languages such as &lt;a href=&quot;https://elixir-lang.org&quot; target=&quot;_blank&quot;&gt;Elixir&lt;/a&gt; and &lt;a href=&quot;https://erlang.org&quot; target=&quot;_blank&quot;&gt;Erlang&lt;/a&gt;.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;gleam&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;variable parameter&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;variable parameter&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;punctuation delimiter&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;type&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;punctuation bracket&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;substring&lt;/span&gt; &lt;span class=&quot;punctuation bracket&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;string&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class=&quot;punctuation delimiter&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;to_graphemes&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;error&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;comment unused&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;punctuation delimiter&quot;&gt;-&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;error&quot;&gt;x&lt;/span&gt;
+      &lt;span class=&quot;operator&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;string_builder&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;function&quot;&gt;from_string&lt;/span&gt;
+      &lt;span class=&quot;operator&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;string_builder&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;property&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;operator&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;property&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;string_builder&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;function&quot;&gt;to_string&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;punctuation bracket&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;punctuation bracket&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+				
+					&lt;div id=why&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#why&quot;&gt;Why I Chose Gleam&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;First and foremost, I wanted to try something new. Gleam ticked quite a few of the boxes of things I like in a language:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Static type system&lt;/li&gt;&lt;li&gt;Immutability&lt;/li&gt;&lt;li&gt;Compiled&lt;/li&gt;&lt;li&gt;Built-in tooling&lt;/li&gt;&lt;li&gt;Decent standard library&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;For the purpose of &lt;code&gt;AoC&lt;/code&gt;, it’s mainly the type system, tooling and standard library I’m choosing Gleam. I might take on doing something more complicated (and distributed) afterwards.&lt;/p&gt;&lt;/div&gt;
+				
+					&lt;div id=first-impressions&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#first-impressions&quot;&gt;First Impressions&lt;/a&gt;&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;gleam&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;todo&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+				</description>
+			</item>
 		
 			<item>
 				<title>Setting up a site with Zine</title>
@@ -31,6 +58,24 @@
 &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+				
+					&lt;div id=rss-update&gt;&lt;h4&gt;&lt;a class=&quot;&quot; href=&quot;#rss-update&quot;&gt;Update&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:loop=&amp;quot;$page.subpages()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:text=&amp;quot;$loop.it.title&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 
+      Here goes the rest of the RSS info for the post
+    --&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:loop=&amp;quot;$site.page($loop.it.link()).contentSections()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:text=&amp;quot;$loop.it.html()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And the corresponding change to the post:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;&lt;span class=&quot;punctuation special&quot;&gt;####&lt;/span&gt; &lt;span class=&quot;text title&quot;&gt;[Heading]($section.id(&amp;quot;heading&amp;quot;))&lt;/span&gt;
+
+Text goes here...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;An added benefit of this is that the headers are clickable, which is included in the table of contents of the post.&lt;/p&gt;&lt;/div&gt;
 				</description>
 			</item>
 		

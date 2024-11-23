@@ -1,23 +1,25 @@
 :root {
-  --light-yellow: #e5c07b;
-  --dark-yellow: #d19a66;
-  --blue: #61afef;
-  --cyan: #56b6c2;
-  --light-red: #e06c75;
-  --dark-red: #be5046;
-  --comment-gray: #5c6370;
-  --magenta: #c678dd;
+  --yellow: #eed49f;
+  --pink: #f5bde6;
+  --blue: #8aadf4;
+  --cyan: #91d7e3;
+  --mauve: #c6a0f6;
+  --dark-red: #ed8796;
+  --comment-gray: #6e738d;
+  --magenta: #c6a0f6;
+  --gray: #cad3f5;
+  --green: #a6da95;
 }
 
 code .comment {
   color: var(--comment-gray);
 }
 
-
-code.html {}
+code.html {
+}
 
 code.html .string {
-  color: var(--dark-yellow);
+  color: var(--pink);
 }
 
 code.html .tag {
@@ -25,17 +27,16 @@ code.html .tag {
 }
 
 code.html .constant {
-  color: var(--light-red);
+  color: var(--mauve);
 }
 
 code.html .attribute {
-  color: var(--light-yellow);
+  color: var(--yellow);
 }
 
 code.html .punctuation {
   color: var(--cyan);
 }
-
 
 code.zig {
   color: var(--cyan);
@@ -46,18 +47,18 @@ code.zig .punctuation {
 }
 
 code.zig .string {
-  color: var(--dark-yellow);
+  color: var(--pink);
 }
 
 code.zig .variable,
 code.zig .parameter,
 code.zig .exception,
 code.zig .field {
-  color: var(--light-yellow);
+  color: var(--yellow);
 }
 
 code.zig .keyword.function {
-  color: var(--light-red);
+  color: var(--mauve);
 }
 
 code.zig .bracket {
@@ -80,7 +81,7 @@ code.zig .operator,
 code.zig .qualifier,
 code.zig .keyword,
 code.zig .attribute {
-  color: var(--light-red);
+  color: var(--mauve);
 }
 
 code.ziggy {
@@ -89,11 +90,11 @@ code.ziggy {
 
 code.ziggy .keyword,
 code.ziggy .type {
-  color: var(--light-yellow);
+  color: var(--yellow);
 }
 
 code.ziggy .string {
-  color: var(--dark-yellow);
+  color: var(--pink);
 }
 
 code.ziggy .numeric.constant {
@@ -108,12 +109,9 @@ code.json {
   color: var(--cyan);
 }
 
-
 code.json .string {
-  color: var(--dark-yellow);
+  color: var(--pink);
 }
-
-
 
 code.python {
   color: var(--cyan);
@@ -124,18 +122,18 @@ code.python .punctuation {
 }
 
 code.python .string {
-  color: var(--dark-yellow);
+  color: var(--pink);
 }
 
 code.python .variable,
 code.python .parameter,
 code.python .exception,
 code.python .field {
-  color: var(--light-yellow);
+  color: var(--yellow);
 }
 
 code.python .keyword.function {
-  color: var(--light-red);
+  color: var(--mauve);
 }
 
 code.python .bracket {
@@ -158,20 +156,72 @@ code.python .operator,
 code.python .qualifier,
 code.python .keyword,
 code.python .attribute {
-  color: var(--light-red);
+  color: var(--mauve);
 }
-
-
 
 code.markdown {
   color: #ccc;
 }
 
-
 code.markdown .text.title {
-  color: var(--light-red);
+  color: var(--mauve);
 }
 
 code.markdown .punctuation {
-  color: var(--light-red);
+  color: var(--mauve);
+}
+
+code.gleam {
+  color: var(--cyan);
+}
+
+code.gleam .punctuation {
+  color: var(--dark-red);
+}
+
+code.gleam .string {
+  color: var(--green);
+}
+
+code.gleam .variable,
+code.gleam .parameter,
+code.gleam .exception,
+code.gleam .field {
+  color: var(--dark-red);
+}
+
+code.gleam .type {
+  color: var(--yellow);
+}
+
+code.gleam .property,
+code.gleam .error {
+  color: var(--gray);
+}
+
+code.gleam .keyword.function {
+  color: var(--mauve);
+}
+
+code.gleam .bracket {
+  color: var(--dark-red);
+}
+
+code.gleam .function {
+  color: var(--blue);
+}
+
+code.gleam .builtin {
+  color: var(--magenta);
+}
+
+code.gleam .number {
+  color: var(--magenta);
+}
+
+code.gleam .operator,
+code.gleam .qualifier,
+code.gleam .keyword,
+code.gleam .attribute {
+  color: var(--mauve);
 }
