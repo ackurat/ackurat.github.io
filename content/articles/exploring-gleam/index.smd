@@ -69,7 +69,7 @@ def shift_row_right(matrix, row_index, n):
 shift_row_right(matrix, 0, 1) # [['b', 'a'], ['c', 'd']]
 ```
 
-Performance aside, this is a very simple and neat way of accessing elements in a list. In Gleam, you can't access lists by index. Instead, you have to iterate through the list until you're on the right index. Pairing this with the immutability means that shifting rows as above is a bit more tedious. For AoC 2016 day 8, this was the solution I came up with for shifting rows with wrap around:
+Performance aside, this is a very simple and neat way of accessing elements in a list. There's no need to iterate over the rows. In Gleam, you can't access lists by index. Instead, you have to iterate through the list until you're on the right index. Pairing this with the immutability means that shifting rows as above is a bit more tedious. For AoC 2016 day 8, this was the solution I came up with for shifting rows with wrap around:
 
 ```gleam
 // gleam
@@ -83,34 +83,15 @@ pub fn shift_row_right(
     cells: list.index_map(matrix.cells, fn(current_row, row_index) {
       case row_index == row {
         True -> {
-          let values =
-            list.index_map(current_row, fn(value, col_index) {
-              let source_pos = case col_index + shift % matrix.width {
-                n if n >= matrix.width -> n - matrix.width
-                n -> n
-              }
-              #(col_index, source_pos, value)
-            })
-
-          list.index_map(current_row, fn(value, col_index) {
-            case
-              list.find(values, fn(triple) {
-                let #(_, source, _) = triple
-                source == col_index
-              })
-            {
-              Ok(#(_, _, v)) -> v
-              Error(_) -> value
-            }
-          })
+          current_row
+          |> list.split(list.length(current_row) - shift)
+          |> fn(splitted) { list.append(splitted.1, splitted.0) }
         }
         False -> current_row
       }
     }),
-    width: matrix.width,
-    height: matrix.height,
   )
 }
 ```
 
-As you can see, it's certainly more verbose. I'm certain that this is not the most performant solution (using `list.find` repeatedly makes this not ideal for big matrices), but that's not the point - had it been possible to just access the values through indices, we'd not need the verbose iterating. As long as the underlying data structured is a single linked list (as it is in Gleam), the performance would still be linear, but the verbosity would be less if there was a `list.at` function.
+We first have to iterate through all the rows, and in case of being on the wrong row we just return it as is. In case of being on the right row, we then need to construct a new row by iterating over the row, first to split it and then over the first part of the list in the `list.append` function.
