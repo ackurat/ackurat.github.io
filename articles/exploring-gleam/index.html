@@ -6,7 +6,7 @@
       Exploring Gleam through Advent of Code
       | Adam CL
     </title>
-    <meta name="description" content="I&apos;ve explored the young programming language Gleam by doing `Advent of Code` 2016 using it. This post outlines my thoughts about Gleam so far, but is quite limited to the `AoC` single-problem perspective.">
+    <meta name="description" content="I&apos;ve explored the young programming language Gleam by doing Advent of Code 2016 using it. This post outlines my thoughts about Gleam so far, but is quite limited to the AoC single-problem perspective.">
     <meta property="og:title" content="Exploring Gleam through Advent of Code">
     <meta property="og:type" content="website">
     <!-- <meta
@@ -151,17 +151,20 @@
     <span>November 11, 2024</span>
     <span></span>
     •
-    <span>1</span>
+    <span>4</span>
     min read • by
     <b>Adam CL</b>
     <span></span>
   </p>
-  <div id="post-description">I've explored the young programming language Gleam by doing `Advent of Code` 2016 using it. This post outlines my thoughts about Gleam so far, but is quite limited to the `AoC` single-problem perspective.</div>
+  <div id="post-description">I've explored the young programming language Gleam by doing Advent of Code 2016 using it. This post outlines my thoughts about Gleam so far, but is quite limited to the AoC single-problem perspective.</div>
   <details><summary>Contents</summary><div><ul>
 <li>
 <ul><li>
-<a href="#intro"><a href="#intro">Quick Intro to Gleam</a></li><li><a href="#why"><a href="#why">Why I Chose Gleam</a></li><li><a href="#first-impressions"><a href="#first-impressions">First Impressions</a></li></ul></ul></div></details>
-  <div id="post-body"><div id=intro><h2><a class="" href="#intro">Quick Intro to Gleam</a></h2><p><a href="https://gleam.run" target="_blank">Gleam</a> is a statically typed functional programming language that gets compiled to either <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)" target="_blank">BEAM</a> or JavaScript. Its syntax is more akin to <a href="https://rust-lang.org" target="_blank">Rust</a> than other BEAM languages such as <a href="https://elixir-lang.org" target="_blank">Elixir</a> and <a href="https://erlang.org" target="_blank">Erlang</a>.</p><pre><code class="gleam"><span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function">split</span><span class="punctuation bracket">(</span><span class="variable parameter">x</span><span class="punctuation delimiter">:</span> <span class="type">String</span><span class="punctuation delimiter">,</span> <span class="property">on</span> <span class="variable parameter">substring</span><span class="punctuation delimiter">:</span> <span class="type">String</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">-&gt;</span> <span class="type">List</span><span class="punctuation bracket">(</span><span class="type">String</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+<a href="#intro"><a href="#intro">Quick Intro to Gleam</a></li><li><a href="#why"><a href="#why">Why I Chose Gleam</a></li><li><a href="#first-impressions"><a href="#first-impressions">First Impressions</a><ul><li>
+<a href="#first-miss"><a href="#first-miss">Missed Functionality #1</a></li></ul></li></ul></ul></div></details>
+  <div id="post-body"><div id=intro><h2><a class="" href="#intro">Quick Intro to Gleam</a></h2><p><a href="https://gleam.run" target="_blank">Gleam</a> is a statically typed functional programming language that gets compiled to either <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)" target="_blank">BEAM</a> or JavaScript. Its syntax is more akin to <a href="https://rust-lang.org" target="_blank">Rust</a> than other BEAM languages such as <a href="https://elixir-lang.org" target="_blank">Elixir</a> and <a href="https://erlang.org" target="_blank">Erlang</a>.</p><pre><code class="gleam"><span class="comment">// gleam</span>
+
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function">split</span><span class="punctuation bracket">(</span><span class="variable parameter">x</span><span class="punctuation delimiter">:</span> <span class="type">String</span><span class="punctuation delimiter">,</span> <span class="property">on</span> <span class="variable parameter">substring</span><span class="punctuation delimiter">:</span> <span class="type">String</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">-&gt;</span> <span class="type">List</span><span class="punctuation bracket">(</span><span class="type">String</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
   <span class="keyword">case</span> <span class="error">substring</span> <span class="punctuation bracket">{</span>
     <span class="string">&quot;&quot;</span> <span class="punctuation delimiter">-&gt;</span> <span class="function">to_graphemes</span><span class="punctuation bracket">(</span><span class="error">x</span><span class="punctuation bracket">)</span>
     <span class="comment unused">_</span> <span class="punctuation delimiter">-&gt;</span>
@@ -172,9 +175,63 @@
   <span class="punctuation bracket">}</span>
 <span class="punctuation bracket">}</span>
 </code></pre>
-</div><div id=why><h2><a class="" href="#why">Why I Chose Gleam</a></h2><p>First and foremost, I wanted to try something new. Gleam ticked quite a few of the boxes of things I like in a language:</p><ul><li>Static type system</li><li>Immutability</li><li>Compiled</li><li>Built-in tooling</li><li>Decent standard library</li></ul><p>For the purpose of <code>AoC</code>, it’s mainly the type system, tooling and standard library I’m choosing Gleam. I might take on doing something more complicated (and distributed) afterwards.</p></div><div id=first-impressions><h2><a class="" href="#first-impressions">First Impressions</a></h2><pre><code class="gleam"><span class="keyword">todo</span>
+</div><div id=why><h2><a class="" href="#why">Why I Chose Gleam</a></h2><p>First and foremost, I wanted to try something new. Gleam ticked quite a few of the boxes of things I like in a language:</p><ul><li>Static type system</li><li>Immutability</li><li>Compiled</li><li>Built-in tooling</li><li>Decent standard library</li></ul><p>For the purpose of AoC, it’s mainly the type system, tooling and standard library I’m choosing Gleam. I might take on doing something more complicated (and distributed) afterwards.</p></div><div id=first-impressions><h2><a class="" href="#first-impressions">First Impressions</a></h2><p>As I usually work in procedural languages, getting into the strictly functional paradigm has been the biggest hurdle. Don’t get me wrong - I often use the functional style functions of JS, but due to its mutability and dynamic typing, it’s far from Gleam. I’ve previously delved into Elixir, and while it is also functional it’s got the dynamic typing to make it less of a jump. After completing the first 8 days of AoC, I’m getting used to it and I see the light that is immutability. In the codebase I spend most time in at work, there’s plenty of functionality that modifies in-place, causing both confusion and bugs for developers who are new to the code.</p></div><div id=first-miss><h3><a class="" href="#first-miss">Missed Functionality #1</a></h3><p>When it comes to AoC, it’s very common to work with arrays/lists, for instance in a matrix:</p><pre><code class="python"><span class="comment"># python</span>
+
+<span class="variable">matrix</span> <span class="operator">=</span> [[<span class="string">&apos;a&apos;</span>, <span class="string">&apos;b&apos;</span>], [<span class="string">&apos;c&apos;</span>, <span class="string">&apos;d&apos;</span>]]
+<span class="variable">matrix</span>[<span class="number">0</span>][<span class="number">0</span>] <span class="comment"># &apos;a&apos;</span>
 </code></pre>
-</div></div>
+<p>Let’s say then that a task requires shifting rows by 1:</p><pre><code class="python"><span class="comment"># python</span>
+
+<span class="keyword">def</span> <span class="function">shift_row_right</span>(<span class="variable">matrix</span>, <span class="variable">row_index</span>, <span class="variable">n</span>):
+    <span class="variable">row</span> <span class="operator">=</span> <span class="variable">matrix</span>[<span class="variable">row_index</span>]
+    <span class="variable">n</span> <span class="operator">=</span> <span class="variable">n</span> <span class="operator">%</span> <span class="function">len</span>(<span class="variable">row</span>)
+    <span class="variable">shifted_row</span> <span class="operator">=</span> <span class="variable">row</span>[<span class="operator">-</span><span class="variable">n</span>:] <span class="operator">+</span> <span class="variable">row</span>[:<span class="operator">-</span><span class="variable">n</span>]
+    <span class="variable">matrix</span>[<span class="variable">row_index</span>] <span class="operator">=</span> <span class="variable">shifted_row</span>
+    <span class="keyword">return</span> <span class="variable">matrix</span>
+
+<span class="function">shift_row_right</span>(<span class="variable">matrix</span>, <span class="number">0</span>, <span class="number">1</span>) <span class="comment"># [[&apos;b&apos;, &apos;a&apos;], [&apos;c&apos;, &apos;d&apos;]]</span>
+</code></pre>
+<p>Performance aside, this is a very simple and neat way of accessing elements in a list. In Gleam, you can’t access lists by index. Instead, you have to iterate through the list until you’re on the right index. Pairing this with the immutability means that shifting rows as above is a bit more tedious. For AoC 2016 day 8, this was the solution I came up with for shifting rows with wrap around:</p><pre><code class="gleam"><span class="comment">// gleam</span>
+
+<span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function">shift_row_right</span><span class="punctuation bracket">(</span>
+  <span class="variable parameter">matrix</span><span class="punctuation delimiter">:</span> <span class="type">Matrix</span><span class="punctuation bracket">(</span>value<span class="punctuation bracket">)</span><span class="punctuation delimiter">,</span>
+  <span class="variable parameter">row</span><span class="punctuation delimiter">:</span> <span class="type">Int</span><span class="punctuation delimiter">,</span>
+  <span class="variable parameter">shift</span><span class="punctuation delimiter">:</span> <span class="type">Int</span><span class="punctuation delimiter">,</span>
+<span class="punctuation bracket">)</span> <span class="punctuation delimiter">-&gt;</span> <span class="type">Matrix</span><span class="punctuation bracket">(</span>value<span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+  <span class="constructor">Matrix</span><span class="punctuation bracket">(</span>
+    <span class="property">cells</span><span class="punctuation delimiter">:</span> <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">index_map</span><span class="punctuation bracket">(</span><span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">cells</span><span class="punctuation delimiter">,</span> <span class="keyword">fn</span><span class="punctuation bracket">(</span><span class="variable parameter">current_row</span><span class="punctuation delimiter">,</span> <span class="variable parameter">row_index</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+      <span class="keyword">case</span> <span class="error">row_index</span> <span class="operator">==</span> <span class="error">row</span> <span class="punctuation bracket">{</span>
+        <span class="constructor">True</span> <span class="punctuation delimiter">-&gt;</span> <span class="punctuation bracket">{</span>
+          <span class="keyword">let</span> <span class="error">values</span> <span class="punctuation delimiter">=</span>
+            <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">index_map</span><span class="punctuation bracket">(</span><span class="error">current_row</span><span class="punctuation delimiter">,</span> <span class="keyword">fn</span><span class="punctuation bracket">(</span><span class="variable parameter">value</span><span class="punctuation delimiter">,</span> <span class="variable parameter">col_index</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+              <span class="keyword">let</span> <span class="error">source_pos</span> <span class="punctuation delimiter">=</span> <span class="keyword">case</span> <span class="error">col_index</span> <span class="operator">+</span> <span class="error">shift</span> <span class="operator">%</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">width</span> <span class="punctuation bracket">{</span>
+                <span class="error">n</span> <span class="keyword">if</span> <span class="error">n</span> <span class="operator">&gt;=</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">width</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">n</span> <span class="operator">-</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">width</span>
+                <span class="error">n</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">n</span>
+              <span class="punctuation bracket">}</span>
+              <span class="punctuation delimiter">#</span><span class="punctuation bracket">(</span><span class="error">col_index</span><span class="punctuation delimiter">,</span> <span class="error">source_pos</span><span class="punctuation delimiter">,</span> <span class="error">value</span><span class="punctuation bracket">)</span>
+            <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span>
+
+          <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">index_map</span><span class="punctuation bracket">(</span><span class="error">current_row</span><span class="punctuation delimiter">,</span> <span class="keyword">fn</span><span class="punctuation bracket">(</span><span class="variable parameter">value</span><span class="punctuation delimiter">,</span> <span class="variable parameter">col_index</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+            <span class="keyword">case</span>
+              <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">find</span><span class="punctuation bracket">(</span><span class="error">values</span><span class="punctuation delimiter">,</span> <span class="keyword">fn</span><span class="punctuation bracket">(</span><span class="variable parameter">triple</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+                <span class="keyword">let</span> <span class="punctuation delimiter">#</span><span class="punctuation bracket">(</span><span class="comment unused">_</span><span class="punctuation delimiter">,</span> <span class="error">source</span><span class="punctuation delimiter">,</span> <span class="comment unused">_</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">=</span> <span class="error">triple</span>
+                <span class="error">source</span> <span class="operator">==</span> <span class="error">col_index</span>
+              <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span>
+            <span class="punctuation bracket">{</span>
+              <span class="constructor">Ok</span><span class="punctuation bracket">(</span><span class="punctuation delimiter">#</span><span class="punctuation bracket">(</span><span class="comment unused">_</span><span class="punctuation delimiter">,</span> <span class="comment unused">_</span><span class="punctuation delimiter">,</span> <span class="error">v</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">v</span>
+              <span class="constructor">Error</span><span class="punctuation bracket">(</span><span class="comment unused">_</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">value</span>
+            <span class="punctuation bracket">}</span>
+          <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span>
+        <span class="punctuation bracket">}</span>
+        <span class="constructor">False</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">current_row</span>
+      <span class="punctuation bracket">}</span>
+    <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">,</span>
+    <span class="property">width</span><span class="punctuation delimiter">:</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">width</span><span class="punctuation delimiter">,</span>
+    <span class="property">height</span><span class="punctuation delimiter">:</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">height</span><span class="punctuation delimiter">,</span>
+  <span class="punctuation bracket">)</span>
+<span class="punctuation bracket">}</span>
+</code></pre>
+<p>As you can see, it’s certainly more verbose. I’m certain that this is not the most performant solution (using <code>list.find</code> repeatedly makes this not ideal for big matrices), but that’s not the point - had it been possible to just access the values through indices, we’d not need the verbose iterating. As long as the underlying data structured is a single linked list (as it is in Gleam), the performance would still be linear, but the verbosity would be less if there was a <code>list.at</code> function.</p></div></div>
   <hr>
   <div id="prev-next">
     <span>
