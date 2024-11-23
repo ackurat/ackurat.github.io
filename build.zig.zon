@@ -3,7 +3,7 @@
     .version = "0.0.0",
     .dependencies = .{
         .zine = .{
-            .url = "https://github.com/ackurat/zine/archive/refs/heads/update-flow.zip",
+            .url = "https://github.com/ackurat/zine/archive/refs/heads/main.zip",
             .hash = "1220a7c885b21f98ea4864e605e996238e17fbe2efef7bc171afa2e04ce1fa6510c6",
         },
     },
