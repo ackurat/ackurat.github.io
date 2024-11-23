@@ -151,7 +151,7 @@
     <span>November 11, 2024</span>
     <span></span>
     •
-    <span>4</span>
+    <span>3</span>
     min read • by
     <b>Adam CL</b>
     <span></span>
@@ -191,7 +191,7 @@
 
 <span class="function">shift_row_right</span>(<span class="variable">matrix</span>, <span class="number">0</span>, <span class="number">1</span>) <span class="comment"># [[&apos;b&apos;, &apos;a&apos;], [&apos;c&apos;, &apos;d&apos;]]</span>
 </code></pre>
-<p>Performance aside, this is a very simple and neat way of accessing elements in a list. In Gleam, you can’t access lists by index. Instead, you have to iterate through the list until you’re on the right index. Pairing this with the immutability means that shifting rows as above is a bit more tedious. For AoC 2016 day 8, this was the solution I came up with for shifting rows with wrap around:</p><pre><code class="gleam"><span class="comment">// gleam</span>
+<p>Performance aside, this is a very simple and neat way of accessing elements in a list. There’s no need to iterate over the rows. In Gleam, you can’t access lists by index. Instead, you have to iterate through the list until you’re on the right index. Pairing this with the immutability means that shifting rows as above is a bit more tedious. For AoC 2016 day 8, this was the solution I came up with for shifting rows with wrap around:</p><pre><code class="gleam"><span class="comment">// gleam</span>
 
 <span class="keyword">pub</span> <span class="keyword">fn</span> <span class="function">shift_row_right</span><span class="punctuation bracket">(</span>
   <span class="variable parameter">matrix</span><span class="punctuation delimiter">:</span> <span class="type">Matrix</span><span class="punctuation bracket">(</span>value<span class="punctuation bracket">)</span><span class="punctuation delimiter">,</span>
@@ -202,36 +202,17 @@
     <span class="property">cells</span><span class="punctuation delimiter">:</span> <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">index_map</span><span class="punctuation bracket">(</span><span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">cells</span><span class="punctuation delimiter">,</span> <span class="keyword">fn</span><span class="punctuation bracket">(</span><span class="variable parameter">current_row</span><span class="punctuation delimiter">,</span> <span class="variable parameter">row_index</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
       <span class="keyword">case</span> <span class="error">row_index</span> <span class="operator">==</span> <span class="error">row</span> <span class="punctuation bracket">{</span>
         <span class="constructor">True</span> <span class="punctuation delimiter">-&gt;</span> <span class="punctuation bracket">{</span>
-          <span class="keyword">let</span> <span class="error">values</span> <span class="punctuation delimiter">=</span>
-            <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">index_map</span><span class="punctuation bracket">(</span><span class="error">current_row</span><span class="punctuation delimiter">,</span> <span class="keyword">fn</span><span class="punctuation bracket">(</span><span class="variable parameter">value</span><span class="punctuation delimiter">,</span> <span class="variable parameter">col_index</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
-              <span class="keyword">let</span> <span class="error">source_pos</span> <span class="punctuation delimiter">=</span> <span class="keyword">case</span> <span class="error">col_index</span> <span class="operator">+</span> <span class="error">shift</span> <span class="operator">%</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">width</span> <span class="punctuation bracket">{</span>
-                <span class="error">n</span> <span class="keyword">if</span> <span class="error">n</span> <span class="operator">&gt;=</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">width</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">n</span> <span class="operator">-</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">width</span>
-                <span class="error">n</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">n</span>
-              <span class="punctuation bracket">}</span>
-              <span class="punctuation delimiter">#</span><span class="punctuation bracket">(</span><span class="error">col_index</span><span class="punctuation delimiter">,</span> <span class="error">source_pos</span><span class="punctuation delimiter">,</span> <span class="error">value</span><span class="punctuation bracket">)</span>
-            <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span>
-
-          <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">index_map</span><span class="punctuation bracket">(</span><span class="error">current_row</span><span class="punctuation delimiter">,</span> <span class="keyword">fn</span><span class="punctuation bracket">(</span><span class="variable parameter">value</span><span class="punctuation delimiter">,</span> <span class="variable parameter">col_index</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
-            <span class="keyword">case</span>
-              <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">find</span><span class="punctuation bracket">(</span><span class="error">values</span><span class="punctuation delimiter">,</span> <span class="keyword">fn</span><span class="punctuation bracket">(</span><span class="variable parameter">triple</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
-                <span class="keyword">let</span> <span class="punctuation delimiter">#</span><span class="punctuation bracket">(</span><span class="comment unused">_</span><span class="punctuation delimiter">,</span> <span class="error">source</span><span class="punctuation delimiter">,</span> <span class="comment unused">_</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">=</span> <span class="error">triple</span>
-                <span class="error">source</span> <span class="operator">==</span> <span class="error">col_index</span>
-              <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span>
-            <span class="punctuation bracket">{</span>
-              <span class="constructor">Ok</span><span class="punctuation bracket">(</span><span class="punctuation delimiter">#</span><span class="punctuation bracket">(</span><span class="comment unused">_</span><span class="punctuation delimiter">,</span> <span class="comment unused">_</span><span class="punctuation delimiter">,</span> <span class="error">v</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">v</span>
-              <span class="constructor">Error</span><span class="punctuation bracket">(</span><span class="comment unused">_</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">value</span>
-            <span class="punctuation bracket">}</span>
-          <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span>
+          <span class="error">current_row</span>
+          <span class="operator">|&gt;</span> <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">split</span><span class="punctuation bracket">(</span><span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">length</span><span class="punctuation bracket">(</span><span class="error">current_row</span><span class="punctuation bracket">)</span> <span class="operator">-</span> <span class="error">shift</span><span class="punctuation bracket">)</span>
+          <span class="operator">|&gt;</span> <span class="keyword">fn</span><span class="punctuation bracket">(</span><span class="variable parameter">splitted</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span> <span class="error">list</span><span class="punctuation delimiter">.</span><span class="function">append</span><span class="punctuation bracket">(</span><span class="error">splitted</span><span class="punctuation delimiter">.</span><span class="property">1</span><span class="punctuation delimiter">,</span> <span class="error">splitted</span><span class="punctuation delimiter">.</span><span class="property">0</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">}</span>
         <span class="punctuation bracket">}</span>
         <span class="constructor">False</span> <span class="punctuation delimiter">-&gt;</span> <span class="error">current_row</span>
       <span class="punctuation bracket">}</span>
     <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">,</span>
-    <span class="property">width</span><span class="punctuation delimiter">:</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">width</span><span class="punctuation delimiter">,</span>
-    <span class="property">height</span><span class="punctuation delimiter">:</span> <span class="error">matrix</span><span class="punctuation delimiter">.</span><span class="function">height</span><span class="punctuation delimiter">,</span>
   <span class="punctuation bracket">)</span>
 <span class="punctuation bracket">}</span>
 </code></pre>
-<p>As you can see, it’s certainly more verbose. I’m certain that this is not the most performant solution (using <code>list.find</code> repeatedly makes this not ideal for big matrices), but that’s not the point - had it been possible to just access the values through indices, we’d not need the verbose iterating. As long as the underlying data structured is a single linked list (as it is in Gleam), the performance would still be linear, but the verbosity would be less if there was a <code>list.at</code> function.</p></div></div>
+<p>We first have to iterate through all the rows, and in case of being on the wrong row we just return it as is. In case of being on the right row, we then need to construct a new row by iterating over the row, first to split it and then over the first part of the list in the <code>list.append</code> function.</p></div></div>
   <hr>
   <div id="prev-next">
     <span>
