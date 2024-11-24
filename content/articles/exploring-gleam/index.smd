@@ -43,7 +43,7 @@ For the purpose of AoC, it's mainly the type system, tooling and standard librar
 
 As I usually work in procedural languages, getting into the strictly functional paradigm has been the biggest hurdle. Don't get me wrong - I often use the functional style functions of JS, but due to its mutability and dynamic typing, it's far from Gleam. I've previously delved into Elixir, and while it is also functional it's got the dynamic typing to make it less of a jump. After completing the first 8 days of AoC, I'm getting used to it and I see the light that is immutability. In the codebase I spend most time in at work, there's plenty of functionality that modifies in-place, causing both confusion and bugs for developers who are new to the code.
 
-### [Missed Functionality #1]($section.id("first-miss"))
+### [Missed Functionality #1 - list access by index]($section.id("first-miss"))
 
 When it comes to AoC, it's very common to work with arrays/lists, for instance in a matrix:
 
@@ -85,7 +85,7 @@ pub fn shift_row_right(
         True -> {
           current_row
           |> list.split(list.length(current_row) - shift)
-          |> fn(splitted) { list.append(splitted.1, splitted.0) }
+          |> fn(split) { list.append(split.1, split.0) }
         }
         False -> current_row
       }
@@ -94,4 +94,4 @@ pub fn shift_row_right(
 }
 ```
 
-We first have to iterate through all the rows, and in case of being on the wrong row we just return it as is. In case of being on the right row, we then need to construct a new row by iterating over the row, first to split it and then over the first part of the list in the `list.append` function.
+We first have to iterate through all the rows, and in case of being on the wrong row we just return it as is. In case of being on the right row, we then need to construct a new row by iterating over the row, first to split it and then over the first part of the new list (`split.1`) in the `list.append` function.
