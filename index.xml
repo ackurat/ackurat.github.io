@@ -1,83 +1,210 @@
-<rss version="2.0">
-	<channel>
-		<title>Adam CL</title>
-		<link>https://ackurat.github.io/</link>
-		<description>Recent articles from Adam CL</description>
-		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
-		<language>en-us</language>
-		<lastBuildDate>Sat, 23 Nov 2024 09:51:22 +0000</lastBuildDate>
-		
-			<item>
-				<title>Exploring Gleam through Advent of Code</title>
-				<link>https://ackurat.github.io/articles/exploring-gleam/</link>
-				<pubDate>Mon, 11 Nov 2024 11:31:00 +0000</pubDate>
-				<guid>https://ackurat.github.io/articles/exploring-gleam/</guid>
-				<description>
-					&lt;div id=intro&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#intro&quot;&gt;Quick Intro to Gleam&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://gleam.run&quot; target=&quot;_blank&quot;&gt;Gleam&lt;/a&gt; is a statically typed functional programming language that gets compiled to either &lt;a href=&quot;https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)&quot; target=&quot;_blank&quot;&gt;BEAM&lt;/a&gt; or JavaScript. Its syntax is more akin to &lt;a href=&quot;https://rust-lang.org&quot; target=&quot;_blank&quot;&gt;Rust&lt;/a&gt; than other BEAM languages such as &lt;a href=&quot;https://elixir-lang.org&quot; target=&quot;_blank&quot;&gt;Elixir&lt;/a&gt; and &lt;a href=&quot;https://erlang.org&quot; target=&quot;_blank&quot;&gt;Erlang&lt;/a&gt;.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;gleam&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;pub&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;variable parameter&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;property&quot;&gt;on&lt;/span&gt; &lt;span class=&quot;variable parameter&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;punctuation delimiter&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;type&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;type&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;punctuation bracket&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;substring&lt;/span&gt; &lt;span class=&quot;punctuation bracket&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;string&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class=&quot;punctuation delimiter&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;to_graphemes&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;error&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;comment unused&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;punctuation delimiter&quot;&gt;-&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;error&quot;&gt;x&lt;/span&gt;
-      &lt;span class=&quot;operator&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;string_builder&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;function&quot;&gt;from_string&lt;/span&gt;
-      &lt;span class=&quot;operator&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;string_builder&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;property&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;operator&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;property&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;string_builder&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;function&quot;&gt;to_string&lt;/span&gt;&lt;span class=&quot;punctuation bracket&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;punctuation bracket&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;punctuation bracket&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-				
-					&lt;div id=why&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#why&quot;&gt;Why I Chose Gleam&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;First and foremost, I wanted to try something new. Gleam ticked quite a few of the boxes of things I like in a language:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Static type system&lt;/li&gt;&lt;li&gt;Immutability&lt;/li&gt;&lt;li&gt;Compiled&lt;/li&gt;&lt;li&gt;Built-in tooling&lt;/li&gt;&lt;li&gt;Decent standard library&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;For the purpose of &lt;code&gt;AoC&lt;/code&gt;, it’s mainly the type system, tooling and standard library I’m choosing Gleam. I might take on doing something more complicated (and distributed) afterwards.&lt;/p&gt;&lt;/div&gt;
-				
-					&lt;div id=first-impressions&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#first-impressions&quot;&gt;First Impressions&lt;/a&gt;&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;gleam&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;todo&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-				</description>
-			</item>
-		
-			<item>
-				<title>Setting up a site with Zine</title>
-				<link>https://ackurat.github.io/articles/zine/</link>
-				<pubDate>Sun, 27 Oct 2024 00:00:00 +0000</pubDate>
-				<guid>https://ackurat.github.io/articles/zine/</guid>
-				<description>
-					&lt;div id=first-steps&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#first-steps&quot;&gt;First Steps&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Were me just copying the Zine creator &lt;a href=&quot;https://kristoff.it/&quot; target=&quot;_blank&quot;&gt;Kristoff’s&lt;/a&gt; personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.&lt;/p&gt;&lt;/div&gt;
-				
-					&lt;div id=what-i-like-about-zine&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#what-i-like-about-zine&quot;&gt;What I like About Zine&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. &lt;code&gt;SuperMD&lt;/code&gt; and &lt;code&gt;SuperHTML&lt;/code&gt; are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance &lt;code&gt;Templ&lt;/code&gt; to generate HTML, so I’m excited to see how Zine compares.&lt;/p&gt;&lt;/div&gt;
-				
-					&lt;div id=whats-next&gt;&lt;h2&gt;&lt;a class=&quot;&quot; href=&quot;#whats-next&quot;&gt;What’s Next&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;There are some things with the site that are far from finished. For instance, the CSS is a mess, as I’ve used Kristoff’s CSS as a base and then just added some of my own. It needs cleaning up.&lt;/p&gt;&lt;/div&gt;
-				
-					&lt;div id=tags&gt;&lt;h3&gt;&lt;a class=&quot;&quot; href=&quot;#tags&quot;&gt;Tags&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;I’m adding tags to this post, but so far there’s no way to filter posts by tags. I’ll have to implement that.&lt;/p&gt;&lt;/div&gt;
-				
-					&lt;div id=rss&gt;&lt;h3&gt;&lt;a class=&quot;&quot; href=&quot;#rss&quot;&gt;RSS&lt;/a&gt; ✅&lt;/h3&gt;&lt;p&gt;I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.&lt;/p&gt;&lt;p&gt;The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with &lt;code&gt;only the main page can be rendered for now, sorry!&lt;/code&gt;.&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:loop=&amp;quot;$page.subpages()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 
-      Here goes the rest of the RSS info for the post
-    --&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:text=&amp;quot;$loop.it.content()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-				
-					&lt;div id=rss-update&gt;&lt;h4&gt;&lt;a class=&quot;&quot; href=&quot;#rss-update&quot;&gt;Update&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:loop=&amp;quot;$page.subpages()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:text=&amp;quot;$loop.it.title&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;&amp;lt;!-- 
-      Here goes the rest of the RSS info for the post
-    --&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:loop=&amp;quot;$site.page($loop.it.link()).contentSections()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt; &lt;span class=&quot;error&quot;&gt;:text=&amp;quot;$loop.it.html()&amp;quot;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;markup&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;punctuation delimiter&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And the corresponding change to the post:&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;markdown&quot;&gt;&lt;span class=&quot;punctuation special&quot;&gt;####&lt;/span&gt; &lt;span class=&quot;text title&quot;&gt;[Heading]($section.id(&amp;quot;heading&amp;quot;))&lt;/span&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ackurat.github.io</title>
+    <link>https://ackurat.github.io</link>
+    <description>Recent content on ackurat.github.io</description>
+    <language>en-us</language>
+    <managingEditor>Adam CL (mail@mail.com)</managingEditor>
+    <webMaster>Adam CL (mail@mail.com)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 09 Feb 2025 16:03:54 +0000</lastBuildDate>
+    <atom:link type="application/rss+xml" rel="self" href="https://ackurat.github.io/index.xml"/>
+    <item>
+      <title>Once again rewriting the site</title>
+      <link>https://ackurat.github.io/once-again-rewriting-the-site/</link>
+      <pubDate>Sat, 08 Feb 2025 06:00:00 +0000</pubDate>
+      <author>Adam CL (mail@mail.com)</author>
+      <guid>https://ackurat.github.io/once-again-rewriting-the-site/</guid>
+      <description>&lt;h2 id=&quot;once-again-rewriting-the-site&quot;&gt;
+&lt;a href=&quot;#once-again-rewriting-the-site&quot;&gt;Once again rewriting the site&lt;/a&gt;&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;makeup elixir&quot;&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;replace_heading&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-1&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-1&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot; data-group-id=&quot;8858837378-2&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;starts_with?&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-3&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;## &quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-3&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot; data-group-id=&quot;8858837378-4&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-5&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;## &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-5&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;slug&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downcase&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-6&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-6&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-7&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;~r/[^a-z]+/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-&quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-7&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trim&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-8&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;-&quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;8858837378-8&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
-Text goes here...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;An added benefit of this is that the headers are clickable, which is included in the table of contents of the post.&lt;/p&gt;&lt;/div&gt;
-				</description>
-			</item>
-		
-	</channel>
+      &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;## [&lt;/span&gt;&lt;span class=&quot;si&quot; data-group-id=&quot;8858837378-9&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;si&quot; data-group-id=&quot;8858837378-9&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;](#&lt;/span&gt;&lt;span class=&quot;si&quot; data-group-id=&quot;8858837378-10&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;slug&lt;/span&gt;&lt;span class=&quot;si&quot; data-group-id=&quot;8858837378-10&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;k&quot; data-group-id=&quot;8858837378-4&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;k&quot; data-group-id=&quot;8858837378-4&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;k&quot; data-group-id=&quot;8858837378-2&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+This is some inline text with inline code &lt;code class=&quot;inline&quot;&gt;def replace_heading(line)&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Understanding PostgreSQL and its buffers</title>
+      <link>https://ackurat.github.io/understanding-postgresql-buffers/</link>
+      <pubDate>Fri, 07 Feb 2025 06:00:00 +0000</pubDate>
+      <author>Adam CL (mail@mail.com)</author>
+      <guid>https://ackurat.github.io/understanding-postgresql-buffers/</guid>
+      <description>&lt;h2 id=&quot;quick-intro-to-postgresql&quot;&gt;
+&lt;a href=&quot;#quick-intro-to-postgresql&quot;&gt;Quick Intro to PostgreSQL&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;
+&lt;a href=&quot;https://www.postgresql.org/&quot;&gt;PostgreSQL&lt;/a&gt; is an open source relational database engine. It has been around for some 35 years, is highly performant, scalable through replication and is widely used. Major cloud providers offer managed solutions for Postgres, with additions such as automatic failover and recover and automatic maintenance.&lt;/p&gt;
+&lt;h2 id=&quot;what-is-the-buffer-cache&quot;&gt;
+&lt;a href=&quot;#what-is-the-buffer-cache&quot;&gt;What is the Buffer Cache?&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;
+The buffer cache is, simply put, a caching mechanism to speed up reading of data. Since Postgres stores data on disk, any I/O reads to the storage layer will incur extra delay. The cache on the other hand lives in memory, providing much lower delay. The performance difference is an order of magnitude, something we’ll see later in this post.&lt;/p&gt;
+&lt;p&gt;
+There is more than one cache in Postgres, but in this post I’ll only focus on &lt;code class=&quot;inline&quot;&gt;shared_buffers&lt;/code&gt;, which is the main cache for reading data.&lt;/p&gt;
+&lt;h3&gt;
+Structure of shared_buffers&lt;/h3&gt;
+&lt;p&gt;
+The smallest unit in Postgres is a &lt;code class=&quot;inline&quot;&gt;page&lt;/code&gt;, defaulting to 8kB. A row of data in a table will be stored in at least one page - if the size of the row exceeds the page size, it will be distributed among multiple pages. Simple stuff.&lt;/p&gt;
+&lt;p&gt;
+The &lt;code class=&quot;inline&quot;&gt;shared_buffers&lt;/code&gt; will only cache pages. The implication of this is that rows that hasn’t been read might be cached, since neighbouring (page-wise) rows have been read.&lt;/p&gt;
+&lt;h2 id=&quot;experimenting-with-the-cache&quot;&gt;
+&lt;a href=&quot;#experimenting-with-the-cache&quot;&gt;Experimenting with the Cache&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;
+Let’s start by enabling an extension which will allow us to read the contents of the cache:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;makeup sql&quot;&gt;&lt;span class=&quot;kr&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extension&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pg_buffercache&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    <item>
+      <title>Exploring gleam through advent of code</title>
+      <link>https://ackurat.github.io/exploring-gleam-through-advent-of-code/</link>
+      <pubDate>Mon, 11 Nov 2024 06:00:00 +0000</pubDate>
+      <author>Adam CL (mail@mail.com)</author>
+      <guid>https://ackurat.github.io/exploring-gleam-through-advent-of-code/</guid>
+      <description>&lt;p&gt;
+&lt;a href=&quot;https://gleam.run&quot;&gt;Gleam&lt;/a&gt; is a statically typed functional programming language that gets compiled to either &lt;a href=&quot;https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)&quot;&gt;BEAM&lt;/a&gt; or JavaScript. Its syntax is more akin to &lt;a href=&quot;https://rust-lang.org&quot;&gt;Rust&lt;/a&gt; than other BEAM languages such as &lt;a href=&quot;https://elixir-lang.org&quot;&gt;Elixir&lt;/a&gt; and &lt;a href=&quot;https://erlang.org&quot;&gt;Erlang&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;gleam&quot;&gt;pub fn split(x: String, on substring: String) -&gt; List(String) {
+  case substring {
+    &quot;&quot; -&gt; to_graphemes(x)
+    _ -&gt;
+      x
+      |&gt; string_builder.from_string
+      |&gt; string_builder.split(on: substring)
+      |&gt; list.map(with: string_builder.to_string)
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;why-i-chose-gleam&quot;&gt;
+&lt;a href=&quot;#why-i-chose-gleam&quot;&gt;Why I Chose Gleam&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;
+First and foremost, I wanted to try something new. Gleam ticked quite a few of the boxes of things I like in a language:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+Static type system  &lt;/li&gt;
+  &lt;li&gt;
+Immutability  &lt;/li&gt;
+  &lt;li&gt;
+Compiled  &lt;/li&gt;
+  &lt;li&gt;
+Built-in tooling  &lt;/li&gt;
+  &lt;li&gt;
+Decent standard library  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+For the purpose of AoC, it’s mainly the type system, tooling and standard library I’m choosing Gleam. I might take on doing something more complicated (and distributed) afterwards.&lt;/p&gt;
+&lt;h2 id=&quot;first-impressions&quot;&gt;
+&lt;a href=&quot;#first-impressions&quot;&gt;First Impressions&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;
+As I usually work in procedural languages, getting into the strictly functional paradigm has been the biggest hurdle. Don’t get me wrong - I often use the functional style functions of JS, but due to its mutability and dynamic typing, it’s far from Gleam. I’ve previously delved into Elixir, and while it is also functional it’s got the dynamic typing to make it less of a jump. After completing the first 8 days of AoC, I’m getting used to it and I see the light that is immutability. In the codebase I spend most time in at work, there’s plenty of functionality that modifies in-place, causing both confusion and bugs for developers who are new to the code.&lt;/p&gt;
+&lt;h3&gt;
+Missed Functionality #1 - list access by index&lt;/h3&gt;
+&lt;p&gt;
+When it comes to AoC, it’s very common to work with arrays/lists, for instance in a matrix:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;matrix = [[&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;], [&amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;]]
+matrix[0][0] # &amp;#39;a&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+Let’s say then that a task requires shifting rows by 1:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;def shift_row_right(matrix, row_index, n):
+    row = matrix[row_index]
+    n = n % len(row)
+    shifted_row = row[-n:] + row[:-n]
+    matrix[row_index] = shifted_row
+    return matrix
+
+shift_row_right(matrix, 0, 1) # [[&amp;#39;b&amp;#39;, &amp;#39;a&amp;#39;], [&amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;]]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+Performance aside, this is a very simple and neat way of accessing elements in a list. There’s no need to iterate over the rows. In Gleam, you can’t access lists by index. Instead, you have to iterate through the list until you’re on the right index. Pairing this with the immutability means that shifting rows as above is a bit more tedious. For AoC 2016 day 8, this was the solution I came up with for shifting rows with wrap around:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;gleam&quot;&gt;pub fn shift_row_right(
+  matrix: Matrix(value),
+  row: Int,
+  shift: Int,
+) -&gt; Matrix(value) {
+  Matrix(
+    cells: list.index_map(matrix.cells, fn(current_row, row_index) {
+      case row_index == row {
+        True -&gt; {
+          current_row
+          |&gt; list.split(list.length(current_row) - shift)
+          |&gt; fn(split) { list.append(split.1, split.0) }
+        }
+        False -&gt; current_row
+      }
+    }),
+  )
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+We first have to iterate through all the rows, and in case of being on the wrong row we just return it as is. In case of being on the right row, we then need to construct a new row by iterating over the row, first to split it and then over the first part of the new list (&lt;code class=&quot;inline&quot;&gt;split.1&lt;/code&gt;) in the &lt;code class=&quot;inline&quot;&gt;list.append&lt;/code&gt; function.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Setting up a site with zine</title>
+      <link>https://ackurat.github.io/setting-up-a-site-with-zine/</link>
+      <pubDate>Sun, 27 Oct 2024 06:00:00 +0000</pubDate>
+      <author>Adam CL (mail@mail.com)</author>
+      <guid>https://ackurat.github.io/setting-up-a-site-with-zine/</guid>
+      <description>&lt;h2 id=&quot;first-steps&quot;&gt;
+&lt;a href=&quot;#first-steps&quot;&gt;First Steps&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;
+Were me just copying the Zine creator &lt;a href=&quot;https://kristoff.it/&quot;&gt;Kristoff’s&lt;/a&gt; personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.&lt;/p&gt;
+&lt;h2 id=&quot;what-i-like-about-zine&quot;&gt;
+&lt;a href=&quot;#what-i-like-about-zine&quot;&gt;What I like About Zine&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;
+I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. &lt;code class=&quot;inline&quot;&gt;SuperMD&lt;/code&gt; and &lt;code class=&quot;inline&quot;&gt;SuperHTML&lt;/code&gt; are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance &lt;code class=&quot;inline&quot;&gt;Templ&lt;/code&gt; to generate HTML, so I’m excited to see how Zine compares.&lt;/p&gt;
+&lt;h2 id=&quot;what-s-next&quot;&gt;
+&lt;a href=&quot;#what-s-next&quot;&gt;What’s Next&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;
+There are some things with the site that are far from finished. For instance, the CSS is a mess, as I’ve used Kristoff’s CSS as a base and then just added some of my own. It needs cleaning up.&lt;/p&gt;
+&lt;h3&gt;
+Tags&lt;/h3&gt;
+&lt;p&gt;
+I’m adding tags to this post, but so far there’s no way to filter posts by tags. I’ll have to implement that.&lt;/p&gt;
+&lt;h3&gt;
+RSS ✅&lt;/h3&gt;
+&lt;p&gt;
+I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.&lt;/p&gt;
+&lt;p&gt;
+The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with &lt;code class=&quot;inline&quot;&gt;only the main page can be rendered for now, sorry!&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;makeup html&quot;&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-1&quot;&gt;&lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;:loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$page.subpages()&quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-1&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-2&quot;&gt;&lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-2&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;c&quot;&gt;&lt;!-- 
+      Here goes the rest of the RSS info for the post
+    --&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-3&quot;&gt;&lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;:text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$loop.it.content()&quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-3&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-4&quot;&gt;&lt;/&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-4&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-5&quot;&gt;&lt;/&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-5&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-6&quot;&gt;&lt;/&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;0928231107-6&quot;&gt;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;
+Update&lt;/h4&gt;
+&lt;p&gt;
+I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;makeup html&quot;&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-1&quot;&gt;&lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;:loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$page.subpages()&quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-1&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-2&quot;&gt;&lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-2&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-3&quot;&gt;&lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;:text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$loop.it.title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-3&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-4&quot;&gt;&lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-4&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;c&quot;&gt;&lt;!-- 
+      Here goes the rest of the RSS info for the post
+    --&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-5&quot;&gt;&lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;:loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$site.page($loop.it.link()).contentSections()&quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-5&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-6&quot;&gt;&lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;:text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$loop.it.html()&quot;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-6&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-7&quot;&gt;&lt;/&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-7&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-8&quot;&gt;&lt;/&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-8&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-9&quot;&gt;&lt;/&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-9&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-10&quot;&gt;&lt;/&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ctx&lt;/span&gt;&lt;span class=&quot;p&quot; data-group-id=&quot;9568392399-10&quot;&gt;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+And the corresponding change to the post:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#### [Heading]($section.id(&quot;heading&quot;))
+
+Text goes here...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+An added benefit of this is that the headers are clickable, which is included in the table of contents of the post.&lt;/p&gt;
+</description>
+    </item>
+  </channel>
 </rss>

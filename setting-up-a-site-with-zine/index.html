@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Setting up a site with zine — ackurat.github.io</title>
+      <meta name="description" content="">
+      <meta name="author" content="Adam CL">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="/index.xml" rel="alternate" type="application/rss+xml" title="ackurat.github.io">
+      <meta name="ROBOTS" content="INDEX, FOLLOW">
+      <meta property="og:title" content="Setting up a site with zine — ackurat.github.io">
+      <meta property="og:description" content="">
+      <meta property="og:type" content="article">
+      <meta property="og:url" content="https://ackurat.github.io/setting-up-a-site-with-zine/">
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:title" content="Setting up a site with zine — ackurat.github.io">
+      <meta name="twitter:description" content="">
+      <meta itemprop="name" content="Setting up a site with zine — ackurat.github.io">
+      <meta itemprop="description" content="">
+      
+        <meta itemprop="datePublished" content="2024-10-27T06:00:00Z">
+        <meta itemprop="dateModified" content="2024-10-27T06:00:00Z">
+        <meta itemprop="wordCount" content="438">
+        <meta itemprop="keywords" content="zine,zig">
+        <meta property="article:author" content="Adam CL">
+        <meta property="article:section" content="Software">
+        <meta property="article:tag" content="zine"><meta property="article:tag" content="zig">
+        <meta property="article:published_time" content="2024-10-27T06:00:00Z">
+        <meta property="article:modified_time" content="2024-10-27T06:00:00Z">
+      
+      <link rel="canonical" href="https://ackurat.github.io/setting-up-a-site-with-zine/">
+      <link rel="stylesheet" href="/assets/app.css">
+    </head>
+    <body>
+      <div class="container mx-auto px-4">
+        <header class="flex justify-center py-4 text-lg font-bold tracking-wider">
+          <div class="flex space-x-4 pb-6">
+            <a href="/">Home</a>
+            <a href="/about/">About</a>
+            <a href="/archive/">Archive</a>
+            <a href="/reads/">Reads</a>
+            <a type="application/rss+xml" href="/index.xml">RSS</a>
+          </div>
+        </header>
+        <main class="flex justify-center">
+          <div class="w-full md:w-1/2">
+            
+  <div class="flex flex-col">
+    <span class="text-base">Oct 27, 2024</span>
+    <span class="text-3xl">Setting up a site with zine</span>
+  </div>
+  <article class="text-xl">
+    <p></p>
+    <h2 id="first-steps">
+<a href="#first-steps">First Steps</a></h2>
+<p>
+Were me just copying the Zine creator <a href="https://kristoff.it/">Kristoff’s</a> personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.</p>
+<h2 id="what-i-like-about-zine">
+<a href="#what-i-like-about-zine">What I like About Zine</a></h2>
+<p>
+I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. <code class="inline">SuperMD</code> and <code class="inline">SuperHTML</code> are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance <code class="inline">Templ</code> to generate HTML, so I’m excited to see how Zine compares.</p>
+<h2 id="what-s-next">
+<a href="#what-s-next">What’s Next</a></h2>
+<p>
+There are some things with the site that are far from finished. For instance, the CSS is a mess, as I’ve used Kristoff’s CSS as a base and then just added some of my own. It needs cleaning up.</p>
+<h3>
+Tags</h3>
+<p>
+I’m adding tags to this post, but so far there’s no way to filter posts by tags. I’ll have to implement that.</p>
+<h3>
+RSS ✅</h3>
+<p>
+I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p>
+<p>
+The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code class="inline">only the main page can be rendered for now, sorry!</code>.</p>
+<pre><code class="makeup html"><span class="p" data-group-id="0928231107-1">&lt;</span><span class="s">ctx</span><span class="w"> </span><span class="s">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="0928231107-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="0928231107-2">&lt;</span><span class="s">item</span><span class="p" data-group-id="0928231107-2">&gt;</span><span class="s">
+    </span><span class="c">&lt;!-- 
+      Here goes the rest of the RSS info for the post
+    --&gt;</span><span class="s">
+    </span><span class="p" data-group-id="0928231107-3">&lt;</span><span class="s">description</span><span class="w"> </span><span class="s">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="0928231107-3">&gt;</span><span class="p" data-group-id="0928231107-4">&lt;/</span><span class="s">description</span><span class="p" data-group-id="0928231107-4">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="0928231107-5">&lt;/</span><span class="s">item</span><span class="p" data-group-id="0928231107-5">&gt;</span><span class="s">
+</span><span class="p" data-group-id="0928231107-6">&lt;/</span><span class="s">ctx</span><span class="p" data-group-id="0928231107-6">&gt;</span></code></pre>
+<h4>
+Update</h4>
+<p>
+I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:</p>
+<pre><code class="makeup html"><span class="p" data-group-id="9568392399-1">&lt;</span><span class="s">ctx</span><span class="w"> </span><span class="s">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="9568392399-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="9568392399-2">&lt;</span><span class="s">item</span><span class="p" data-group-id="9568392399-2">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="9568392399-3">&lt;</span><span class="k">title</span><span class="w"> </span><span class="s">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="9568392399-3">&gt;</span><span class="p" data-group-id="9568392399-4">&lt;/</span><span class="k">title</span><span class="p" data-group-id="9568392399-4">&gt;</span><span class="s">
+    </span><span class="c">&lt;!-- 
+      Here goes the rest of the RSS info for the post
+    --&gt;</span><span class="s">
+    </span><span class="p" data-group-id="9568392399-5">&lt;</span><span class="s">description</span><span class="w"> </span><span class="s">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="9568392399-5">&gt;</span><span class="s">
+      </span><span class="p" data-group-id="9568392399-6">&lt;</span><span class="s">ctx</span><span class="w"> </span><span class="s">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="9568392399-6">&gt;</span><span class="p" data-group-id="9568392399-7">&lt;/</span><span class="s">ctx</span><span class="p" data-group-id="9568392399-7">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="9568392399-8">&lt;/</span><span class="s">description</span><span class="p" data-group-id="9568392399-8">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="9568392399-9">&lt;/</span><span class="s">item</span><span class="p" data-group-id="9568392399-9">&gt;</span><span class="s">
+</span><span class="p" data-group-id="9568392399-10">&lt;/</span><span class="s">ctx</span><span class="p" data-group-id="9568392399-10">&gt;</span></code></pre>
+<p>
+And the corresponding change to the post:</p>
+<pre><code>#### [Heading]($section.id(&quot;heading&quot;))
+
+Text goes here...</code></pre>
+<p>
+An added benefit of this is that the headers are clickable, which is included in the table of contents of the post.</p>
+
+  </article>
+  <hr class="my-4">
+  <footer>
+    
+    <div class="flex justify-between">
+      
+        <a href="/exploring-gleam-through-advent-of-code">
+          Previous
+        </a>
+      
+      
+    </div>
+  
+    
+  </footer>
+  
+          </div>
+        </main>
+      </div>
+    </body>
+  </html>
