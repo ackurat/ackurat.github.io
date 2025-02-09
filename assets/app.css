@@ -1721,7 +1721,7 @@ article h3 {
   font-size: x-large;
 }
 
-code {
+pre code {
   display: block;
   overflow-x: auto;
   &::before {
@@ -1758,7 +1758,7 @@ code {
     background-color: var(--color-macchiato-base);
   }
 
-  code {
+  pre code {
     &::before {
       background-color: var(--color-macchiato-base);
       color: var(--color-frappe-text);
