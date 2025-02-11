@@ -1,0 +1,118 @@
+@import "./fonts.css";
+@import "./makeup.css";
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+    html {
+      font-family: "EB Garamond", "Georgia", serif;
+    }
+
+    a:hover {
+      color: var(--color-latte-blue);
+    }
+    body {
+      color: var(--color-latte-text);
+      background-color: var(--color-latte-base);
+    }
+    pre {
+      background-color: var(--color-latte-crust);
+      position: relative;
+      overflow: visible;
+      padding: 0.5rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-size: medium;
+      line-height: 1.25;
+    }
+
+    article p {
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+
+    article h2 {
+      font-size: x-large;
+      font-weight: bold;
+    }
+
+    article h3 {
+      font-size: x-large;
+    }
+
+    article a {
+      text-decoration: underline;
+    }
+
+    article h1 a,
+    article h2 a,
+    article h3 a,
+    article h4 a,
+    article h5 a,
+    article h6 a {
+      text-decoration: none;
+    }
+
+    pre code {
+      display: block;
+      overflow-x: auto;
+
+      &::before {
+        background-color: var(--color-latte-crust);
+        border-radius: 0.3rem 0.3rem 0 0;
+        position: absolute;
+        top: -1rem;
+        right: 1rem;
+        padding: 0 0.2rem 0 0.2rem;
+        font-size: medium;
+      }
+    
+      &.elixir::before {
+        content: "elixir";
+      }
+
+      &.sql::before {
+        content: "sql"
+      }
+
+      &.html::before {
+        content: "html"
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      a:hover {
+        color: var(--color-frappe-blue);
+      }
+      body {
+        color: var(--color-frappe-text);
+        background-color: var(--color-frappe-base);
+      }
+      pre {
+        background-color: var(--color-macchiato-base);
+      }
+      pre code {
+        &::before {
+          background-color: var(--color-macchiato-base);
+          color: var(--color-frappe-text);
+        } 
+      }
+    }
+
+    :root {
+      --color-frappe-base: rgb(48, 52, 70);
+      --color-frappe-blue: rgb(140, 170, 238);
+      --color-frappe-text: rgb(198, 208, 245);
+
+      --color-latte-base: rgb(239, 241, 245);
+      --color-latte-blue: rgb(30, 102, 245);
+      --color-latte-text: rgb(76, 79, 105);
+      --color-latte-crust: rgb(220, 224, 232);
+
+      --color-macchiato-base: rgb(36, 39, 58);
+    }
+
+
+  }
