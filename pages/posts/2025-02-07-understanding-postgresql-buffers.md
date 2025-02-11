@@ -8,9 +8,7 @@
 ---
 
 
-## Quick Intro to PostgreSQL
-
-[PostgreSQL](https://www.postgresql.org/) is an open source relational database engine. It has been around for some 35 years, is highly performant, scalable through replication and is widely used. Major cloud providers offer managed solutions for Postgres, with additions such as automatic failover and recover and automatic maintenance.
+[PostgreSQL](https://www.postgresql.org/) is an open source relational database engine. It has been around for some 35 years, is highly performant, scalable horizontally through replication and is widely used. Major cloud providers offer managed solutions for Postgres, with additions such as automatic failover and recover, and automatic maintenance.
 
 ## What is the Buffer Cache?
 

@@ -35,8 +35,6 @@ defmodule Mix.Tasks.Ack.Post do
       ---
 
 
-      ## #{String.capitalize(file_name)}
-
       """,
       [:write]
     )
