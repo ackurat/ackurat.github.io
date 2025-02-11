@@ -1721,6 +1721,10 @@ article h3 {
   font-size: x-large;
 }
 
+article a {
+  text-decoration: underline;
+}
+
 pre code {
   display: block;
   overflow-x: auto;
@@ -1823,6 +1827,10 @@ pre code {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .mt-4 {

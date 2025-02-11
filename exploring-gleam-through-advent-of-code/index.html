@@ -39,6 +39,7 @@
             <a href="/">Home</a>
             <a href="/about/">About</a>
             <a href="/archive/">Archive</a>
+            <a href="/keywords/">Tags</a>
             <a href="/reads/">Reads</a>
             <a type="application/rss+xml" href="/index.xml">RSS</a>
           </div>
@@ -49,9 +50,11 @@
   <div class="flex flex-col">
     <span class="text-base">Nov 11, 2024</span>
     <span class="text-3xl">Exploring gleam through advent of code</span>
+    <div>
+      <a class="text-base mr-2" href="/keywords/gleam" class="text-base">gleam</a><a class="text-base mr-2" href="/keywords/advent-of-code" class="text-base">advent-of-code</a>
+    </div>
   </div>
   <article class="text-xl">
-    <p></p>
     <p>
 <a href="https://gleam.run">Gleam</a> is a statically typed functional programming language that gets compiled to either <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)">BEAM</a> or JavaScript. Its syntax is more akin to <a href="https://rust-lang.org">Rust</a> than other BEAM languages such as <a href="https://elixir-lang.org">Elixir</a> and <a href="https://erlang.org">Erlang</a>.</p>
 <pre><code class="gleam">pub fn split(x: String, on substring: String) -&gt; List(String) {
@@ -142,7 +145,6 @@ We first have to iterate through all the rows, and in case of being on the wrong
       
     </div>
   
-    
   </footer>
   
           </div>

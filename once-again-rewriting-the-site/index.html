@@ -3,25 +3,25 @@
     <head>
       <meta charset="utf-8">
       <title>Once again rewriting the site — ackurat.github.io</title>
-      <meta name="description" content="">
+      <meta name="description" content="I&#39;m rewriting the site in Elixir, with NimblePublisher and LiveView templates as a base.">
       <meta name="author" content="Adam CL">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="/index.xml" rel="alternate" type="application/rss+xml" title="ackurat.github.io">
       <meta name="ROBOTS" content="INDEX, FOLLOW">
       <meta property="og:title" content="Once again rewriting the site — ackurat.github.io">
-      <meta property="og:description" content="">
+      <meta property="og:description" content="I&#39;m rewriting the site in Elixir, with NimblePublisher and LiveView templates as a base.">
       <meta property="og:type" content="article">
       <meta property="og:url" content="https://ackurat.github.io/once-again-rewriting-the-site/">
       <meta name="twitter:card" content="summary">
       <meta name="twitter:title" content="Once again rewriting the site — ackurat.github.io">
-      <meta name="twitter:description" content="">
+      <meta name="twitter:description" content="I&#39;m rewriting the site in Elixir, with NimblePublisher and LiveView templates as a base.">
       <meta itemprop="name" content="Once again rewriting the site — ackurat.github.io">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="I&#39;m rewriting the site in Elixir, with NimblePublisher and LiveView templates as a base.">
       
         <meta itemprop="datePublished" content="2025-02-08T06:00:00Z">
         <meta itemprop="dateModified" content="2025-02-08T06:00:00Z">
-        <meta itemprop="wordCount" content="45">
+        <meta itemprop="wordCount" content="126">
         <meta itemprop="keywords" content="elixir,zine">
         <meta property="article:author" content="Adam CL">
         <meta property="article:section" content="Software">
@@ -39,6 +39,7 @@
             <a href="/">Home</a>
             <a href="/about/">About</a>
             <a href="/archive/">Archive</a>
+            <a href="/keywords/">Tags</a>
             <a href="/reads/">Reads</a>
             <a type="application/rss+xml" href="/index.xml">RSS</a>
           </div>
@@ -49,25 +50,29 @@
   <div class="flex flex-col">
     <span class="text-base">Feb 8, 2025</span>
     <span class="text-3xl">Once again rewriting the site</span>
+    <div>
+      <a class="text-base mr-2" href="/keywords/elixir" class="text-base">elixir</a><a class="text-base mr-2" href="/keywords/zine" class="text-base">zine</a>
+    </div>
   </div>
   <article class="text-xl">
-    <p></p>
-    <h2 id="once-again-rewriting-the-site">
-<a href="#once-again-rewriting-the-site">Once again rewriting the site</a></h2>
-<pre><code class="makeup elixir"><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">replace_heading</span><span class="p" data-group-id="7436180044-1">(</span><span class="n">line</span><span class="p" data-group-id="7436180044-1">)</span><span class="w"> </span><span class="k" data-group-id="7436180044-2">do</span><span class="w">
-    </span><span class="k">if</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">starts_with?</span><span class="p" data-group-id="7436180044-3">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p" data-group-id="7436180044-3">)</span><span class="w"> </span><span class="k" data-group-id="7436180044-4">do</span><span class="w">
-      </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="7436180044-5">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="7436180044-5">)</span><span class="w">
+    <p>
+Once again I’m rewriting the site. I never got around to finishing my <a href="https://zine-ssg.io">Zine</a> implementation, partly because I didn’t have time to invest into learning Zig. I’ll soon start a new job where I’ll use <a href="https://elixir-lang.org">Elixir</a> and <a href="https://erlang.org">Erlang</a> as my main languages. I haven’t used Erlang much before, but Elixir has been a lurking favourite, and with my experiments with <a href="https://gleam.run">Gleam</a> I found renewed interest in it.</p>
+<p>
+The base for this implementation </p>
+<pre><code class="makeup elixir"><span class="w">  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">replace_heading</span><span class="p" data-group-id="7385826425-1">(</span><span class="n">line</span><span class="p" data-group-id="7385826425-1">)</span><span class="w"> </span><span class="k" data-group-id="7385826425-2">do</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">starts_with?</span><span class="p" data-group-id="7385826425-3">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p" data-group-id="7385826425-3">)</span><span class="w"> </span><span class="k" data-group-id="7385826425-4">do</span><span class="w">
+      </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="7385826425-5">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="7385826425-5">)</span><span class="w">
       </span><span class="n">slug</span><span class="w"> </span><span class="o">=</span><span class="w">
         </span><span class="n">title</span><span class="w">
-        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p" data-group-id="7436180044-6">(</span><span class="p" data-group-id="7436180044-6">)</span><span class="w">
-        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="7436180044-7">(</span><span class="sr">~r/[^a-z]+/</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="7436180044-7">)</span><span class="w">
-        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p" data-group-id="7436180044-8">(</span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="7436180044-8">)</span><span class="w">
+        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p" data-group-id="7385826425-6">(</span><span class="p" data-group-id="7385826425-6">)</span><span class="w">
+        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="7385826425-7">(</span><span class="sr">~r/[^a-z]+/</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="7385826425-7">)</span><span class="w">
+        </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p" data-group-id="7385826425-8">(</span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="7385826425-8">)</span><span class="w">
 
-      </span><span class="s">&quot;## [</span><span class="si" data-group-id="7436180044-9">#{</span><span class="n">title</span><span class="si" data-group-id="7436180044-9">}</span><span class="s">](#</span><span class="si" data-group-id="7436180044-10">#{</span><span class="n">slug</span><span class="si" data-group-id="7436180044-10">}</span><span class="s">)&quot;</span><span class="w">
-    </span><span class="k" data-group-id="7436180044-4">else</span><span class="w">
+      </span><span class="s">&quot;## [</span><span class="si" data-group-id="7385826425-9">#{</span><span class="n">title</span><span class="si" data-group-id="7385826425-9">}</span><span class="s">](#</span><span class="si" data-group-id="7385826425-10">#{</span><span class="n">slug</span><span class="si" data-group-id="7385826425-10">}</span><span class="s">)&quot;</span><span class="w">
+    </span><span class="k" data-group-id="7385826425-4">else</span><span class="w">
       </span><span class="n">line</span><span class="w">
-    </span><span class="k" data-group-id="7436180044-4">end</span><span class="w">
-  </span><span class="k" data-group-id="7436180044-2">end</span></code></pre>
+    </span><span class="k" data-group-id="7385826425-4">end</span><span class="w">
+  </span><span class="k" data-group-id="7385826425-2">end</span></code></pre>
 <p>
 This is some inline text with inline code <code class="inline">def replace_heading(line)</code></p>
 
@@ -88,7 +93,6 @@ This is some inline text with inline code <code class="inline">def replace_headi
       
     </div>
   
-    
   </footer>
   
           </div>

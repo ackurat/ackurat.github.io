@@ -39,6 +39,7 @@
             <a href="/">Home</a>
             <a href="/about/">About</a>
             <a href="/archive/">Archive</a>
+            <a href="/keywords/">Tags</a>
             <a href="/reads/">Reads</a>
             <a type="application/rss+xml" href="/index.xml">RSS</a>
           </div>
@@ -49,9 +50,11 @@
   <div class="flex flex-col">
     <span class="text-base">Feb 7, 2025</span>
     <span class="text-3xl">Understanding PostgreSQL and its buffers</span>
+    <div>
+      <a class="text-base mr-2" href="/keywords/postgres" class="text-base">postgres</a><a class="text-base mr-2" href="/keywords/database" class="text-base">database</a>
+    </div>
   </div>
   <article class="text-xl">
-    <p>PostgreSQL&#39;s buffer cache plays a crucial role in maintaining high performance. In this article, I conduct some experiments and show how the buffer cache affects performance.</p>
     <h2 id="quick-intro-to-postgresql">
 <a href="#quick-intro-to-postgresql">Quick Intro to PostgreSQL</a></h2>
 <p>
@@ -93,7 +96,6 @@ Let’s start by enabling an extension which will allow us to read the contents 
       
     </div>
   
-    
   </footer>
   
           </div>
