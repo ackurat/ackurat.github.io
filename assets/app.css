@@ -1705,6 +1705,8 @@ pre {
   padding: 0.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  font-size: medium;
+  line-height: 1.25;
 }
 
 article p {
@@ -1723,6 +1725,15 @@ article h3 {
 
 article a {
   text-decoration: underline;
+}
+
+article h1 a,
+    article h2 a,
+    article h3 a,
+    article h4 a,
+    article h5 a,
+    article h6 a {
+  text-decoration: none;
 }
 
 pre code {

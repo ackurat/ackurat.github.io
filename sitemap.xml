@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ackurat.github.io</loc>
-    <lastmod>2025-02-11T09:36:43.047837Z</lastmod>
+    <lastmod>2025-02-11T11:02:18.861413Z</lastmod>
   </url>
   <url>
     <loc>https://ackurat.github.io/about/</loc>
-    <lastmod>2025-02-11T09:36:42.802566Z</lastmod>
+    <lastmod>2025-02-11T11:02:18.620213Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ackurat.github.io/once-again-rewriting-the-site/</loc>
+    <lastmod>2025-02-08T06:00:00Z</lastmod>
   </url>
   <url>
     <loc>https://ackurat.github.io/exploring-gleam-through-advent-of-code/</loc>
@@ -18,6 +22,6 @@
   </url>
   <url>
     <loc>https://ackurat.github.io/reads/test/</loc>
-    <lastmod>2025-02-11T09:36:42.897340Z</lastmod>
+    <lastmod>2025-02-11T11:02:18.712470Z</lastmod>
   </url>
 </urlset>

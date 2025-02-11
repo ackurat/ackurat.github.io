@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Once again rewriting the site — ackurat.github.io</title>
+      <meta name="description" content="I&#39;m rewriting the site in Elixir, with NimblePublisher and LiveView templates as a base.">
+      <meta name="author" content="Adam CL">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="/index.xml" rel="alternate" type="application/rss+xml" title="ackurat.github.io">
+      <meta name="ROBOTS" content="INDEX, FOLLOW">
+      <meta property="og:title" content="Once again rewriting the site — ackurat.github.io">
+      <meta property="og:description" content="I&#39;m rewriting the site in Elixir, with NimblePublisher and LiveView templates as a base.">
+      <meta property="og:type" content="article">
+      <meta property="og:url" content="https://ackurat.github.io/once-again-rewriting-the-site/">
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:title" content="Once again rewriting the site — ackurat.github.io">
+      <meta name="twitter:description" content="I&#39;m rewriting the site in Elixir, with NimblePublisher and LiveView templates as a base.">
+      <meta itemprop="name" content="Once again rewriting the site — ackurat.github.io">
+      <meta itemprop="description" content="I&#39;m rewriting the site in Elixir, with NimblePublisher and LiveView templates as a base.">
+      
+        <meta itemprop="datePublished" content="2025-02-08T06:00:00Z">
+        <meta itemprop="dateModified" content="2025-02-08T06:00:00Z">
+        <meta itemprop="wordCount" content="509">
+        <meta itemprop="keywords" content="elixir,zine">
+        <meta property="article:author" content="Adam CL">
+        <meta property="article:section" content="Software">
+        <meta property="article:tag" content="elixir"><meta property="article:tag" content="zine">
+        <meta property="article:published_time" content="2025-02-08T06:00:00Z">
+        <meta property="article:modified_time" content="2025-02-08T06:00:00Z">
+      
+      <link rel="canonical" href="https://ackurat.github.io/once-again-rewriting-the-site/">
+      <link rel="stylesheet" href="/assets/app.css">
+    </head>
+    <body>
+      <div class="container mx-auto px-4">
+        <header class="flex justify-center py-4 text-lg font-bold tracking-wider">
+          <div class="flex space-x-4 pb-6">
+            <a href="/">Home</a>
+            <a href="/about/">About</a>
+            <a href="/archive/">Archive</a>
+            <a href="/keywords/">Tags</a>
+            <a href="/reads/">Reads</a>
+            <a type="application/rss+xml" href="/index.xml">RSS</a>
+          </div>
+        </header>
+        <main class="flex justify-center">
+          <div class="w-full md:w-1/2">
+            
+  <div class="flex flex-col">
+    <span class="text-base">Feb 8, 2025</span>
+    <span class="text-3xl">Once again rewriting the site</span>
+    <div>
+      <a class="text-base mr-2" href="/keywords/elixir" class="text-base">elixir</a><a class="text-base mr-2" href="/keywords/zine" class="text-base">zine</a>
+    </div>
+  </div>
+  <article class="text-xl">
+    <p>
+Once again I’m rewriting the site. I never got around to finishing my <a href="https://zine-ssg.io">Zine</a> implementation, partly because I didn’t have time to invest into learning Zig. I’ll soon start a new job where I’ll use <a href="https://elixir-lang.org">Elixir</a> and <a href="https://erlang.org">Erlang</a> as my main languages. I haven’t used Erlang much before, but Elixir has been a lurking favourite, and with my experiments with <a href="https://gleam.run">Gleam</a> I found renewed interest in it.</p>
+<p>
+The site uses <a href="https://github.com/dashbitco/nimble_publisher">NimblePublisher</a> and <a href="https://github.com/phoenixframework/phoenix_live_view">LiveView</a> <code class="inline">HEEx</code> templates. The basis for the site is <a href="https://fly.io/phoenix-files/crafting-your-own-static-site-generator-using-phoenix/">Jason Stiebe’s tutorial</a>, and after I had implemented a rudimentary version I forked <a href="https://jorin.me/">Jorin’s website</a> and started rebuilding it to my liking. Kudos to both these for saving me time! Unlike Jorin, I don’t have a desire to create my site generator from scratch, but I’ll happily spend time refactoring and tinkering.</p>
+<h2 id="upcoming-changes">
+<a href="#upcoming-changes">Upcoming changes</a></h2>
+<p>
+Inspired by <a href="https://www.jonashietala.se/blog/2024/07/09/microfeatures_in_my_blog/">Jonas Hietala’s microfeatures</a>, I have some features I want to implement. Just like he states, microfeatures are fun and a way to learn. For instance, I’ve already implemented headings with automatic linking. It was pretty straight forward - reimplement the parsing of headings to add markdown links, and add a postprocessor to add the anchor ID to the headings:</p>
+<pre><code class="makeup elixir"><span class="c1"># parser.ex</span><span class="w">
+
+</span><span class="kd">defp</span><span class="w"> </span><span class="nf">replace_heading</span><span class="p" data-group-id="6034401063-1">(</span><span class="n">line</span><span class="p" data-group-id="6034401063-1">)</span><span class="w"> </span><span class="k" data-group-id="6034401063-2">do</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">starts_with?</span><span class="p" data-group-id="6034401063-3">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p" data-group-id="6034401063-3">)</span><span class="w"> </span><span class="k" data-group-id="6034401063-4">do</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="6034401063-5">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="6034401063-5">)</span><span class="w">
+    </span><span class="n">slug</span><span class="w"> </span><span class="o">=</span><span class="w">
+      </span><span class="n">title</span><span class="w">
+      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p" data-group-id="6034401063-6">(</span><span class="p" data-group-id="6034401063-6">)</span><span class="w">
+      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="6034401063-7">(</span><span class="sr">~r/[^a-z]+/</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="6034401063-7">)</span><span class="w">
+      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p" data-group-id="6034401063-8">(</span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="6034401063-8">)</span><span class="w">
+
+    </span><span class="s">&quot;## [</span><span class="si" data-group-id="6034401063-9">#{</span><span class="n">title</span><span class="si" data-group-id="6034401063-9">}</span><span class="s">](#</span><span class="si" data-group-id="6034401063-10">#{</span><span class="n">slug</span><span class="si" data-group-id="6034401063-10">}</span><span class="s">)&quot;</span><span class="w">
+  </span><span class="k" data-group-id="6034401063-4">else</span><span class="w">
+    </span><span class="n">line</span><span class="w">
+  </span><span class="k" data-group-id="6034401063-4">end</span><span class="w">
+</span><span class="k" data-group-id="6034401063-2">end</span><span class="w">
+
+</span><span class="c1"># processor.ex</span><span class="w">
+
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">process</span><span class="p" data-group-id="6034401063-11">(</span><span class="p" data-group-id="6034401063-12">{</span><span class="s">&quot;h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-13">[</span><span class="p" data-group-id="6034401063-13">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-14">[</span><span class="n">text</span><span class="p" data-group-id="6034401063-14">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-15">%{</span><span class="p" data-group-id="6034401063-15">}</span><span class="p" data-group-id="6034401063-12">}</span><span class="p" data-group-id="6034401063-11">)</span><span class="w"> </span><span class="k" data-group-id="6034401063-16">do</span><span class="w">
+  </span><span class="k">case</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="k" data-group-id="6034401063-17">do</span><span class="w">
+    </span><span class="p" data-group-id="6034401063-18">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-19">[</span><span class="p" data-group-id="6034401063-20">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">anchor_id</span><span class="p" data-group-id="6034401063-20">}</span><span class="p" data-group-id="6034401063-19">]</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p" data-group-id="6034401063-18">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="6034401063-21">{</span><span class="s">&quot;h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-22">[</span><span class="p" data-group-id="6034401063-23">{</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">anchor_id</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p" data-group-id="6034401063-24">(</span><span class="s">&quot;#&quot;</span><span class="p" data-group-id="6034401063-24">)</span><span class="p" data-group-id="6034401063-23">}</span><span class="p" data-group-id="6034401063-22">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-25">[</span><span class="n">text</span><span class="p" data-group-id="6034401063-25">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-26">%{</span><span class="p" data-group-id="6034401063-26">}</span><span class="p" data-group-id="6034401063-21">}</span><span class="w">
+    </span><span class="bp">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="6034401063-27">{</span><span class="s">&quot;h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-28">[</span><span class="p" data-group-id="6034401063-28">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-29">[</span><span class="n">text</span><span class="p" data-group-id="6034401063-29">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6034401063-30">%{</span><span class="p" data-group-id="6034401063-30">}</span><span class="p" data-group-id="6034401063-27">}</span><span class="w">
+  </span><span class="k" data-group-id="6034401063-17">end</span><span class="w">
+</span><span class="k" data-group-id="6034401063-16">end</span></code></pre>
+<h3>
+Djot support</h3>
+<p>
+One microfeature I really like in Jonas’ blog is syntax highlighting in inline code. I could solve this by either writing the inline code as HTML:</p>
+<pre><code>This is some markdown with inline Elixir code: &lt;code class=&quot;makeup elixir&quot;&gt;def process(value), do: value&lt;/code&gt;</code></pre>
+<p>
+Unfortunately, the markdown parser used by NimblePublisher, <a href="https://github.com/pragdave/earmark">Earmark</a> doesn’t support inline HTML. It’s probably solvable by using a postprocessor, but that feels like a tedious rabbit hole. Instead, I want to take the same <a href="https://www.jonashietala.se/blog/2024/02/02/blogging_in_djot_instead_of_markdown/">path as Jonas</a> and use <a href="https://www.djot.net/">Djot</a> to write content. Djot supports adding <a href="https://htmlpreview.github.io/?https://github.com/jgm/djot/blob/master/doc/syntax.html#inline-attributes">inline attributes</a> which could be used like this:</p>
+<pre><code>This is some markdown with inline Elixir code: `def process(value), do: value`{.makeup .elixir}</code></pre>
+<p>
+There are more features of Djot I could use, for instance footnotes.</p>
+<h3>
+Less hand-written CSS</h3>
+<p>
+I’m using <a href="https://tailwindcss.com/">TailwindCSS</a> to lessen the need of writing CSS, but since I use Earmark to produce the HTML of the post you’re reading right now, it’s not simple to use Tailwind for styling within the generated HTML. Instead, I’ve resorted to hand-writing CSS. I’m trying to minimize it and if I switch to Djot, I’ll see if it’s easier to have a post processing step to add Tailwind classes to the generated HTML.</p>
+<h3>
+Typography improvements</h3>
+<p>
+The styling and typography is very basic right now. I like it basic, but I still think there is room for improvement. For instance, the header of this section is not very well separated stylistically.</p>
+
+  </article>
+  <hr class="my-4">
+  <footer>
+    
+    <div class="flex justify-between">
+      
+        <a href="/setting-up-a-site-with-zine">
+          Previous
+        </a>
+      
+      
+        <a href="/understanding-postgresql-buffers">
+          Next
+        </a>
+      
+    </div>
+  
+  </footer>
+  
+          </div>
+        </main>
+      </div>
+    </body>
+  </html>
