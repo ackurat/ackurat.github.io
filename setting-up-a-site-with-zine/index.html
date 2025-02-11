@@ -77,29 +77,29 @@ RSS ✅</h3>
 I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p>
 <p>
 The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code class="inline">only the main page can be rendered for now, sorry!</code>.</p>
-<pre><code class="makeup html"><span class="p" data-group-id="8975551403-1">&lt;</span><span class="s">ctx</span><span class="w"> </span><span class="s">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="8975551403-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="8975551403-2">&lt;</span><span class="s">item</span><span class="p" data-group-id="8975551403-2">&gt;</span><span class="s">
+<pre><code class="makeup html"><span class="p" data-group-id="7950059953-1">&lt;</span><span class="s">ctx</span><span class="w"> </span><span class="s">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="7950059953-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="7950059953-2">&lt;</span><span class="s">item</span><span class="p" data-group-id="7950059953-2">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="8975551403-3">&lt;</span><span class="s">description</span><span class="w"> </span><span class="s">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="8975551403-3">&gt;</span><span class="p" data-group-id="8975551403-4">&lt;/</span><span class="s">description</span><span class="p" data-group-id="8975551403-4">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="8975551403-5">&lt;/</span><span class="s">item</span><span class="p" data-group-id="8975551403-5">&gt;</span><span class="s">
-</span><span class="p" data-group-id="8975551403-6">&lt;/</span><span class="s">ctx</span><span class="p" data-group-id="8975551403-6">&gt;</span></code></pre>
+    </span><span class="p" data-group-id="7950059953-3">&lt;</span><span class="s">description</span><span class="w"> </span><span class="s">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="7950059953-3">&gt;</span><span class="p" data-group-id="7950059953-4">&lt;/</span><span class="s">description</span><span class="p" data-group-id="7950059953-4">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="7950059953-5">&lt;/</span><span class="s">item</span><span class="p" data-group-id="7950059953-5">&gt;</span><span class="s">
+</span><span class="p" data-group-id="7950059953-6">&lt;/</span><span class="s">ctx</span><span class="p" data-group-id="7950059953-6">&gt;</span></code></pre>
 <h4>
 Update</h4>
 <p>
 I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:</p>
-<pre><code class="makeup html"><span class="p" data-group-id="1150724868-1">&lt;</span><span class="s">ctx</span><span class="w"> </span><span class="s">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="1150724868-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="1150724868-2">&lt;</span><span class="s">item</span><span class="p" data-group-id="1150724868-2">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="1150724868-3">&lt;</span><span class="k">title</span><span class="w"> </span><span class="s">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="1150724868-3">&gt;</span><span class="p" data-group-id="1150724868-4">&lt;/</span><span class="k">title</span><span class="p" data-group-id="1150724868-4">&gt;</span><span class="s">
+<pre><code class="makeup html"><span class="p" data-group-id="3316866150-1">&lt;</span><span class="s">ctx</span><span class="w"> </span><span class="s">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="3316866150-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="3316866150-2">&lt;</span><span class="s">item</span><span class="p" data-group-id="3316866150-2">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="3316866150-3">&lt;</span><span class="k">title</span><span class="w"> </span><span class="s">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="3316866150-3">&gt;</span><span class="p" data-group-id="3316866150-4">&lt;/</span><span class="k">title</span><span class="p" data-group-id="3316866150-4">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="1150724868-5">&lt;</span><span class="s">description</span><span class="w"> </span><span class="s">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="1150724868-5">&gt;</span><span class="s">
-      </span><span class="p" data-group-id="1150724868-6">&lt;</span><span class="s">ctx</span><span class="w"> </span><span class="s">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="1150724868-6">&gt;</span><span class="p" data-group-id="1150724868-7">&lt;/</span><span class="s">ctx</span><span class="p" data-group-id="1150724868-7">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="1150724868-8">&lt;/</span><span class="s">description</span><span class="p" data-group-id="1150724868-8">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="1150724868-9">&lt;/</span><span class="s">item</span><span class="p" data-group-id="1150724868-9">&gt;</span><span class="s">
-</span><span class="p" data-group-id="1150724868-10">&lt;/</span><span class="s">ctx</span><span class="p" data-group-id="1150724868-10">&gt;</span></code></pre>
+    </span><span class="p" data-group-id="3316866150-5">&lt;</span><span class="s">description</span><span class="w"> </span><span class="s">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="3316866150-5">&gt;</span><span class="s">
+      </span><span class="p" data-group-id="3316866150-6">&lt;</span><span class="s">ctx</span><span class="w"> </span><span class="s">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="3316866150-6">&gt;</span><span class="p" data-group-id="3316866150-7">&lt;/</span><span class="s">ctx</span><span class="p" data-group-id="3316866150-7">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="3316866150-8">&lt;/</span><span class="s">description</span><span class="p" data-group-id="3316866150-8">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="3316866150-9">&lt;/</span><span class="s">item</span><span class="p" data-group-id="3316866150-9">&gt;</span><span class="s">
+</span><span class="p" data-group-id="3316866150-10">&lt;/</span><span class="s">ctx</span><span class="p" data-group-id="3316866150-10">&gt;</span></code></pre>
 <p>
 And the corresponding change to the post:</p>
 <pre><code>#### [Heading]($section.id(&quot;heading&quot;))
