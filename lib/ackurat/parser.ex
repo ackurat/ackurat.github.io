@@ -20,8 +20,7 @@ defmodule Ackurat.Parser do
       title = String.replace(line, "## ", "")
       slug =
         title
-        |> String.downcase()
-        |> String.replace(~r/[^a-z]+/, "-")
+        |> String.replace(~r/\s+/, "-")
         |> String.trim("-")
 
       "## [#{title}](##{slug})"

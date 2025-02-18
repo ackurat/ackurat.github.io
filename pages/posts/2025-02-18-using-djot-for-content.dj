@@ -1,0 +1,22 @@
+%{
+  title: "Using djot for content",
+  description: "",
+  keywords: ["djot", "elixir"],
+  draft: true,
+}
+
+---
+
+
+This is just a test with Djot.
+
+
+## First Heading
+
+Here's some code:
+
+```elixir
+defp render() do :render
+```
+
+And here is some inline code `defp render() do :render`{.makeup}

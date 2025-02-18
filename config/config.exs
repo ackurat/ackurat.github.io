@@ -13,5 +13,5 @@ config :tailwind,
 
 config :exsync,
   src_monitor: true,
-  extra_extensions: [".md", ".js", ".css", ".yml"],
+  extra_extensions: [".md", ".js", ".css", ".yml", ".dj"],
   addition_dirs: ["/pages", "/assets"]
