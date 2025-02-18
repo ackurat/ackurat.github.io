@@ -55,59 +55,62 @@
     </div>
   </div>
   <article class="text-xl">
-    <p>
-<a href="https://gleam.run">Gleam</a> is a statically typed functional programming language that gets compiled to either <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine)">BEAM</a> or JavaScript. Its syntax is more akin to <a href="https://rust-lang.org">Rust</a> than other BEAM languages such as <a href="https://elixir-lang.org">Elixir</a> and <a href="https://erlang.org">Erlang</a>.</p>
-<pre><code class="gleam">pub fn split(x: String, on substring: String) -&gt; List(String) {
+    
+<p><a href="https://gleam.run">Gleam</a> is a statically typed functional programming language that gets compiled to either <a href="https://en.wikipedia.org/wiki/BEAM_(Erlang_virtual_machine">BEAM</a>) or JavaScript. Its syntax is more akin to <a href="https://rust-lang.org">Rust</a> than other BEAM languages such as <a href="https://elixir-lang.org">Elixir</a> and <a href="https://erlang.org">Erlang</a>.</p>
+<pre><code class="language-gleam">pub fn split(x: String, on substring: String) -&gt; List(String) {
   case substring {
-    &quot;&quot; -&gt; to_graphemes(x)
+    "" -&gt; to_graphemes(x)
     _ -&gt;
       x
       |&gt; string_builder.from_string
       |&gt; string_builder.split(on: substring)
       |&gt; list.map(with: string_builder.to_string)
   }
-}</code></pre>
-<h2 id="why-i-chose-gleam">
-<a href="#why-i-chose-gleam">Why I Chose Gleam</a></h2>
-<p>
-First and foremost, I wanted to try something new. Gleam ticked quite a few of the boxes of things I like in a language:</p>
+}
+</code></pre>
+<section id="Why-I-Chose-Gleam">
+<h2><a href="#Why-I-Chose-Gleam">Why I Chose Gleam</a></h2>
+<p>First and foremost, I wanted to try something new. Gleam ticked quite a few of the boxes of things I like in a language:</p>
 <ul>
-  <li>
-Static type system  </li>
-  <li>
-Immutability  </li>
-  <li>
-Compiled  </li>
-  <li>
-Built-in tooling  </li>
-  <li>
-Decent standard library  </li>
+<li>
+Static type system
+</li>
+<li>
+Immutability
+</li>
+<li>
+Compiled
+</li>
+<li>
+Built-in tooling
+</li>
+<li>
+Decent standard library
+</li>
 </ul>
-<p>
-For the purpose of AoC, it’s mainly the type system, tooling and standard library I’m choosing Gleam. I might take on doing something more complicated (and distributed) afterwards.</p>
-<h2 id="first-impressions">
-<a href="#first-impressions">First Impressions</a></h2>
-<p>
-As I usually work in procedural languages, getting into the strictly functional paradigm has been the biggest hurdle. Don’t get me wrong - I often use the functional style functions of JS, but due to its mutability and dynamic typing, it’s far from Gleam. I’ve previously delved into Elixir, and while it is also functional it’s got the dynamic typing to make it less of a jump. After completing the first 8 days of AoC, I’m getting used to it and I see the light that is immutability. In the codebase I spend most time in at work, there’s plenty of functionality that modifies in-place, causing both confusion and bugs for developers who are new to the code.</p>
-<h3>
-Missed Functionality #1 - list access by index</h3>
-<p>
-When it comes to AoC, it’s very common to work with arrays/lists, for instance in a matrix:</p>
-<pre><code class="python">matrix = [[&#39;a&#39;, &#39;b&#39;], [&#39;c&#39;, &#39;d&#39;]]
-matrix[0][0] # &#39;a&#39;</code></pre>
-<p>
-Let’s say then that a task requires shifting rows by 1:</p>
-<pre><code class="python">def shift_row_right(matrix, row_index, n):
+<p>For the purpose of AoC, it’s mainly the type system, tooling and standard library I’m choosing Gleam. I might take on doing something more complicated (and distributed) afterwards.</p>
+</section>
+<section id="First-Impressions">
+<h2><a href="#First-Impressions">First Impressions</a></h2>
+<p>As I usually work in procedural languages, getting into the strictly functional paradigm has been the biggest hurdle. Don’t get me wrong - I often use the functional style functions of JS, but due to its mutability and dynamic typing, it’s far from Gleam. I’ve previously delved into Elixir, and while it is also functional it’s got the dynamic typing to make it less of a jump. After completing the first 8 days of AoC, I’m getting used to it and I see the light that is immutability. In the codebase I spend most time in at work, there’s plenty of functionality that modifies in-place, causing both confusion and bugs for developers who are new to the code.</p>
+<section id="Missed-Functionality-1---list-access-by-index">
+<h3><a href="#Missed-Functionality-#1---list-access-by-index">Missed Functionality #1 - list access by index</a></h3>
+<p>When it comes to AoC, it’s very common to work with arrays/lists, for instance in a matrix:</p>
+<pre><code class="language-python">matrix = [['a', 'b'], ['c', 'd']]
+matrix[0][0] # 'a'
+</code></pre>
+<p>Let’s say then that a task requires shifting rows by 1:</p>
+<pre><code class="language-python">def shift_row_right(matrix, row_index, n):
     row = matrix[row_index]
     n = n % len(row)
     shifted_row = row[-n:] + row[:-n]
     matrix[row_index] = shifted_row
     return matrix
 
-shift_row_right(matrix, 0, 1) # [[&#39;b&#39;, &#39;a&#39;], [&#39;c&#39;, &#39;d&#39;]]</code></pre>
-<p>
-Performance aside, this is a very simple and neat way of accessing elements in a list. There’s no need to iterate over the rows. In Gleam, you can’t access lists by index. Instead, you have to iterate through the list until you’re on the right index. Pairing this with the immutability means that shifting rows as above is a bit more tedious. For AoC 2016 day 8, this was the solution I came up with for shifting rows with wrap around:</p>
-<pre><code class="gleam">pub fn shift_row_right(
+shift_row_right(matrix, 0, 1) # [['b', 'a'], ['c', 'd']]
+</code></pre>
+<p>Performance aside, this is a very simple and neat way of accessing elements in a list. There’s no need to iterate over the rows. In Gleam, you can’t access lists by index. Instead, you have to iterate through the list until you’re on the right index. Pairing this with the immutability means that shifting rows as above is a bit more tedious. For AoC 2016 day 8, this was the solution I came up with for shifting rows with wrap around:</p>
+<pre><code class="language-gleam">pub fn shift_row_right(
   matrix: Matrix(value),
   row: Int,
   shift: Int,
@@ -124,9 +127,11 @@ Performance aside, this is a very simple and neat way of accessing elements in a
       }
     }),
   )
-}</code></pre>
-<p>
-We first have to iterate through all the rows, and in case of being on the wrong row we just return it as is. In case of being on the right row, we then need to construct a new row by iterating over the row, first to split it and then over the first part of the new list (<code class="inline">split.1</code>) in the <code class="inline">list.append</code> function.</p>
+}
+</code></pre>
+<p>We first have to iterate through all the rows, and in case of being on the wrong row we just return it as is. In case of being on the right row, we then need to construct a new row by iterating over the row, first to split it and then over the first part of the new list (<code>split.1</code>) in the <code>list.append</code> function.</p>
+</section>
+</section>
 
   </article>
   <hr class="my-4">

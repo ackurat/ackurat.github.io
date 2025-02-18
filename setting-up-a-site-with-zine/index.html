@@ -55,58 +55,59 @@
     </div>
   </div>
   <article class="text-xl">
-    <h2 id="first-steps">
-<a href="#first-steps">First Steps</a></h2>
-<p>
-Were me just copying the Zine creator <a href="https://kristoff.it/">Kristoff’s</a> personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.</p>
-<h2 id="what-i-like-about-zine">
-<a href="#what-i-like-about-zine">What I like About Zine</a></h2>
-<p>
-I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. <code class="inline">SuperMD</code> and <code class="inline">SuperHTML</code> are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance <code class="inline">Templ</code> to generate HTML, so I’m excited to see how Zine compares.</p>
-<h2 id="what-s-next">
-<a href="#what-s-next">What’s Next</a></h2>
-<p>
-There are some things with the site that are far from finished. For instance, the CSS is a mess, as I’ve used Kristoff’s CSS as a base and then just added some of my own. It needs cleaning up.</p>
-<h3>
-Tags</h3>
-<p>
-I’m adding tags to this post, but so far there’s no way to filter posts by tags. I’ll have to implement that.</p>
-<h3>
-RSS ✅</h3>
-<p>
-I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p>
-<p>
-The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code class="inline">only the main page can be rendered for now, sorry!</code>.</p>
-<pre><code class="makeup html"><span class="p" data-group-id="5115716489-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="5115716489-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="5115716489-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="5115716489-2">&gt;</span><span class="s">
+    
+<section id="First-Steps">
+<h2><a href="#First-Steps">First Steps</a></h2>
+<p>Were me just copying the Zine creator <a href="https://kristoff.it/">Kristoff’s</a> personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.</p>
+</section>
+<section id="What-I-like-About-Zine">
+<h2><a href="#What-I-like-About-Zine">What I like About Zine</a></h2>
+<p>I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. <code>SuperMD</code> and <code>SuperHTML</code> are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance <code>Templ</code> to generate HTML, so I’m excited to see how Zine compares.</p>
+</section>
+<section id="Whats-Next">
+<h2><a href="#What's-Next">What’s Next</a></h2>
+<p>There are some things with the site that are far from finished. For instance, the CSS is a mess, as I’ve used Kristoff’s CSS as a base and then just added some of my own. It needs cleaning up.</p>
+<section id="Tags">
+<h3><a href="#Tags">Tags</a></h3>
+<p>I’m adding tags to this post, but so far there’s no way to filter posts by tags. I’ll have to implement that.</p>
+</section>
+<section id="RSS-✅">
+<h3><a href="#RSS-✅">RSS ✅</a></h3>
+<p>I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p>
+<p>The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code>only the main page can be rendered for now, sorry!</code>.</p>
+<pre><code class="makeup html"><span class="p" data-group-id="4264191299-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="4264191299-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="4264191299-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="4264191299-2">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="5115716489-3">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="5115716489-3">&gt;</span><span class="p" data-group-id="5115716489-4">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="5115716489-4">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="5115716489-5">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="5115716489-5">&gt;</span><span class="s">
-</span><span class="p" data-group-id="5115716489-6">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="5115716489-6">&gt;</span></code></pre>
-<h4>
-Update</h4>
-<p>
-I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:</p>
-<pre><code class="makeup html"><span class="p" data-group-id="0908121283-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="0908121283-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="0908121283-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="0908121283-2">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="0908121283-3">&lt;</span><span class="nt">title</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="0908121283-3">&gt;</span><span class="p" data-group-id="0908121283-4">&lt;/</span><span class="nt">title</span><span class="p" data-group-id="0908121283-4">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="4264191299-3">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="4264191299-3">&gt;</span><span class="p" data-group-id="4264191299-4">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="4264191299-4">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="4264191299-5">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="4264191299-5">&gt;</span><span class="s">
+</span><span class="p" data-group-id="4264191299-6">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="4264191299-6">&gt;</span><span class="s">
+</span></code></pre>
+<section id="Update">
+<h4><a href="#Update">Update</a></h4>
+<p>I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:</p>
+<pre><code class="makeup html"><span class="p" data-group-id="4958480907-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="4958480907-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="4958480907-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="4958480907-2">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="4958480907-3">&lt;</span><span class="nt">title</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="4958480907-3">&gt;</span><span class="p" data-group-id="4958480907-4">&lt;/</span><span class="nt">title</span><span class="p" data-group-id="4958480907-4">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="0908121283-5">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="0908121283-5">&gt;</span><span class="s">
-      </span><span class="p" data-group-id="0908121283-6">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="0908121283-6">&gt;</span><span class="p" data-group-id="0908121283-7">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="0908121283-7">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="0908121283-8">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="0908121283-8">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="0908121283-9">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="0908121283-9">&gt;</span><span class="s">
-</span><span class="p" data-group-id="0908121283-10">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="0908121283-10">&gt;</span></code></pre>
-<p>
-And the corresponding change to the post:</p>
-<pre><code>#### [Heading]($section.id(&quot;heading&quot;))
+    </span><span class="p" data-group-id="4958480907-5">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="4958480907-5">&gt;</span><span class="s">
+      </span><span class="p" data-group-id="4958480907-6">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="4958480907-6">&gt;</span><span class="p" data-group-id="4958480907-7">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="4958480907-7">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="4958480907-8">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="4958480907-8">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="4958480907-9">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="4958480907-9">&gt;</span><span class="s">
+</span><span class="p" data-group-id="4958480907-10">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="4958480907-10">&gt;</span><span class="s">
+</span></code></pre>
+<p>And the corresponding change to the post:</p>
+<pre><code>#### [Heading]($section.id("heading"))
 
-Text goes here...</code></pre>
-<p>
-An added benefit of this is that the headers are clickable, which is included in the table of contents of the post.</p>
+Text goes here...
+</code></pre>
+<p>An added benefit of this is that the headers are clickable, which is included in the table of contents of the post.</p>
+</section>
+</section>
+</section>
 
   </article>
   <hr class="my-4">
