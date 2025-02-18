@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Using Djot for Content — ackurat.github.io</title>
+      <meta name="description" content="My site now has Djot support, which will make it easier to implement some microfeatures such as inline code highlighting and footnotes.">
+      <meta name="author" content="Adam CL">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="/index.xml" rel="alternate" type="application/rss+xml" title="ackurat.github.io">
+      <meta name="ROBOTS" content="INDEX, FOLLOW">
+      <meta property="og:title" content="Using Djot for Content — ackurat.github.io">
+      <meta property="og:description" content="My site now has Djot support, which will make it easier to implement some microfeatures such as inline code highlighting and footnotes.">
+      <meta property="og:type" content="article">
+      <meta property="og:url" content="https://ackurat.github.io/using-djot-for-content/">
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:title" content="Using Djot for Content — ackurat.github.io">
+      <meta name="twitter:description" content="My site now has Djot support, which will make it easier to implement some microfeatures such as inline code highlighting and footnotes.">
+      <meta itemprop="name" content="Using Djot for Content — ackurat.github.io">
+      <meta itemprop="description" content="My site now has Djot support, which will make it easier to implement some microfeatures such as inline code highlighting and footnotes.">
+      
+        <meta itemprop="datePublished" content="2025-02-18T06:00:00Z">
+        <meta itemprop="dateModified" content="2025-02-18T06:00:00Z">
+        <meta itemprop="wordCount" content="288">
+        <meta itemprop="keywords" content="djot,elixir">
+        <meta property="article:author" content="Adam CL">
+        <meta property="article:section" content="Software">
+        <meta property="article:tag" content="djot"><meta property="article:tag" content="elixir">
+        <meta property="article:published_time" content="2025-02-18T06:00:00Z">
+        <meta property="article:modified_time" content="2025-02-18T06:00:00Z">
+      
+      <link rel="canonical" href="https://ackurat.github.io/using-djot-for-content/">
+      <link rel="stylesheet" href="/assets/app.css">
+    </head>
+    <body>
+      <div class="container mx-auto px-4">
+        <header class="flex justify-center py-4 text-lg font-bold tracking-wider">
+          <div class="flex space-x-4 pb-6">
+            <a href="/">Home</a>
+            <a href="/about/">About</a>
+            <a href="/archive/">Archive</a>
+            <a href="/keywords/">Tags</a>
+            <a href="/reads/">Reads</a>
+            <a type="application/rss+xml" href="/index.xml">RSS</a>
+          </div>
+        </header>
+        <main class="flex justify-center">
+          <div class="w-full md:w-1/2">
+            
+  <div class="flex flex-col">
+    <span class="text-base">Feb 18, 2025</span>
+    <span class="text-3xl">Using Djot for Content</span>
+    <div>
+      <a class="text-base mr-2" href="/keywords/djot" class="text-base">djot</a><a class="text-base mr-2" href="/keywords/elixir" class="text-base">elixir</a>
+    </div>
+  </div>
+  <article class="text-xl">
+    
+<p>I’ve just set up the site to handle both <a href="https://djot.net">Djot</a> and Markdown for writing content. It was surprisingly easy! This post outlines how to do it using <a href="https://hexdocs.pm/nimble_publisher/">NimblePublisher</a> and a <a href="https://hexdocs.pm/djot/">Djot</a> parser.</p>
+<p>We can <a href="https://hexdocs.pm/nimble_publisher/NimblePublisher.html#module-custom-html-converter">override</a> the HTML converter used by NimblePublisher by simply plugging in our own. Our converter needs to implement the <code>convert/4</code> function which returns the HTML as a string.</p>
+<pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Convert</span><span class="w"> </span><span class="k" data-group-id="2027978645-1">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">convert</span><span class="p" data-group-id="2027978645-2">(</span><span class="c">_path</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="c">_attrs</span><span class="p">,</span><span class="w"> </span><span class="c">_optds</span><span class="p" data-group-id="2027978645-2">)</span><span class="w"> </span><span class="k" data-group-id="2027978645-3">do</span><span class="w">
+    </span><span class="nc">Djot</span><span class="o">.</span><span class="n">to_html!</span><span class="p" data-group-id="2027978645-4">(</span><span class="n">body</span><span class="p" data-group-id="2027978645-4">)</span><span class="w">
+  </span><span class="k" data-group-id="2027978645-3">end</span><span class="w">
+</span><span class="k" data-group-id="2027978645-1">end</span><span class="w">
+</span></code></pre>
+<p>Since Djot is more or less a superset of Markdown, all previous content can be rendered successfully with the Djot parser. With the default HTML converter now defunct, NimblePublisher won’t apply the code highlighter, so we’ll need to add this to our <code>convert/4</code> function. Let’s create two small helpers, one to apply highlighting to all block code and one to inline code:</p>
+<pre><code class="makeup elixir"><span class="kd">defp</span><span class="w"> </span><span class="nf">highlight_block_code</span><span class="p" data-group-id="0626023836-1">(</span><span class="n">body</span><span class="p" data-group-id="0626023836-1">)</span><span class="w"> </span><span class="k" data-group-id="0626023836-2">do</span><span class="w">
+  </span><span class="n">block_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sr">~r/&lt;pre&gt;&lt;code(?:</span><span class="se">\s</span><span class="sr">+class=&quot;language-(</span><span class="se">\w</span><span class="sr">*)&quot;)?&gt;([^&lt;]*)&lt;</span><span class="se">\/</span><span class="sr">code&gt;&lt;</span><span class="se">\/</span><span class="sr">pre&gt;/</span><span class="w">
+
+  </span><span class="nc">NimblePublisher</span><span class="o">.</span><span class="n">highlight</span><span class="p" data-group-id="0626023836-3">(</span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="ss">regex</span><span class="p">:</span><span class="w"> </span><span class="n">block_code</span><span class="p" data-group-id="0626023836-3">)</span><span class="w">
+</span><span class="k" data-group-id="0626023836-2">end</span><span class="w">
+
+</span><span class="kd">defp</span><span class="w"> </span><span class="nf">highlight_inline_code</span><span class="p" data-group-id="0626023836-4">(</span><span class="n">body</span><span class="p" data-group-id="0626023836-4">)</span><span class="w"> </span><span class="k" data-group-id="0626023836-5">do</span><span class="w">
+  </span><span class="n">inline_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sr">~r/(?&lt;!&lt;pre&gt;)&lt;code(?:</span><span class="se">\s</span><span class="sr">+class=&quot;language-(</span><span class="se">\w</span><span class="sr">*)&quot;)?&gt;([^&lt;]*)&lt;</span><span class="se">\/</span><span class="sr">code&gt;/</span><span class="w">
+
+  </span><span class="nc">Regex</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="0626023836-6">(</span><span class="n">inline_code</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="k" data-group-id="0626023836-7">fn</span><span class="w"> </span><span class="p" data-group-id="0626023836-8">(</span><span class="n">block</span><span class="p">,</span><span class="w"> </span><span class="c">_lang</span><span class="p">,</span><span class="w"> </span><span class="c">_code</span><span class="p" data-group-id="0626023836-8">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">
+    </span><span class="nc">NimblePublisher</span><span class="o">.</span><span class="n">highlight</span><span class="p" data-group-id="0626023836-9">(</span><span class="n">block</span><span class="p">,</span><span class="w"> </span><span class="ss">regex</span><span class="p">:</span><span class="w"> </span><span class="n">inline_code</span><span class="p" data-group-id="0626023836-9">)</span><span class="w">
+    </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="0626023836-10">(</span><span class="sr">~r/&lt;pre&gt;(.*)&lt;</span><span class="se">\/</span><span class="sr">pre&gt;/s</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\\</span><span class="s">1&quot;</span><span class="p" data-group-id="0626023836-10">)</span><span class="w">
+  </span><span class="k" data-group-id="0626023836-7">end</span><span class="p" data-group-id="0626023836-6">)</span><span class="w">
+</span><span class="k" data-group-id="0626023836-5">end</span><span class="w">
+</span></code></pre>
+<p>Now we can just pipe the HTML output from the parser through these functions, and we’ll get highlighting. There are a few considerations:</p>
+<ul>
+<li>
+We need the new regexes since the default used in <code>NimblePublisher.highlight/2</code> doesn’t match anymore - the Djot parser uses an attribute like <code class="makeup html"><span class="na">class</span><span class="o">=</span><span class="s">&quot;language-elixir&quot;</span></code>.
+</li>
+<li>
+The library I use for highlighting, <a href="https://hexdocs.pm/makeup/">Makeup</a> adds <code class="makeup html"><span class="p" data-group-id="7839852936-1">&lt;</span><span class="nt">pre</span><span class="p" data-group-id="7839852936-1">&gt;</span></code> tags around code. This messes up the inline code, hence the replace code to remove them.
+</li>
+</ul>
+<p>All that is left to do now is tell NimblePublisher to use the converter, both on markdown and djot:</p>
+<pre><code class="makeup elixir"><span class="kn">use</span><span class="w"> </span><span class="nc">NimblePublisher</span><span class="p">,</span><span class="w">
+  </span><span class="ss">from</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./pages/**/*.{md,dj}&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">highlighters</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9548561485-1">[</span><span class="ss">:makeup_elixir</span><span class="p" data-group-id="9548561485-1">]</span><span class="p">,</span><span class="w">
+  </span><span class="ss">html_converter</span><span class="p">:</span><span class="w"> </span><span class="nc">Convert</span><span class="w">
+  </span><span class="n">...</span><span class="w">
+</span></code></pre>
+
+  </article>
+  <hr class="my-4">
+  <footer>
+    
+    <div class="flex justify-between">
+      
+        <a href="/setting-up-a-site-with-zine">
+          Previous
+        </a>
+      
+      
+        <a href="/once-again-rewriting-the-site">
+          Next
+        </a>
+      
+    </div>
+  
+  </footer>
+  
+          </div>
+        </main>
+      </div>
+    </body>
+  </html>

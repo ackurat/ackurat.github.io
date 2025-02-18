@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ackurat.github.io</loc>
-    <lastmod>2025-02-18T15:26:44.782460Z</lastmod>
+    <lastmod>2025-02-18T20:36:24.587253Z</lastmod>
   </url>
   <url>
     <loc>https://ackurat.github.io/about/</loc>
-    <lastmod>2025-02-18T15:26:44.556466Z</lastmod>
+    <lastmod>2025-02-18T20:36:24.347429Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ackurat.github.io/using-djot-for-content/</loc>
+    <lastmod>2025-02-18T06:00:00Z</lastmod>
   </url>
   <url>
     <loc>https://ackurat.github.io/once-again-rewriting-the-site/</loc>
@@ -22,6 +26,6 @@
   </url>
   <url>
     <loc>https://ackurat.github.io/reads/test/</loc>
-    <lastmod>2025-02-18T15:26:44.639131Z</lastmod>
+    <lastmod>2025-02-18T20:36:24.427256Z</lastmod>
   </url>
 </urlset>

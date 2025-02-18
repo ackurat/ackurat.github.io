@@ -1736,6 +1736,32 @@ article h1 a,
   text-decoration: none;
 }
 
+article ul, 
+    article ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+article ul {
+  list-style-type: disc;
+}
+
+article ol {
+  list-style-type: decimal;
+}
+
+article li {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+article ul ul,
+    article ol ol,
+    article ul ol,
+    article ol ul {
+  margin: 0.25rem 0;
+}
+
 pre code {
   display: block;
   overflow-x: auto;
