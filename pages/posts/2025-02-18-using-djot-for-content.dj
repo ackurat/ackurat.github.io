@@ -1,6 +1,6 @@
 %{
   title: "Using djot for content",
-  description: "",
+  description: "My site now has Djot support, which will make it easier to implement some microfeatures such as inline code highlighting and footnotes.",
   keywords: ["djot", "elixir"],
   draft: true,
 }
@@ -8,8 +8,7 @@
 ---
 
 
-This is just a test with Djot.
-
+I've just set up the site to handle both [Djot](https://djot.net) and Markdown for writing content. 
 
 ## First Heading
 
@@ -19,4 +18,4 @@ Here's some code:
 defp render() do :render
 ```
 
-And here is some inline code `defp render() do :render`{.makeup}
+And here is some inline code `defp render() do :render`{.language-elixir} and here is some without class `defp render() do :render`. Here is some SQL: `select * from a_table limit 10;`{.language-sql}

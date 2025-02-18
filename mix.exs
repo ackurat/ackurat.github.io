@@ -8,18 +8,7 @@ defmodule Ackurat.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
-      deps: deps(),
-      archives: [mix_gleam: "~> 0.6"],
-      compilers: [:gleam | Mix.compilers()],
-      aliases: [
-        "deps.get": ["deps.get", "gleam.deps.get"]
-      ],
-      erlc_paths: [
-        "build/dev/erlang/#{@app}/_gleam_artefacts",
-        "build/dev/erlang/#{@app}/build"
-      ],
-      erlc_include_path: "build/dev/erlang/#{@app}/include",
-      prune_code_paths: false,
+      deps: deps()
     ]
   end
 
@@ -45,7 +34,7 @@ defmodule Ackurat.MixProject do
       {:bandit, "~> 1.6.0", only: :dev},
       {:exsync, "~> 0.4", only: :dev},
       {:tailwind, "~> 0.2"},
-      {:jot, "~> 2.0"}
+      {:djot, "~> 0.1.4"}
     ]
   end
 end

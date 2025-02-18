@@ -8,7 +8,6 @@ defmodule Ackurat.Content do
   use NimblePublisher,
     build: Page,
     parser: Parser,
-    # earmark_options: [postprocessor: &Ackurat.Processor.process/1, breaks: true],
     from: "./pages/**/*.{md,dj}",
     as: :pages,
     highlighters: [:makeup_elixir, :makeup_js, :makeup_html, :makeup_sql],
