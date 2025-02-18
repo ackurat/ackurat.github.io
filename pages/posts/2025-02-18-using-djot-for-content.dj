@@ -1,21 +1,54 @@
 %{
-  title: "Using djot for content",
+  title: "Using Djot for Content",
   description: "My site now has Djot support, which will make it easier to implement some microfeatures such as inline code highlighting and footnotes.",
   keywords: ["djot", "elixir"],
-  draft: true,
 }
 
 ---
 
 
-I've just set up the site to handle both [Djot](https://djot.net) and Markdown for writing content. 
+I've just set up the site to handle both [Djot](https://djot.net) and Markdown for writing content. It was surprisingly easy! This post outlines how to do it using [NimblePublisher](https://hexdocs.pm/nimble_publisher/) and a [Djot](https://hexdocs.pm/djot/) parser.
 
-## First Heading
-
-Here's some code:
+We can [override](https://hexdocs.pm/nimble_publisher/NimblePublisher.html#module-custom-html-converter) the HTML converter used by NimblePublisher by simply plugging in our own. Our converter needs to implement the `convert/4` function which returns the HTML as a string.
 
 ```elixir
-defp render() do :render
+defmodule Convert do
+  def convert(_path, body, _attrs, _optds) do
+    Djot.to_html!(body)
+  end
+end
 ```
 
-And here is some inline code `defp render() do :render`{.language-elixir} and here is some without class `defp render() do :render`. Here is some SQL: `select * from a_table limit 10;`{.language-sql}
+Since Djot is more or less a superset of Markdown, all previous content can be rendered successfully with the Djot parser. With the default HTML converter now defunct, NimblePublisher won't apply the code highlighter, so we'll need to add this to our `convert/4` function. Let's create two small helpers, one to apply highlighting to all block code and one to inline code:
+ 
+``` elixir
+defp highlight_block_code(body) do
+  block_code = ~r/<pre><code(?:\s+class="language-(\w*)")?>([^<]*)<\/code><\/pre>/
+
+  NimblePublisher.highlight(body, regex: block_code)
+end
+
+defp highlight_inline_code(body) do
+  inline_code = ~r/(?<!<pre>)<code(?:\s+class="language-(\w*)")?>([^<]*)<\/code>/
+
+  Regex.replace(inline_code, body, fn (block, _lang, _code) ->
+    NimblePublisher.highlight(block, regex: inline_code)
+    |> String.replace(~r/<pre>(.*)<\/pre>/s, "\\1")
+  end)
+end
+```
+
+Now we can just pipe the HTML output from the parser through these functions, and we'll get highlighting. There are a few considerations:
+
+- We need the new regexes since the default used in `NimblePublisher.highlight/2` doesn't match anymore - the Djot parser uses an attribute like `class="language-elixir"`{.language-html}.
+- The library I use for highlighting, [Makeup](https://hexdocs.pm/makeup/) adds `<pre>`{.language-html} tags around code. This messes up the inline code, hence the replace code to remove them.
+
+All that is left to do now is tell NimblePublisher to use the converter, both on markdown and djot:
+
+```elixir
+use NimblePublisher,
+  from: "./pages/**/*.{md,dj}",
+  highlighters: [:makeup_elixir],
+  html_converter: Convert
+  ...
+```
