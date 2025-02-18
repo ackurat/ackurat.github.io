@@ -16,17 +16,16 @@ defmodule Ackurat.Parser do
   end
 
   defp replace_heading(line) do
-    if String.starts_with?(line, "## ") do
-      title = String.replace(line, "## ", "")
-      slug =
-        title
-        |> String.downcase()
-        |> String.replace(~r/[^a-z]+/, "-")
-        |> String.trim("-")
+    case Regex.run(~r/^(\#{1,6})\s+(.+)$/, line) do
+      [_full, hashes, title] ->
+        slug =
+          title
+          |> String.replace(~r/\s+/, "-")
+          |> String.trim("-")
 
-      "## [#{title}](##{slug})"
-    else
-      line
+        "#{hashes} [#{title}](##{slug})"
+
+      nil -> line
     end
   end
 

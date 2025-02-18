@@ -1,13 +1,14 @@
 defmodule Ackurat.MixProject do
   use Mix.Project
+  @app :ackurat
 
   def project do
     [
-      app: :ackurat,
+      app: @app,
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
-      deps: deps(),
+      deps: deps()
     ]
   end
 
@@ -32,7 +33,8 @@ defmodule Ackurat.MixProject do
       {:html_sanitize_ex, "~> 1.4.3"},
       {:bandit, "~> 1.6.0", only: :dev},
       {:exsync, "~> 0.4", only: :dev},
-      {:tailwind, "~> 0.2"}
+      {:tailwind, "~> 0.2"},
+      {:djot, "~> 0.1.4"}
     ]
   end
 end

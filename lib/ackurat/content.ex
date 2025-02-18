@@ -4,13 +4,14 @@ defmodule Ackurat.Content do
   alias Ackurat.Page
   alias Ackurat.Parser
 
+
   use NimblePublisher,
     build: Page,
     parser: Parser,
-    earmark_options: [postprocessor: &Ackurat.Processor.process/1, breaks: true],
-    from: "./pages/**/*.md",
+    from: "./pages/**/*.{md,dj}",
     as: :pages,
-    highlighters: [:makeup_elixir, :makeup_js, :makeup_html, :makeup_sql]
+    highlighters: [:makeup_elixir, :makeup_js, :makeup_html, :makeup_sql],
+    html_converter: Ackurat.Convert
 
   def site_title() do
     "ackurat.github.io"
