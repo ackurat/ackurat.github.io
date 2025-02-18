@@ -4,7 +4,6 @@ defmodule Ackurat.Content do
   alias Ackurat.Page
   alias Ackurat.Parser
 
-
   use NimblePublisher,
     build: Page,
     parser: Parser,
