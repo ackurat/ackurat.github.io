@@ -1856,6 +1856,10 @@ pre code {
   position: static;
 }
 
+.float-right {
+  float: right;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1878,12 +1882,21 @@ pre code {
   display: block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
 
 .contents {
   display: contents;
+}
+
+.size-60 {
+  width: 15rem;
+  height: 15rem;
 }
 
 .w-full {
@@ -1906,6 +1919,10 @@ pre code {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.rounded-full {
+  border-radius: 9999px;
 }
 
 .px-4 {
