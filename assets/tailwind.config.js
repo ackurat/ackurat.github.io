@@ -5,7 +5,8 @@ let plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: [
-    '../lib/**/*.ex'
+    '../lib/**/*.ex',
+    '../pages/**/*.dj'
   ],
   theme: {
     extend: {

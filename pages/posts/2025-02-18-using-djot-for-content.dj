@@ -38,6 +38,9 @@ defp highlight_inline_code(body) do
 end
 ```
 
+
+
+
 Now we can just pipe the HTML output from the parser through these functions, and we'll get highlighting. There are a few considerations:
 
 - We need the new regexes since the default used in `NimblePublisher.highlight/2` doesn't match anymore - the Djot parser uses an attribute like `class="language-elixir"`{.language-html}.
