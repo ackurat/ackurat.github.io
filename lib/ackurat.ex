@@ -59,7 +59,7 @@ defmodule Ackurat do
     render_file("404.html", Render.Layout.page(Content.not_found_page()))
     render_file(about_page.html_path, Render.Layout.page(about_page))
     render_file("archive/index.html", Render.Pages.archive(%{posts: active_posts}))
-    render_file("reads/index.html", Render.Pages.reads_index(%{pages: reads}))
+    render_file("reads/index.html", Render.Reads.index(%{pages: reads}))
     render_file("photos/index.html", Render.Photos.index(photos))
     write_file("index.xml", Render.Rss.rss(active_posts))
     write_file("sitemap.xml", Render.Layout.sitemap(pages))

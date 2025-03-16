@@ -110,18 +110,18 @@
 
     @media (prefers-color-scheme: dark) {
       a:hover {
-        color: var(--color-frappe-blue);
+        color: var(--color-macchiato-blue);
       }
       body {
-        color: var(--color-frappe-text);
-        background-color: var(--color-frappe-base);
+        color: var(--color-macchiato-text);
+        background-color: var(--color-macchiato-base);
       }
       pre {
-        background-color: var(--color-macchiato-base);
+        background-color: var(--color-frappe-base);
       }
       pre code {
         &::before {
-          background-color: var(--color-macchiato-base);
+          background-color: var(--color-frappe-base);
           color: var(--color-frappe-text);
         } 
       }
@@ -138,6 +138,9 @@
       --color-latte-crust: rgb(220, 224, 232);
 
       --color-macchiato-base: rgb(36, 39, 58);
+      --color-macchiato-text: rgb(202, 211, 245);
+      --color-macchiato-blue: rgb(138, 173, 244);
+      --color-macchiato-crust: rgb(24, 25, 38);
     }
 
 

@@ -108,6 +108,7 @@ defmodule Ackurat.Content do
       %{
         id: id,
         date: DateTime.utc_now(),
+        update: data["update"],
         type: :reads,
         title: data["title"],
         description: data["description"],

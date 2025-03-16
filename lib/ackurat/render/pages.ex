@@ -86,27 +86,4 @@ defmodule Ackurat.Render.Pages do
     </.layout>
     """
   end
-
-  def reads_index(assigns) do
-    ~H"""
-    <.layout
-      title="Reads"
-      description="A list of articles I read and recommend."
-      og_type="website"
-      route="/reads/"
-    >
-      <.heading>Reads</.heading>
-      <section class="text-xl mt-4">
-          <ul>
-            <li :for={page <- @pages}>
-              <a href={ page.route }>
-                <%= page.title %>
-              </a>
-            </li>
-           </ul>
-      </section>
-    </.layout>
-    """
-  end
-
 end
