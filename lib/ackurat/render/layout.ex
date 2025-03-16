@@ -51,8 +51,8 @@ defmodule Ackurat.Render.Layout do
         </head>
         <body>
           <div class="container mx-auto px-4">
-            <header class="flex justify-center py-4 text-lg font-bold tracking-wider">
-              <div class="flex space-x-4 pb-6">
+            <header class="flex justify-center py-4">
+              <nav class="flex flex-wrap justify-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider">
                 <a href="/">Home</a>
                 <a href="/about/">About</a>
                 <a href="/archive/">Archive</a>
@@ -60,7 +60,7 @@ defmodule Ackurat.Render.Layout do
                 <a href="/reads/">Reads</a>
                 <a href="/photos/">Photos</a>
                 <a type="application/rss+xml" href="/index.xml">RSS</a>
-              </div>
+              </nav>
             </header>
             <main class="flex justify-center">
               <div class={if @og_type == "gallery", do: "w-full max-w-screen-2xl", else: "w-full md:w-1/2"}>
