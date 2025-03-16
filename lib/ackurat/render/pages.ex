@@ -108,4 +108,5 @@ defmodule Ackurat.Render.Pages do
     </.layout>
     """
   end
+
 end
