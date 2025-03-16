@@ -1,6 +1,6 @@
 @media (prefers-color-scheme: dark) {
-    .makeup .hll {background-color: #363a4f}
-    .makeup {background-color: #24273a}.makeup .unselectable {
+    .makeup .hll {background-color: var(--color-frappe-base)}
+    .makeup {background-color: var(--color-frappe-base)}.makeup .unselectable {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;

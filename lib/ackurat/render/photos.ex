@@ -7,10 +7,6 @@ defmodule Ackurat.Render.Photos do
     ~H"""
     <.layout title={"Photos — #{Content.site_title()}"} description={@description} og_type="gallery" route={@route}>
       <div class="max-w-screen-lg mx-auto px-4 sm:px-6 lg:px-8">
-        <div>
-            <h1 class="text-3xl font-bold mb-6">Photos</h1>
-        </div>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
           <%= for {photo, index} <- Enum.with_index(@images) do %>
             <% meta = photo["meta"] %>
