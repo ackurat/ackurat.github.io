@@ -34,8 +34,8 @@
     </head>
     <body>
       <div class="container mx-auto px-4">
-        <header class="flex justify-center py-4 text-lg font-bold tracking-wider">
-          <div class="flex space-x-4 pb-6">
+        <header class="flex justify-center py-4">
+          <nav class="flex flex-wrap justify-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider">
             <a href="/">Home</a>
             <a href="/about/">About</a>
             <a href="/archive/">Archive</a>
@@ -43,7 +43,7 @@
             <a href="/reads/">Reads</a>
             <a href="/photos/">Photos</a>
             <a type="application/rss+xml" href="/index.xml">RSS</a>
-          </div>
+          </nav>
         </header>
         <main class="flex justify-center">
           <div class="w-full md:w-1/2">
@@ -76,29 +76,29 @@
 <h3><a href="#RSS-✅">RSS ✅</a></h3>
 <p>I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p>
 <p>The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code>only the main page can be rendered for now, sorry!</code>.</p>
-<pre><code class="makeup html"><span class="p" data-group-id="7557029814-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="7557029814-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="7557029814-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="7557029814-2">&gt;</span><span class="s">
+<pre><code class="makeup html"><span class="p" data-group-id="4440277723-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="4440277723-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="4440277723-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="4440277723-2">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="7557029814-3">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="7557029814-3">&gt;</span><span class="p" data-group-id="7557029814-4">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="7557029814-4">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="7557029814-5">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="7557029814-5">&gt;</span><span class="s">
-</span><span class="p" data-group-id="7557029814-6">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="7557029814-6">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="4440277723-3">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="4440277723-3">&gt;</span><span class="p" data-group-id="4440277723-4">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="4440277723-4">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="4440277723-5">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="4440277723-5">&gt;</span><span class="s">
+</span><span class="p" data-group-id="4440277723-6">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="4440277723-6">&gt;</span><span class="s">
 </span></code></pre>
 <section id="Update">
 <h4><a href="#Update">Update</a></h4>
 <p>I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:</p>
-<pre><code class="makeup html"><span class="p" data-group-id="1606068414-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="1606068414-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="1606068414-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="1606068414-2">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="1606068414-3">&lt;</span><span class="nt">title</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="1606068414-3">&gt;</span><span class="p" data-group-id="1606068414-4">&lt;/</span><span class="nt">title</span><span class="p" data-group-id="1606068414-4">&gt;</span><span class="s">
+<pre><code class="makeup html"><span class="p" data-group-id="7498733296-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="7498733296-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="7498733296-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="7498733296-2">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="7498733296-3">&lt;</span><span class="nt">title</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="7498733296-3">&gt;</span><span class="p" data-group-id="7498733296-4">&lt;/</span><span class="nt">title</span><span class="p" data-group-id="7498733296-4">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="1606068414-5">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="1606068414-5">&gt;</span><span class="s">
-      </span><span class="p" data-group-id="1606068414-6">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="1606068414-6">&gt;</span><span class="p" data-group-id="1606068414-7">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="1606068414-7">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="1606068414-8">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="1606068414-8">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="1606068414-9">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="1606068414-9">&gt;</span><span class="s">
-</span><span class="p" data-group-id="1606068414-10">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="1606068414-10">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="7498733296-5">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="7498733296-5">&gt;</span><span class="s">
+      </span><span class="p" data-group-id="7498733296-6">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="7498733296-6">&gt;</span><span class="p" data-group-id="7498733296-7">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="7498733296-7">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="7498733296-8">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="7498733296-8">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="7498733296-9">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="7498733296-9">&gt;</span><span class="s">
+</span><span class="p" data-group-id="7498733296-10">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="7498733296-10">&gt;</span><span class="s">
 </span></code></pre>
 <p>And the corresponding change to the post:</p>
 <pre><code>#### [Heading]($section.id("heading"))
