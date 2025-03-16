@@ -119,6 +119,18 @@ defmodule Ackurat.Content do
     end
   end
 
+  def get_photos() do
+      data = YamlElixir.read_from_file!("pages/photos.yml")
+      %{
+        date: DateTime.utc_now(),
+        type: :photos,
+        title: data["title"],
+        description: data["description"],
+        images: data["images"],
+        route: "/photos/"
+      }
+  end
+
   def all_pages do
     [about_page()] ++ active_posts() ++ get_reads()
   end

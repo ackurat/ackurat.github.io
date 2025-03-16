@@ -58,11 +58,12 @@ defmodule Ackurat.Render.Layout do
                 <a href="/archive/">Archive</a>
                 <a href="/keywords/">Tags</a>
                 <a href="/reads/">Reads</a>
+                <a href="/photos/">Photos</a>
                 <a type="application/rss+xml" href="/index.xml">RSS</a>
               </div>
             </header>
             <main class="flex justify-center">
-              <div class="w-full md:w-1/2">
+              <div class={if @og_type == "gallery", do: "w-full max-w-screen-2xl", else: "w-full md:w-1/2"}>
                 <%= render_slot(@inner_block) %>
               </div>
             </main>

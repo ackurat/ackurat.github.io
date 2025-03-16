@@ -46,18 +46,21 @@ defmodule Ackurat do
     end
   end
 
+
   def build_pages(prod) do
     pages = Content.all_pages()
     active_posts = Content.active_posts(prod)
     all_keywords = Content.all_keywords()
     about_page = Content.about_page()
-    reads = Content.get_reads()
+    reads = Content.get_reads() |> IO.inspect()
+    photos = Content.get_photos() |> IO.inspect()
     assert_uniq_page_ids!(pages)
     render_file("index.html", Render.Pages.index(%{posts: active_posts}))
     render_file("404.html", Render.Layout.page(Content.not_found_page()))
     render_file(about_page.html_path, Render.Layout.page(about_page))
     render_file("archive/index.html", Render.Pages.archive(%{posts: active_posts}))
     render_file("reads/index.html", Render.Pages.reads_index(%{pages: reads}))
+    render_file("photos/index.html", Render.Photos.index(photos))
     write_file("index.xml", Render.Rss.rss(active_posts))
     write_file("sitemap.xml", Render.Layout.sitemap(pages))
     render_posts(active_posts)
