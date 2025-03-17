@@ -82,7 +82,7 @@ defmodule Ackurat.Render.Layout do
   def footer(assigns) do
     ~H"""
       <hr class="my-4"/>
-      <footer>
+      <footer class="italic">
         <%= render_slot(@inner_block) %>
       </footer>
     """
