@@ -83,7 +83,7 @@ defmodule Ackurat.Render.Photos do
         </div>
 
         <.footer>
-          © 2025 Adam Liliemark
+        <%= Phoenix.HTML.raw(Content.site_copyright()) %>
         </.footer>
       </div>
     </.layout>
