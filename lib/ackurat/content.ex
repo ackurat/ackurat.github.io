@@ -57,7 +57,7 @@ defmodule Ackurat.Content do
 
   def posts_by_keyword(keyword) do
     active_posts() |> Enum.filter(fn post -> keyword in post.keywords end)
-   end
+  end
 
   def all_keywords do
     active_posts()
@@ -71,10 +71,11 @@ defmodule Ackurat.Content do
     idx = posts |> Enum.find_index(&(&1.id == id))
     previous = posts |> Enum.fetch(idx - 1)
     next = posts |> Enum.fetch(idx + 1)
+
     case {previous, next} do
       {{:ok, prev}, {:ok, nxt}} -> {prev.id, nxt.id}
-      {:error, {:ok, nxt}} -> {:nil, nxt.id}
-      {{:ok, prev}, :error} -> {prev.id, :nil}
+      {:error, {:ok, nxt}} -> {nil, nxt.id}
+      {{:ok, prev}, :error} -> {prev.id, nil}
       _ -> :error
     end
   end
@@ -121,15 +122,28 @@ defmodule Ackurat.Content do
   end
 
   def get_photos() do
-      data = YamlElixir.read_from_file!("pages/photos.yml")
-      %{
-        date: DateTime.utc_now(),
-        type: :photos,
-        title: data["title"],
-        description: data["description"],
-        images: data["images"],
-        route: "/photos/"
-      }
+    data = YamlElixir.read_from_file!("pages/photos.yml")
+
+    sorted_images =
+      data["images"]
+      |> Enum.sort_by(
+        fn image ->
+          case Date.from_iso8601(image["meta"]["date"]) do
+            {:ok, date} -> date
+            _ -> Date.from_iso8601!("1970-01-01")
+          end
+        end,
+        {:desc, Date}
+      )
+
+    %{
+      date: DateTime.utc_now(),
+      type: :photos,
+      title: data["title"],
+      description: data["description"],
+      images: sorted_images,
+      route: "/photos/"
+    }
   end
 
   def all_pages do
