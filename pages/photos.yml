@@ -1,38 +1,37 @@
 title: Photobomb
 description: A collection of images
 images:
-
   - img: "_DSC4865.jpg"
     meta:
       location: "Stockholm, Sweden"
-      date: 2024
+      date: 2024-01-01
 
   - img: "P1050051.jpg"
     meta:
       location: "Bethlehem, Israel"
-      date: 2012
-  
+      date: 2012-01-01
+
   - img: "P1050070.jpg"
     title: "Playground"
     meta:
       location: "Bethlehem, Israel"
-      date: 2012
-  
+      date: 2012-01-01
+
   - title: "Adblocker"
     img: "P1050094.jpg"
     meta:
       location: "Jerusalem, Israel"
-      date: "2012"
+      date: 2012-01-01
       camera: "GF1"
       lens: "14mm"
       settings:
         - "ISO100"
         - "1/400s"
         - "f/4.5"
-  
+
   - img: "_DSC5143.jpg"
     meta:
       location: "Crevillent, Spain"
-      date: "2025"
+      date: 2025-01-01
       camera: "A7"
       lens: 75mm
