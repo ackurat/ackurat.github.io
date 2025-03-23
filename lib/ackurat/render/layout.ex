@@ -48,7 +48,9 @@ defmodule Ackurat.Render.Layout do
           <% end %>
           <link rel="canonical" href={"#{Content.site_url()}#{@route}"} />
           <link rel="stylesheet" href="/assets/app.css" />
-          <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+          <%= if MIX_ENV == "prod" do %>
+            <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+          <% end %>
         </head>
         <body>
           <div class="container mx-auto px-4">
