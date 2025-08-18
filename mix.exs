@@ -31,7 +31,7 @@ defmodule Ackurat.MixProject do
       {:xml_builder, "~> 2.3.0"},
       {:yaml_elixir, "~> 2.11.0"},
       {:html_sanitize_ex, "~> 1.4.3"},
-      {:bandit, "~> 1.6.0", only: :dev},
+      {:bandit, "~> 1.8.0", only: :dev},
       {:exsync, "~> 0.4", only: :dev},
       {:tailwind, "~> 0.2"},
       {:djot, "~> 0.1.4"}
