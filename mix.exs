@@ -29,7 +29,7 @@ defmodule Ackurat.MixProject do
       {:makeup_sql, "~> 0.1.0"},
       {:phoenix_live_view, "~> 1.1.5"},
       {:xml_builder, "~> 2.4.0"},
-      {:yaml_elixir, "~> 2.11.0"},
+      {:yaml_elixir, "~> 2.12.0"},
       {:html_sanitize_ex, "~> 1.4.3"},
       {:bandit, "~> 1.8.0", only: :dev},
       {:exsync, "~> 0.4", only: :dev},
