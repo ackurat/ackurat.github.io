@@ -95,6 +95,10 @@ defmodule Ackurat.Content do
     pages() |> Enum.find(&(&1.id == "about"))
   end
 
+  def uses_page do
+    pages() |> Enum.find(&(&1.id == "uses"))
+  end
+
   def not_found_page do
     pages() |> Enum.find(&(&1.id == "404"))
   end

@@ -1,0 +1,39 @@
+%{
+  title: "/uses",
+  description: "A collection of tools and products I use."
+}
+---
+
+This is a non-comprehensive list of tools, applications and things I use. For more rundowns like this, check out [uses.tech](https://uses.tech).
+
+## Computers
+
+* Lenovo Thinkpad X1 Carbon gen 7
+  
+  I bought this machine second-hand from my employer, and I see the appeal of Thinkpads. It's stupidly light, durable and relatively powerful. It runs quite hot when loaded, but I mostly use it for lightweight task anyway.
+
+* Workstation
+
+  | CPU           | AMD Ryzen |
+  | RAM           | 32GB DDR5 |
+  | Motherboard   | Asus ProArt B650 |
+  | GPU           | Radeon RX7800 |
+  | Storage       | 1x1TB Crucial, 1x2TB WD |
+  | Case          | Fractal Design North in black |
+  | OS            | Void Linux |
+  | DE            | XFCE4 |
+
+  This is my main machine for personal stuff. I use it for development, gaming and photo editing. I wish I had bought more RAM before the prices went up the roof.
+
+* Work: Macbook Pro 14" M4
+
+  Not much to say. It's my work issued laptop and it's good enough for it.
+
+## Phone
+
+* Google Pixel 9 Pro running Android (work issued)
+
+* Apple Iphone SE3 (backup)
+
+  I don't use this phone much, and I don't like the Liquid Glass design, but other than that I think it's an excellent phone for what it is. It's fast, small and does what it says on the tin.
+

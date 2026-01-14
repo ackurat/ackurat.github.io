@@ -43,6 +43,7 @@ defmodule Ackurat do
     active_posts = Content.active_posts(prod)
     all_keywords = Content.all_keywords()
     about_page = Content.about_page()
+    uses_page = Content.uses_page()
     assert_uniq_page_ids!(pages)
     render_file("index.html", Render.Pages.index(%{posts: active_posts}))
     render_file("404.html", Render.Layout.page(Content.not_found_page()))
@@ -53,6 +54,7 @@ defmodule Ackurat do
       Render.Pages.archive(%{posts: active_posts, tags: all_keywords})
     )
 
+    render_file(uses_page.html_path, Render.Layout.page(uses_page))
     write_file("index.xml", Render.Rss.rss(active_posts))
     write_file("sitemap.xml", Render.Layout.sitemap(pages))
     render_posts(active_posts)
