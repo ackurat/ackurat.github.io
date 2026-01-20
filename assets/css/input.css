@@ -7,43 +7,43 @@
 
 @layer base {
     html {
-      font-family: "EB Garamond", "Georgia", serif;
+        font-family: "ui-sans-serif", "system-ui", "sans-serif";
     }
 
     a:hover {
-      color: var(--color-latte-blue);
+        color: var(--color-latte-blue);
     }
     body {
-      color: var(--color-latte-text);
-      background-color: var(--color-latte-base);
+        color: var(--color-latte-text);
+        background-color: var(--color-latte-base);
     }
     pre {
-      background-color: var(--color-latte-crust);
-      position: relative;
-      overflow: visible;
-      padding: 0.5rem;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      font-size: medium;
-      line-height: 1.25;
+        background-color: var(--color-latte-crust);
+        position: relative;
+        overflow: visible;
+        padding: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-size: medium;
+        line-height: 1.25;
     }
 
     article p {
-      margin-top: 16px;
-      margin-bottom: 16px;
+        margin-top: 16px;
+        margin-bottom: 16px;
     }
 
     article h2 {
-      font-size: x-large;
-      font-weight: bold;
+        font-size: x-large;
+        font-weight: bold;
     }
 
     article h3 {
-      font-size: x-large;
+        font-size: x-large;
     }
 
     article a {
-      text-decoration: underline;
+        text-decoration: underline;
     }
 
     article h1 a,
@@ -52,96 +52,94 @@
     article h4 a,
     article h5 a,
     article h6 a {
-      text-decoration: none;
+        text-decoration: none;
     }
 
-    article ul, 
+    article ul,
     article ol {
-      margin: 1rem 0;
-      padding-left: 2rem;
+        margin: 1rem 0;
+        padding-left: 2rem;
     }
 
     article ul {
-      list-style-type: disc;
+        list-style-type: disc;
     }
 
     article ol {
-      list-style-type: decimal;
+        list-style-type: decimal;
     }
 
     article li {
-      margin: 0.5rem 0;
-      line-height: 1.5;
+        margin: 0.5rem 0;
+        line-height: 1.5;
     }
 
     article ul ul,
     article ol ol,
     article ul ol,
     article ol ul {
-      margin: 0.25rem 0;
+        margin: 0.25rem 0;
     }
 
     pre code {
-      display: block;
-      overflow-x: auto;
+        display: block;
+        overflow-x: auto;
 
-      &::before {
-        background-color: var(--color-latte-crust);
-        border-radius: 0.3rem 0.3rem 0 0;
-        position: absolute;
-        top: -1rem;
-        right: 1rem;
-        padding: 0 0.2rem 0 0.2rem;
-        font-size: medium;
-      }
-    
-      &.elixir::before {
-        content: "elixir";
-      }
+        &::before {
+            background-color: var(--color-latte-crust);
+            border-radius: 0.3rem 0.3rem 0 0;
+            position: absolute;
+            top: -1rem;
+            right: 1rem;
+            padding: 0 0.2rem 0 0.2rem;
+            font-size: medium;
+        }
 
-      &.sql::before {
-        content: "sql"
-      }
+        &.elixir::before {
+            content: "elixir";
+        }
 
-      &.html::before {
-        content: "html"
-      }
+        &.sql::before {
+            content: "sql";
+        }
+
+        &.html::before {
+            content: "html";
+        }
     }
 
     @media (prefers-color-scheme: dark) {
-      a:hover {
-        color: var(--color-macchiato-blue);
-      }
-      body {
-        color: var(--color-macchiato-text);
-        background-color: var(--color-macchiato-base);
-      }
-      pre {
-        background-color: var(--color-frappe-base);
-      }
-      pre code {
-        &::before {
-          background-color: var(--color-frappe-base);
-          color: var(--color-frappe-text);
-        } 
-      }
+        a:hover {
+            color: var(--color-macchiato-blue);
+        }
+        body {
+            color: var(--color-macchiato-text);
+            background-color: var(--color-macchiato-base);
+        }
+        pre {
+            background-color: var(--color-frappe-base);
+        }
+        pre code {
+            &::before {
+                background-color: var(--color-frappe-base);
+                color: var(--color-frappe-text);
+            }
+        }
     }
 
     :root {
-      --color-frappe-base: rgb(48, 52, 70);
-      --color-frappe-blue: rgb(140, 170, 238);
-      --color-frappe-text: rgb(198, 208, 245);
+        --color-frappe-base: rgb(48, 52, 70);
+        --color-frappe-blue: rgb(140, 170, 238);
+        --color-frappe-text: rgb(198, 208, 245);
 
-      --color-latte-base: rgb(239, 241, 245);
-      --color-latte-blue: rgb(30, 102, 245);
-      --color-latte-text: rgb(76, 79, 105);
-      --color-latte-crust: rgb(220, 224, 232);
+        --color-latte-base: rgb(239, 241, 245);
+        --color-latte-blue: rgb(30, 102, 245);
+        --color-latte-text: rgb(76, 79, 105);
+        --color-latte-crust: rgb(220, 224, 232);
 
-      --color-macchiato-base: rgb(36, 39, 58);
-      --color-macchiato-text: rgb(202, 211, 245);
-      --color-macchiato-blue: rgb(138, 173, 244);
-      --color-macchiato-crust: rgb(24, 25, 38);
+        --color-macchiato-base: rgb(36, 39, 58);
+        --color-macchiato-text: rgb(202, 211, 245);
+        --color-macchiato-blue: rgb(138, 173, 244);
+        --color-macchiato-crust: rgb(24, 25, 38);
     }
-
-
-  }
+}

@@ -47,7 +47,7 @@ defmodule Ackurat.Render.Post do
           <a class="text-base mr-2" :for={keyword <- @keywords} href={"/keywords/" <> keyword} class="text-base"><%= keyword %></a>
         </div>
       </div>
-      <article class="text-xl">
+      <article class="text-l">
         <%= raw @body %>
       </article>
       <.footer>

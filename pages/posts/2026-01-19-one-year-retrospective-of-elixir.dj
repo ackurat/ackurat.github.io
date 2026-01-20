@@ -1,0 +1,10 @@
+%{
+  title: "One Year Retrospective of Elixir",
+  description: "I've worked with Elixir professionally for one year now, and this post is gathers some reflections on the language and its tooling",
+  keywords: ["elixir,", "programming"],
+  draft: true,
+}
+
+---
+
+I spend about 90% of my professional development in Elixir (the remaining time is a mix of Erlang and Go), and I couldn't be happier. That said, not everything is perfect. My previous experiences with Elixir are limited to a university course in functional programming, which mainly consisted of solving math-like problems, and Advent of Code, which again is focused on solving math-like problems. In other words, I was pretty much a beginner when I joined my current team.
