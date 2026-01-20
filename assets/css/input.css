@@ -127,6 +127,16 @@
         --color-macchiato-crust: rgb(24, 25, 38);
     }
 
+    :root .footer-gradient,
+    [data-theme="light"] .footer-gradient {
+        background-image: linear-gradient(
+            to right,
+            rgb(30, 102, 245),
+            rgb(136, 57, 239),
+            rgb(230, 69, 83)
+        );
+    }
+
     /* Dark theme */
     @media (prefers-color-scheme: dark) {
         :root:not([data-theme="light"]) {
@@ -165,6 +175,14 @@
                 background-color: var(--color-frappe-base);
                 color: var(--color-frappe-text);
             }
+        }
+        .footer-gradient {
+            background-image: linear-gradient(
+                to right,
+                rgb(245, 169, 127),
+                rgb(238, 212, 159),
+                rgb(166, 218, 149)
+            );
         }
     }
 }

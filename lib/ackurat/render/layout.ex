@@ -61,14 +61,25 @@ defmodule Ackurat.Render.Layout do
         </head>
         <body>
             <header class="flex justify-center py-4">
-                <nav class="flex flex-wrap justify-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider max-w-2xl">
-                    <a href="/">Home</a>
-                    <a href="/about/">About</a>
-                    <a href="/archive/">Archive</a>
-                    <a type="application/rss+xml" href="/index.xml">RSS</a>
-                    <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
-                        <span id="theme-icon"></span>
-                    </button>
+                <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
+                    <a href="/">~/</a>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="/about/">About</a>
+                        <a href="/archive/">Archive</a>
+                        <a type="application/rss+xml" href="/index.xml">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24">
+                            <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->
+                                <g fill="currentColor" stroke="none" stroke-linejoin="round">
+                                    <path d="M1.5 19.5a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/>
+                                    <path d="M12.5 22.5c0-6.075-4.925-11-11-11v-3c7.732 0 14 6.268 14 14z" clip-rule="evenodd"/>
+                                    <path d="M19.5 22.5c0-9.941-8.059-18-18-18v-3c11.598 0 21 9.402 21 21z" clip-rule="evenodd"/>
+                                </g>
+                            </svg>
+                        </a>
+                        <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
+                            <span id="theme-icon"></span>
+                        </button>
+                    </div>
                 </nav>
             </header>
             <main class="w-full">
@@ -107,7 +118,7 @@ defmodule Ackurat.Render.Layout do
 
   def footer(assigns) do
     ~H"""
-      <div class="-mx-4 my-2 flex h-1 w-[100vw] bg-gradient-to-r from-[rgb(244,219,214)] to-[rgb(198,160,246)] dark:from-[rgb(237,135,150)] dark:to-[rgb(238,212,159)] sm:mx-0 sm:w-full"></div>
+      <div class="-mx-4 my-2 flex h-1 w-[100vw] footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
       <footer class="italic">
         <%= render_slot(@inner_block) %>
       </footer>
