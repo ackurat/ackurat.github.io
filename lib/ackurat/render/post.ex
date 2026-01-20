@@ -29,42 +29,78 @@ defmodule Ackurat.Render.Post do
     end
   end
 
-  def post(assigns) do
+  defp table_of_contents(assigns) do
     ~H"""
-    <.layout
-      title={"#{@title} — #{Content.site_title()}"}
-      description={@description}
-      og_type="article"
-      route={@route}
-      date={@date}
-      keywords={@keywords}
-      wordcount={count_words(@description <>" " <> @body)}
-    >
-      <div class="flex flex-col">
-        <span class="text-base"><%= format_post_date(@date) %></span>
-        <span class="text-3xl"><%= @title %></span>
-        <div>
-          <a class="text-base mr-2" :for={keyword <- @keywords} href={"/keywords/" <> keyword} class="text-base"><%= keyword %></a>
-        </div>
-      </div>
-      <article class="text-l">
-        <%= raw @body %>
-      </article>
-      <.footer>
-        <div class="flex justify-between">
-          <%= if get_previous(@id) != :nil do %>
-            <a href={"/" <> get_previous(@id)}>
-              Previous
-            </a>
-          <% end %>
-          <%= if get_next(@id) != :nil do %>
-            <a href={"/" <> get_next(@id)}>
-              Next
-            </a>
-          <% end %>
-        </div>
-      </.footer>
-      </.layout>
+    <%= if @toc != [] do %>
+      <aside class="hidden lg:block fixed left-[calc(50%-624px)] w-64" style="top: calc(5rem + 6.5rem);">
+        <nav class="sticky top-4">
+          <ol class="list-none space-y-2 text-sm pl-0">
+            <%= for item <- @toc do %>
+              <li class={[
+                "leading-relaxed",
+                item.level == 2 && "ml-0",
+                item.level == 3 && "ml-3",
+                item.level == 4 && "ml-6"
+              ]}>
+                <a
+                  href={"##{item.id}"}
+                  class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1"
+                >
+                  <%= item.text %>
+                </a>
+              </li>
+            <% end %>
+          </ol>
+        </nav>
+      </aside>
+    <% end %>
     """
   end
+
+
+  def post(assigns) do
+     ~H"""
+     <.layout
+       title={"#{@title} — #{Content.site_title()}"}
+       description={@description}
+       og_type="article"
+       route={@route}
+       date={@date}
+       keywords={@keywords}
+       wordcount={count_words(@description <>" " <> @body)}
+     >
+       <.table_of_contents toc={Map.get(assigns, :toc, [])} />
+
+       <.centered_content>
+         <article class="text-l">
+           <div class="flex flex-col mb-6">
+             <span class="text-base"><%= format_post_date(@date) %></span>
+             <span class="text-3xl"><%= @title %></span>
+             <div>
+               <a class="text-base mr-2" :for={keyword <- @keywords} href={"/keywords/" <> keyword}><%= keyword %></a>
+             </div>
+           </div>
+
+           <%= raw @body %>
+         </article>
+
+         <.footer>
+           <div class="flex justify-between">
+             <%= if get_previous(@id) != :nil do %>
+               <a href={"/" <> get_previous(@id)}>
+                 Previous
+               </a>
+             <% end %>
+             <%= if get_next(@id) != :nil do %>
+               <a href={"/" <> get_next(@id)}>
+                 Next
+               </a>
+             <% end %>
+           </div>
+         </.footer>
+       </.centered_content>
+     </.layout>
+     """
+   end
+
 end
