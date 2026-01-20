@@ -27,8 +27,6 @@ defmodule Ackurat do
   end
 
   def render_keywords(keywords) do
-    render_file("keywords/index.html", Render.Pages.keyword_index(Content.all_keywords()))
-
     for keyword <- keywords do
       render_file("keywords/" <> keyword <> "/index.html", Render.Pages.keyword(keyword))
     end
@@ -49,7 +47,12 @@ defmodule Ackurat do
     render_file("index.html", Render.Pages.index(%{posts: active_posts}))
     render_file("404.html", Render.Layout.page(Content.not_found_page()))
     render_file(about_page.html_path, Render.Layout.page(about_page))
-    render_file("archive/index.html", Render.Pages.archive(%{posts: active_posts}))
+
+    render_file(
+      "archive/index.html",
+      Render.Pages.archive(%{posts: active_posts, tags: all_keywords})
+    )
+
     write_file("index.xml", Render.Rss.rss(active_posts))
     write_file("sitemap.xml", Render.Layout.sitemap(pages))
     render_posts(active_posts)

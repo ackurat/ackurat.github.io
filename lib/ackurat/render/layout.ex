@@ -65,10 +65,9 @@ defmodule Ackurat.Render.Layout do
                     <a href="/">Home</a>
                     <a href="/about/">About</a>
                     <a href="/archive/">Archive</a>
-                    <a href="/keywords/">Tags</a>
                     <a type="application/rss+xml" href="/index.xml">RSS</a>
                     <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
-                        <span class="theme-icon">◐</span>
+                        <span id="theme-icon"></span>
                     </button>
                 </nav>
             </header>
@@ -77,13 +76,22 @@ defmodule Ackurat.Render.Layout do
             </main>
             <script>
                 const themeToggle = document.getElementById('theme-toggle');
+                const themeIcon = document.getElementById('theme-icon');
                 const html = document.documentElement;
 
+                function updateIcon() {
+                  const currentTheme = html.getAttribute('data-theme');
+                  themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
+                }
+
+                updateIcon();
+
                 themeToggle.addEventListener('click', () => {
-                const currentTheme = html.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                html.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
+                  const currentTheme = html.getAttribute('data-theme');
+                  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                  html.setAttribute('data-theme', newTheme);
+                  localStorage.setItem('theme', newTheme);
+                  updateIcon();
                 });
             </script>
         </body>
@@ -116,7 +124,6 @@ defmodule Ackurat.Render.Layout do
     """
   end
 
-
   def page(assigns) do
     ~H"""
     <.layout
@@ -138,7 +145,6 @@ defmodule Ackurat.Render.Layout do
     </.layout>
     """
   end
-
 
   def sitemap(pages) do
     {:urlset,
