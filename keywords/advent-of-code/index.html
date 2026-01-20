@@ -21,36 +21,76 @@
       
       <link rel="canonical" href="https://ackurat.github.io/">
       <link rel="stylesheet" href="/assets/app.css">
+      <script>
+        (function() {
+        const theme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        })();
+      </script>
       
     </head>
     <body>
-      <div class="container mx-auto px-4">
         <header class="flex justify-center py-4">
-          <nav class="flex flex-wrap justify-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider">
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/archive/">Archive</a>
-            <a href="/keywords/">Tags</a>
-            <a href="/reads/">Reads</a>
-            <a href="/photos/">Photos</a>
-            <a type="application/rss+xml" href="/index.xml">RSS</a>
-          </nav>
+            <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
+                <a href="/">~/</a>
+                <div class="flex flex-wrap gap-4">
+                    <a href="/about/">About</a>
+                    <a href="/archive/">Archive</a>
+                    <a type="application/rss+xml" href="/index.xml">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24">
+                        <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->
+                            <g fill="currentColor" stroke="none" stroke-linejoin="round">
+                                <path d="M1.5 19.5a3 3 0 1 0 6 0a3 3 0 1 0-6 0"></path>
+                                <path d="M12.5 22.5c0-6.075-4.925-11-11-11v-3c7.732 0 14 6.268 14 14z" clip-rule="evenodd"></path>
+                                <path d="M19.5 22.5c0-9.941-8.059-18-18-18v-3c11.598 0 21 9.402 21 21z" clip-rule="evenodd"></path>
+                            </g>
+                        </svg>
+                    </a>
+                    <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
+                        <span id="theme-icon"></span>
+                    </button>
+                </div>
+            </nav>
         </header>
-        <main class="flex justify-center">
-          <div class="w-full md:w-1/2">
+        <main class="w-full">
             
-  <span class="text-3xl my-4">advent-of-code</span>
-  <div>
-    <a href="/exploring-gleam-through-advent-of-code/">
-      <div class="mt-4">
-        <span class="text-base">Nov 11, 2024</span>
-        <div class="text-xl font-bold">Exploring gleam through advent of code</div>
-      </div>
-    </a>
+  <div class="flex justify-center px-4">
+  <div class="w-full max-w-2xl">
+    
+    <span class="text-3xl my-4">advent-of-code</span>
+    <div>
+      <a href="/exploring-gleam-through-advent-of-code/">
+        <div class="mt-4">
+          <span class="text-base">Nov 11, 2024</span>
+          <div class="text-xl font-bold">Exploring gleam through advent of code</div>
+        </div>
+      </a>
+    </div>
+  
   </div>
+</div>
 
-          </div>
         </main>
-      </div>
+        <script>
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const html = document.documentElement;
+
+            function updateIcon() {
+              const currentTheme = html.getAttribute('data-theme');
+              themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
+            }
+
+            updateIcon();
+
+            themeToggle.addEventListener('click', () => {
+              const currentTheme = html.getAttribute('data-theme');
+              const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+              html.setAttribute('data-theme', newTheme);
+              localStorage.setItem('theme', newTheme);
+              updateIcon();
+            });
+        </script>
     </body>
   </html>

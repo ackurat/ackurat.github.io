@@ -31,33 +31,87 @@
       
       <link rel="canonical" href="https://ackurat.github.io/once-again-rewriting-the-site/">
       <link rel="stylesheet" href="/assets/app.css">
+      <script>
+        (function() {
+        const theme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        })();
+      </script>
       
     </head>
     <body>
-      <div class="container mx-auto px-4">
         <header class="flex justify-center py-4">
-          <nav class="flex flex-wrap justify-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider">
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/archive/">Archive</a>
-            <a href="/keywords/">Tags</a>
-            <a href="/reads/">Reads</a>
-            <a href="/photos/">Photos</a>
-            <a type="application/rss+xml" href="/index.xml">RSS</a>
-          </nav>
+            <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
+                <a href="/">~/</a>
+                <div class="flex flex-wrap gap-4">
+                    <a href="/about/">About</a>
+                    <a href="/archive/">Archive</a>
+                    <a type="application/rss+xml" href="/index.xml">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24">
+                        <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->
+                            <g fill="currentColor" stroke="none" stroke-linejoin="round">
+                                <path d="M1.5 19.5a3 3 0 1 0 6 0a3 3 0 1 0-6 0"></path>
+                                <path d="M12.5 22.5c0-6.075-4.925-11-11-11v-3c7.732 0 14 6.268 14 14z" clip-rule="evenodd"></path>
+                                <path d="M19.5 22.5c0-9.941-8.059-18-18-18v-3c11.598 0 21 9.402 21 21z" clip-rule="evenodd"></path>
+                            </g>
+                        </svg>
+                    </a>
+                    <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
+                        <span id="theme-icon"></span>
+                    </button>
+                </div>
+            </nav>
         </header>
-        <main class="flex justify-center">
-          <div class="w-full md:w-1/2">
+        <main class="w-full">
             
-  <div class="flex flex-col">
-    <span class="text-base">Feb 8, 2025</span>
-    <span class="text-3xl">Once again rewriting the site</span>
-    <div>
-      <a class="text-base mr-2" href="/keywords/elixir" class="text-base">elixir</a><a class="text-base mr-2" href="/keywords/zine" class="text-base">zine</a>
-    </div>
-  </div>
-  <article class="text-xl">
+  
+  <aside class="hidden lg:block fixed left-[calc(50%-624px)] w-64" style="top: calc(5rem + 6.5rem);">
+    <nav class="sticky top-4">
+      <ol class="list-none space-y-2 text-sm pl-0">
+        
+          <li class="leading-relaxed ml-0">
+            <a href="#Upcoming-changes" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              Upcoming changes
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Djot-support" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              Djot support
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Less-hand-written-CSS" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              Less hand-written CSS
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Typography-improvements" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              Typography improvements
+            </a>
+          </li>
+        
+      </ol>
+    </nav>
+  </aside>
+
+
+  <div class="flex justify-center px-4">
+  <div class="w-full max-w-2xl">
     
+    <article class="text-l">
+      <div class="flex flex-col mb-6">
+        <span class="text-base">Feb 8, 2025</span>
+        <span class="text-3xl">Once again rewriting the site</span>
+        <div>
+          <a class="text-base mr-2" href="/keywords/elixir">elixir</a><a class="text-base mr-2" href="/keywords/zine">zine</a>
+        </div>
+      </div>
+
+      
 <p>Once again I’m rewriting the site. I never got around to finishing my <a href="https://zine-ssg.io">Zine</a> implementation, partly because I didn’t have time to invest into learning Zig. I’ll soon start a new job where I’ll use <a href="https://elixir-lang.org">Elixir</a> and <a href="https://erlang.org">Erlang</a> as my main languages. I haven’t used Erlang much before, but Elixir has been a lurking favourite, and with my experiments with <a href="https://gleam.run">Gleam</a> I found renewed interest in it.</p>
 <p>The site uses <a href="https://github.com/dashbitco/nimble_publisher">NimblePublisher</a> and <a href="https://github.com/phoenixframework/phoenix_live_view">LiveView</a> <code>HEEx</code> templates. The basis for the site is <a href="https://fly.io/phoenix-files/crafting-your-own-static-site-generator-using-phoenix/">Jason Stiebe’s tutorial</a>, and after I had implemented a rudimentary version I forked <a href="https://jorin.me/">Jorin’s website</a> and started rebuilding it to my liking. Kudos to both these for saving me time! Unlike Jorin, I don’t have a desire to create my site generator from scratch, but I’ll happily spend time refactoring and tinkering.</p>
 <section id="Upcoming-changes">
@@ -65,29 +119,29 @@
 <p>Inspired by <a href="https://www.jonashietala.se/blog/2024/07/09/microfeatures_in_my_blog/">Jonas Hietala’s microfeatures</a>, I have some features I want to implement. Just like he states, microfeatures are fun and a way to learn. For instance, I’ve already implemented headings with automatic linking. It was pretty straight forward - reimplement the parsing of headings to add markdown links, and add a postprocessor to add the anchor ID to the headings:</p>
 <pre><code class="makeup elixir"><span class="c1"># parser.ex</span><span class="w">
 
-</span><span class="kd">defp</span><span class="w"> </span><span class="nf">replace_heading</span><span class="p" data-group-id="5197430550-1">(</span><span class="n">line</span><span class="p" data-group-id="5197430550-1">)</span><span class="w"> </span><span class="k" data-group-id="5197430550-2">do</span><span class="w">
-  </span><span class="k">if</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">starts_with?</span><span class="p" data-group-id="5197430550-3">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p" data-group-id="5197430550-3">)</span><span class="w"> </span><span class="k" data-group-id="5197430550-4">do</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="5197430550-5">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="5197430550-5">)</span><span class="w">
+</span><span class="kd">defp</span><span class="w"> </span><span class="nf">replace_heading</span><span class="p" data-group-id="8929522474-1">(</span><span class="n">line</span><span class="p" data-group-id="8929522474-1">)</span><span class="w"> </span><span class="k" data-group-id="8929522474-2">do</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">starts_with?</span><span class="p" data-group-id="8929522474-3">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p" data-group-id="8929522474-3">)</span><span class="w"> </span><span class="k" data-group-id="8929522474-4">do</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="8929522474-5">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;## &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p" data-group-id="8929522474-5">)</span><span class="w">
     </span><span class="n">slug</span><span class="w"> </span><span class="o">=</span><span class="w">
       </span><span class="n">title</span><span class="w">
-      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p" data-group-id="5197430550-6">(</span><span class="p" data-group-id="5197430550-6">)</span><span class="w">
-      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="5197430550-7">(</span><span class="sr">~r/[^a-z]+/</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="5197430550-7">)</span><span class="w">
-      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p" data-group-id="5197430550-8">(</span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="5197430550-8">)</span><span class="w">
+      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">downcase</span><span class="p" data-group-id="8929522474-6">(</span><span class="p" data-group-id="8929522474-6">)</span><span class="w">
+      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">replace</span><span class="p" data-group-id="8929522474-7">(</span><span class="sr">~r/[^a-z]+/</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="8929522474-7">)</span><span class="w">
+      </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p" data-group-id="8929522474-8">(</span><span class="s">&quot;-&quot;</span><span class="p" data-group-id="8929522474-8">)</span><span class="w">
 
-    </span><span class="s">&quot;## [</span><span class="si" data-group-id="5197430550-9">#{</span><span class="n">title</span><span class="si" data-group-id="5197430550-9">}</span><span class="s">](#</span><span class="si" data-group-id="5197430550-10">#{</span><span class="n">slug</span><span class="si" data-group-id="5197430550-10">}</span><span class="s">)&quot;</span><span class="w">
-  </span><span class="k" data-group-id="5197430550-4">else</span><span class="w">
+    </span><span class="s">&quot;## [</span><span class="si" data-group-id="8929522474-9">#{</span><span class="n">title</span><span class="si" data-group-id="8929522474-9">}</span><span class="s">](#</span><span class="si" data-group-id="8929522474-10">#{</span><span class="n">slug</span><span class="si" data-group-id="8929522474-10">}</span><span class="s">)&quot;</span><span class="w">
+  </span><span class="k" data-group-id="8929522474-4">else</span><span class="w">
     </span><span class="n">line</span><span class="w">
-  </span><span class="k" data-group-id="5197430550-4">end</span><span class="w">
-</span><span class="k" data-group-id="5197430550-2">end</span><span class="w">
+  </span><span class="k" data-group-id="8929522474-4">end</span><span class="w">
+</span><span class="k" data-group-id="8929522474-2">end</span><span class="w">
 
 </span><span class="c1"># [processor.ex](#processor.ex)</span><span class="w">
 
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">process</span><span class="p" data-group-id="5197430550-11">(</span><span class="p" data-group-id="5197430550-12">{</span><span class="s">&quot;h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-13">[</span><span class="p" data-group-id="5197430550-13">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-14">[</span><span class="n">text</span><span class="p" data-group-id="5197430550-14">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-15">%{</span><span class="p" data-group-id="5197430550-15">}</span><span class="p" data-group-id="5197430550-12">}</span><span class="p" data-group-id="5197430550-11">)</span><span class="w"> </span><span class="k" data-group-id="5197430550-16">do</span><span class="w">
-  </span><span class="k">case</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="k" data-group-id="5197430550-17">do</span><span class="w">
-    </span><span class="p" data-group-id="5197430550-18">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-19">[</span><span class="p" data-group-id="5197430550-20">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">anchor_id</span><span class="p" data-group-id="5197430550-20">}</span><span class="p" data-group-id="5197430550-19">]</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p" data-group-id="5197430550-18">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="5197430550-21">{</span><span class="s">&quot;h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-22">[</span><span class="p" data-group-id="5197430550-23">{</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">anchor_id</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p" data-group-id="5197430550-24">(</span><span class="s">&quot;#&quot;</span><span class="p" data-group-id="5197430550-24">)</span><span class="p" data-group-id="5197430550-23">}</span><span class="p" data-group-id="5197430550-22">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-25">[</span><span class="n">text</span><span class="p" data-group-id="5197430550-25">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-26">%{</span><span class="p" data-group-id="5197430550-26">}</span><span class="p" data-group-id="5197430550-21">}</span><span class="w">
-    </span><span class="bp">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="5197430550-27">{</span><span class="s">&quot;h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-28">[</span><span class="p" data-group-id="5197430550-28">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-29">[</span><span class="n">text</span><span class="p" data-group-id="5197430550-29">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5197430550-30">%{</span><span class="p" data-group-id="5197430550-30">}</span><span class="p" data-group-id="5197430550-27">}</span><span class="w">
-  </span><span class="k" data-group-id="5197430550-17">end</span><span class="w">
-</span><span class="k" data-group-id="5197430550-16">end</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">process</span><span class="p" data-group-id="8929522474-11">(</span><span class="p" data-group-id="8929522474-12">{</span><span class="s">&quot;h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-13">[</span><span class="p" data-group-id="8929522474-13">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-14">[</span><span class="n">text</span><span class="p" data-group-id="8929522474-14">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-15">%{</span><span class="p" data-group-id="8929522474-15">}</span><span class="p" data-group-id="8929522474-12">}</span><span class="p" data-group-id="8929522474-11">)</span><span class="w"> </span><span class="k" data-group-id="8929522474-16">do</span><span class="w">
+  </span><span class="k">case</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="k" data-group-id="8929522474-17">do</span><span class="w">
+    </span><span class="p" data-group-id="8929522474-18">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-19">[</span><span class="p" data-group-id="8929522474-20">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">anchor_id</span><span class="p" data-group-id="8929522474-20">}</span><span class="p" data-group-id="8929522474-19">]</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p" data-group-id="8929522474-18">}</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="8929522474-21">{</span><span class="s">&quot;h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-22">[</span><span class="p" data-group-id="8929522474-23">{</span><span class="s">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">anchor_id</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">String</span><span class="o">.</span><span class="n">trim</span><span class="p" data-group-id="8929522474-24">(</span><span class="s">&quot;#&quot;</span><span class="p" data-group-id="8929522474-24">)</span><span class="p" data-group-id="8929522474-23">}</span><span class="p" data-group-id="8929522474-22">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-25">[</span><span class="n">text</span><span class="p" data-group-id="8929522474-25">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-26">%{</span><span class="p" data-group-id="8929522474-26">}</span><span class="p" data-group-id="8929522474-21">}</span><span class="w">
+    </span><span class="bp">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="8929522474-27">{</span><span class="s">&quot;h2&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-28">[</span><span class="p" data-group-id="8929522474-28">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-29">[</span><span class="n">text</span><span class="p" data-group-id="8929522474-29">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8929522474-30">%{</span><span class="p" data-group-id="8929522474-30">}</span><span class="p" data-group-id="8929522474-27">}</span><span class="w">
+  </span><span class="k" data-group-id="8929522474-17">end</span><span class="w">
+</span><span class="k" data-group-id="8929522474-16">end</span><span class="w">
 </span></code></pre>
 <section id="Djot-support">
 <h3><a href="#Djot-support">Djot support</a></h3>
@@ -109,27 +163,49 @@
 </section>
 </section>
 
-  </article>
-  <hr class="my-4">
+    </article>
+
+    <div class="-mx-4 my-2 flex h-1 w-[100vw] footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
   <footer class="italic">
     
-    <div class="flex justify-between">
-      
-        <a href="/using-djot-for-content">
-          Previous
-        </a>
-      
-      
-        <a href="/understanding-postgresql-buffers">
-          Next
-        </a>
-      
-    </div>
-  
+      <div class="flex justify-between">
+        
+          <a href="/using-djot-for-content">
+            Previous
+          </a>
+        
+        
+          <a href="/exploring-gleam-through-advent-of-code">
+            Next
+          </a>
+        
+      </div>
+    
   </footer>
   
-          </div>
+  </div>
+</div>
+
         </main>
-      </div>
+        <script>
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const html = document.documentElement;
+
+            function updateIcon() {
+              const currentTheme = html.getAttribute('data-theme');
+              themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
+            }
+
+            updateIcon();
+
+            themeToggle.addEventListener('click', () => {
+              const currentTheme = html.getAttribute('data-theme');
+              const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+              html.setAttribute('data-theme', newTheme);
+              localStorage.setItem('theme', newTheme);
+              updateIcon();
+            });
+        </script>
     </body>
   </html>

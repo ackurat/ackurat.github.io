@@ -31,33 +31,99 @@
       
       <link rel="canonical" href="https://ackurat.github.io/setting-up-a-site-with-zine/">
       <link rel="stylesheet" href="/assets/app.css">
+      <script>
+        (function() {
+        const theme = localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        })();
+      </script>
       
     </head>
     <body>
-      <div class="container mx-auto px-4">
         <header class="flex justify-center py-4">
-          <nav class="flex flex-wrap justify-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider">
-            <a href="/">Home</a>
-            <a href="/about/">About</a>
-            <a href="/archive/">Archive</a>
-            <a href="/keywords/">Tags</a>
-            <a href="/reads/">Reads</a>
-            <a href="/photos/">Photos</a>
-            <a type="application/rss+xml" href="/index.xml">RSS</a>
-          </nav>
+            <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
+                <a href="/">~/</a>
+                <div class="flex flex-wrap gap-4">
+                    <a href="/about/">About</a>
+                    <a href="/archive/">Archive</a>
+                    <a type="application/rss+xml" href="/index.xml">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24">
+                        <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->
+                            <g fill="currentColor" stroke="none" stroke-linejoin="round">
+                                <path d="M1.5 19.5a3 3 0 1 0 6 0a3 3 0 1 0-6 0"></path>
+                                <path d="M12.5 22.5c0-6.075-4.925-11-11-11v-3c7.732 0 14 6.268 14 14z" clip-rule="evenodd"></path>
+                                <path d="M19.5 22.5c0-9.941-8.059-18-18-18v-3c11.598 0 21 9.402 21 21z" clip-rule="evenodd"></path>
+                            </g>
+                        </svg>
+                    </a>
+                    <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
+                        <span id="theme-icon"></span>
+                    </button>
+                </div>
+            </nav>
         </header>
-        <main class="flex justify-center">
-          <div class="w-full md:w-1/2">
+        <main class="w-full">
             
-  <div class="flex flex-col">
-    <span class="text-base">Oct 27, 2024</span>
-    <span class="text-3xl">Setting up a site with zine</span>
-    <div>
-      <a class="text-base mr-2" href="/keywords/zine" class="text-base">zine</a><a class="text-base mr-2" href="/keywords/zig" class="text-base">zig</a>
-    </div>
-  </div>
-  <article class="text-xl">
+  
+  <aside class="hidden lg:block fixed left-[calc(50%-624px)] w-64" style="top: calc(5rem + 6.5rem);">
+    <nav class="sticky top-4">
+      <ol class="list-none space-y-2 text-sm pl-0">
+        
+          <li class="leading-relaxed ml-0">
+            <a href="#First-Steps" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              First Steps
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-0">
+            <a href="#What-I-like-About-Zine" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              What I like About Zine
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-0">
+            <a href="#What&#39;s-Next" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              What&#39;s Next
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Tags" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              Tags
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#RSS-✅" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              RSS ✅
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-6">
+            <a href="#Update" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+              Update
+            </a>
+          </li>
+        
+      </ol>
+    </nav>
+  </aside>
+
+
+  <div class="flex justify-center px-4">
+  <div class="w-full max-w-2xl">
     
+    <article class="text-l">
+      <div class="flex flex-col mb-6">
+        <span class="text-base">Oct 27, 2024</span>
+        <span class="text-3xl">Setting up a site with zine</span>
+        <div>
+          <a class="text-base mr-2" href="/keywords/zine">zine</a><a class="text-base mr-2" href="/keywords/zig">zig</a>
+        </div>
+      </div>
+
+      
 <section id="First-Steps">
 <h2><a href="#First-Steps">First Steps</a></h2>
 <p>Were me just copying the Zine creator <a href="https://kristoff.it/">Kristoff’s</a> personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.</p>
@@ -77,29 +143,29 @@
 <h3><a href="#RSS-✅">RSS ✅</a></h3>
 <p>I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p>
 <p>The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code>only the main page can be rendered for now, sorry!</code>.</p>
-<pre><code class="makeup html"><span class="p" data-group-id="0341067656-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="0341067656-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="0341067656-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="0341067656-2">&gt;</span><span class="s">
+<pre><code class="makeup html"><span class="p" data-group-id="3810255217-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="3810255217-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="3810255217-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="3810255217-2">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="0341067656-3">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="0341067656-3">&gt;</span><span class="p" data-group-id="0341067656-4">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="0341067656-4">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="0341067656-5">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="0341067656-5">&gt;</span><span class="s">
-</span><span class="p" data-group-id="0341067656-6">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="0341067656-6">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="3810255217-3">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="3810255217-3">&gt;</span><span class="p" data-group-id="3810255217-4">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="3810255217-4">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="3810255217-5">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="3810255217-5">&gt;</span><span class="s">
+</span><span class="p" data-group-id="3810255217-6">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="3810255217-6">&gt;</span><span class="s">
 </span></code></pre>
 <section id="Update">
 <h4><a href="#Update">Update</a></h4>
 <p>I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:</p>
-<pre><code class="makeup html"><span class="p" data-group-id="2780507490-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="2780507490-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="2780507490-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="2780507490-2">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="2780507490-3">&lt;</span><span class="nt">title</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="2780507490-3">&gt;</span><span class="p" data-group-id="2780507490-4">&lt;/</span><span class="nt">title</span><span class="p" data-group-id="2780507490-4">&gt;</span><span class="s">
+<pre><code class="makeup html"><span class="p" data-group-id="1489979324-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="1489979324-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="1489979324-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="1489979324-2">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="1489979324-3">&lt;</span><span class="nt">title</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="1489979324-3">&gt;</span><span class="p" data-group-id="1489979324-4">&lt;/</span><span class="nt">title</span><span class="p" data-group-id="1489979324-4">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="2780507490-5">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="2780507490-5">&gt;</span><span class="s">
-      </span><span class="p" data-group-id="2780507490-6">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="2780507490-6">&gt;</span><span class="p" data-group-id="2780507490-7">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="2780507490-7">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="2780507490-8">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="2780507490-8">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="2780507490-9">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="2780507490-9">&gt;</span><span class="s">
-</span><span class="p" data-group-id="2780507490-10">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="2780507490-10">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="1489979324-5">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="1489979324-5">&gt;</span><span class="s">
+      </span><span class="p" data-group-id="1489979324-6">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="1489979324-6">&gt;</span><span class="p" data-group-id="1489979324-7">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="1489979324-7">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="1489979324-8">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="1489979324-8">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="1489979324-9">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="1489979324-9">&gt;</span><span class="s">
+</span><span class="p" data-group-id="1489979324-10">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="1489979324-10">&gt;</span><span class="s">
 </span></code></pre>
 <p>And the corresponding change to the post:</p>
 <pre><code>#### [Heading]($section.id("heading"))
@@ -111,23 +177,45 @@ Text goes here...
 </section>
 </section>
 
-  </article>
-  <hr class="my-4">
+    </article>
+
+    <div class="-mx-4 my-2 flex h-1 w-[100vw] footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
   <footer class="italic">
     
-    <div class="flex justify-between">
-      
-        <a href="/exploring-gleam-through-advent-of-code">
-          Previous
-        </a>
-      
-      
-    </div>
-  
+      <div class="flex justify-between">
+        
+          <a href="/exploring-gleam-through-advent-of-code">
+            Previous
+          </a>
+        
+        
+      </div>
+    
   </footer>
   
-          </div>
+  </div>
+</div>
+
         </main>
-      </div>
+        <script>
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const html = document.documentElement;
+
+            function updateIcon() {
+              const currentTheme = html.getAttribute('data-theme');
+              themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
+            }
+
+            updateIcon();
+
+            themeToggle.addEventListener('click', () => {
+              const currentTheme = html.getAttribute('data-theme');
+              const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+              html.setAttribute('data-theme', newTheme);
+              localStorage.setItem('theme', newTheme);
+              updateIcon();
+            });
+        </script>
     </body>
   </html>
