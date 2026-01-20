@@ -40,33 +40,21 @@ defmodule Ackurat do
     end
   end
 
-  def render_reads(reads) do
-    for page <- reads do
-      render_file(page.html_path, Render.Reads.reads(page))
-    end
-  end
-
-
   def build_pages(prod) do
     pages = Content.all_pages()
     active_posts = Content.active_posts(prod)
     all_keywords = Content.all_keywords()
     about_page = Content.about_page()
-    reads = Content.get_reads()
-    photos = Content.get_photos()
     assert_uniq_page_ids!(pages)
     render_file("index.html", Render.Pages.index(%{posts: active_posts}))
     render_file("404.html", Render.Layout.page(Content.not_found_page()))
     render_file(about_page.html_path, Render.Layout.page(about_page))
     render_file("archive/index.html", Render.Pages.archive(%{posts: active_posts}))
-    render_file("reads/index.html", Render.Reads.index(%{pages: reads}))
-    render_file("photos/index.html", Render.Photos.index(photos))
     write_file("index.xml", Render.Rss.rss(active_posts))
     write_file("sitemap.xml", Render.Layout.sitemap(pages))
     render_posts(active_posts)
     render_keywords(all_keywords)
     render_redirects(Content.redirects())
-    render_reads(reads)
     :ok
   end
 

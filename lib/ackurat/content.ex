@@ -121,32 +121,7 @@ defmodule Ackurat.Content do
     end
   end
 
-  def get_photos() do
-    data = YamlElixir.read_from_file!("pages/photos.yml")
-
-    sorted_images =
-      data["images"]
-      |> Enum.sort_by(
-        fn image ->
-          case Date.from_iso8601(image["meta"]["date"]) do
-            {:ok, date} -> date
-            _ -> Date.from_iso8601!("1970-01-01")
-          end
-        end,
-        {:desc, Date}
-      )
-
-    %{
-      date: DateTime.utc_now(),
-      type: :photos,
-      title: data["title"],
-      description: data["description"],
-      images: sorted_images,
-      route: "/photos/"
-    }
-  end
-
   def all_pages do
-    [about_page()] ++ active_posts() ++ get_reads()
+    [about_page()] ++ active_posts()
   end
 end
