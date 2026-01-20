@@ -24,7 +24,8 @@ defmodule Ackurat.Page do
     :route,
     :keywords,
     :archive,
-    :draft
+    :draft,
+    :toc
   ]
 
   def build("pages/posts/" <> filename, attrs, body) do

@@ -53,24 +53,20 @@ defmodule Ackurat.Render.Layout do
           <% end %>
         </head>
         <body>
-          <div class="container mx-auto px-4">
             <header class="flex justify-center py-4">
-              <nav class="flex flex-wrap justify-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider">
-                <a href="/">Home</a>
-                <a href="/about/">About</a>
-                <a href="/archive/">Archive</a>
-                <a href="/keywords/">Tags</a>
-                <a href="/reads/">Reads</a>
-                <a href="/photos/">Photos</a>
-                <a type="application/rss+xml" href="/index.xml">RSS</a>
-              </nav>
+                <nav class="flex flex-wrap justify-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider max-w-2xl">
+                    <a href="/">Home</a>
+                    <a href="/about/">About</a>
+                    <a href="/archive/">Archive</a>
+                    <a href="/keywords/">Tags</a>
+                    <a href="/reads/">Reads</a>
+                    <a href="/photos/">Photos</a>
+                    <a type="application/rss+xml" href="/index.xml">RSS</a>
+                </nav>
             </header>
-            <main class="flex justify-center">
-              <div class={if @og_type == "gallery", do: "w-full max-w-screen-2xl", else: "w-full md:w-1/2"}>
+            <main class="w-full">
                 <%= render_slot(@inner_block) %>
-              </div>
             </main>
-          </div>
         </body>
       </html>
     """
@@ -84,12 +80,23 @@ defmodule Ackurat.Render.Layout do
 
   def footer(assigns) do
     ~H"""
-      <hr class="my-4"/>
+      <div class="-mx-4 my-2 flex h-1 w-[100vw] bg-gradient-to-r from-[rgb(244,219,214)] to-[rgb(198,160,246)] dark:from-[rgb(237,135,150)] dark:to-[rgb(238,212,159)] sm:mx-0 sm:w-full"></div>
       <footer class="italic">
         <%= render_slot(@inner_block) %>
       </footer>
     """
   end
+
+  def centered_content(assigns) do
+    ~H"""
+    <div class="flex justify-center px-4">
+      <div class="w-full max-w-2xl">
+        <%= render_slot(@inner_block) %>
+      </div>
+    </div>
+    """
+  end
+
 
   def page(assigns) do
     ~H"""
@@ -99,15 +106,20 @@ defmodule Ackurat.Render.Layout do
       og_type="website"
       route={@route}
     >
-      <.heading>
-        <a href={@route}><%= @title %></a>
-      </.heading>
-      <article class="text-xl">
-        <%= raw @body %>
-      </article>
+      <div class="flex justify-center px-4">
+        <div class="w-full max-w-2xl">
+          <.heading>
+            <a href={@route}><%= @title %></a>
+          </.heading>
+          <article class="text-xl">
+            <%= raw @body %>
+          </article>
+        </div>
+      </div>
     </.layout>
     """
   end
+
 
   def sitemap(pages) do
     {:urlset,
