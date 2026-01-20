@@ -48,6 +48,13 @@ defmodule Ackurat.Render.Layout do
           <% end %>
           <link rel="canonical" href={"#{Content.site_url()}#{@route}"} />
           <link rel="stylesheet" href="/assets/app.css" />
+          <script>
+            (function() {
+            const theme = localStorage.getItem('theme') ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+            })();
+          </script>
           <%= if MIX_ENV == "prod" do %>
             <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
           <% end %>
@@ -59,14 +66,26 @@ defmodule Ackurat.Render.Layout do
                     <a href="/about/">About</a>
                     <a href="/archive/">Archive</a>
                     <a href="/keywords/">Tags</a>
-                    <a href="/reads/">Reads</a>
-                    <a href="/photos/">Photos</a>
                     <a type="application/rss+xml" href="/index.xml">RSS</a>
+                    <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
+                        <span class="theme-icon">◐</span>
+                    </button>
                 </nav>
             </header>
             <main class="w-full">
                 <%= render_slot(@inner_block) %>
             </main>
+            <script>
+                const themeToggle = document.getElementById('theme-toggle');
+                const html = document.documentElement;
+
+                themeToggle.addEventListener('click', () => {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                });
+            </script>
         </body>
       </html>
     """

@@ -1,4 +1,3 @@
-@import "./fonts.css";
 @import "./makeup.css";
 
 @import "tailwindcss/base";
@@ -7,7 +6,7 @@
 
 @layer base {
     html {
-        font-family: "ui-sans-serif", "system-ui", "sans-serif";
+        font-family: system-ui, sans-serif;
         scrollbar-gutter: stable;
     }
 
@@ -32,6 +31,7 @@
     article p {
         margin-top: 16px;
         margin-bottom: 16px;
+        line-height: 1.6;
     }
 
     article h2 {
@@ -109,7 +109,47 @@
         }
     }
 
+    /* Light theme (default) */
+    :root,
+    [data-theme="light"] {
+        --color-frappe-base: rgb(48, 52, 70);
+        --color-frappe-blue: rgb(140, 170, 238);
+        --color-frappe-text: rgb(198, 208, 245);
+
+        --color-latte-base: rgb(239, 241, 245);
+        --color-latte-blue: rgb(30, 102, 245);
+        --color-latte-text: rgb(76, 79, 105);
+        --color-latte-crust: rgb(220, 224, 232);
+
+        --color-macchiato-base: rgb(36, 39, 58);
+        --color-macchiato-text: rgb(202, 211, 245);
+        --color-macchiato-blue: rgb(138, 173, 244);
+        --color-macchiato-crust: rgb(24, 25, 38);
+    }
+
+    /* Dark theme */
     @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+            a:hover {
+                color: var(--color-macchiato-blue);
+            }
+            body {
+                color: var(--color-macchiato-text);
+                background-color: var(--color-macchiato-base);
+            }
+            pre {
+                background-color: var(--color-frappe-base);
+            }
+            pre code {
+                &::before {
+                    background-color: var(--color-frappe-base);
+                    color: var(--color-frappe-text);
+                }
+            }
+        }
+    }
+
+    [data-theme="dark"] {
         a:hover {
             color: var(--color-macchiato-blue);
         }
@@ -126,21 +166,5 @@
                 color: var(--color-frappe-text);
             }
         }
-    }
-
-    :root {
-        --color-frappe-base: rgb(48, 52, 70);
-        --color-frappe-blue: rgb(140, 170, 238);
-        --color-frappe-text: rgb(198, 208, 245);
-
-        --color-latte-base: rgb(239, 241, 245);
-        --color-latte-blue: rgb(30, 102, 245);
-        --color-latte-text: rgb(76, 79, 105);
-        --color-latte-crust: rgb(220, 224, 232);
-
-        --color-macchiato-base: rgb(36, 39, 58);
-        --color-macchiato-text: rgb(202, 211, 245);
-        --color-macchiato-blue: rgb(138, 173, 244);
-        --color-macchiato-crust: rgb(24, 25, 38);
     }
 }

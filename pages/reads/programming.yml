@@ -1,8 +1,0 @@
-title: Programming
-description: A collection of programming related stuff I've read that influenced or inspired me.
-update: 2025-03-16
-links:
-
-  - title: Declarative package management with a Brewfile
-    url: https://matthiasportzel.com/brewfile/
-    description: Matthias Portzel explains how he treats Brew as a declarative package manager. I tested out the solution and immediately liked it as a simple way of getting a declarative-light setup without going down the [Nix](https://www.nixos.org) rabbit hole. I've since set up both my work laptop (Mac) and personal laptop (Bluefin Linux) with a Brewfile.
