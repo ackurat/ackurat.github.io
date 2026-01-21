@@ -1,13 +1,13 @@
 %{
   title: "One Year Retrospective of Elixir",
-  description: "I've worked with Elixir professionally for one year now, and this post is gathers some reflections on the language and its tooling",
+  description: "I've worked with Elixir professionally for one year now, and this post gathers some reflections on the language and its tooling",
   keywords: ["elixir", "programming"],
   draft: true,
 }
 
 ---
 
-I spend about 90% of my professional development in Elixir (the remaining time is a mix of Erlang and Go), and I couldn't be happier. That said, not everything is perfect. My previous experiences with Elixir are limited to a university course in functional programming, which mainly consisted of solving math-like problems, and Advent of Code, which again is focused on solving math-like problems. In other words, I was pretty much a beginner when I joined my current team.
+I've spent about 90% of my professional development in Elixir (the remaining time is a mix of Erlang and Go), and I couldn't be happier. That said, not everything is perfect. My previous experiences with Elixir are limited to a university course in functional programming, which mainly consisted of solving math-like problems, and Advent of Code, which again is focused on solving math-like problems. In other words, I was pretty much a beginner when I joined my current team.
 
 I generally think that tooling and ecosystem is more important than the language itself, so I'll primarily focus on that in this post.
 
@@ -15,11 +15,11 @@ I generally think that tooling and ecosystem is more important than the language
 
 ### Mix as a Build Tool
 
-`Mix` works great - it's extensible, can compile on multiple cores (since v19.4), handles everything from compilation to installation of dependencies and package managers. One thing I really like is that the mixfile of a project, `mix.exs`, is just regular Elixir. This means that I can script the build step freely using the language I already now, and I don't have to shell out into various scripts like I used to do in the `Node` ecosystem. Want to add a CLI task to simplify running tests in CI? Just write an alias function and add it to the `project` in the mixfile:
+`Mix` works great - it's extensible, can compile on multiple cores (since v1.19.4), handles everything from compilation to installation of dependencies and package managers. One thing I really like is that the mixfile of a project, `mix.exs`, is just regular Elixir. This means that I can script the build step freely using the language I already know, and I don't have to shell out into various scripts like I used to do in the `Node` ecosystem. Want to add a CLI task to simplify running tests in CI? Just write an alias function and add it to the `project` in the mixfile:
 
 ```elixir
 def aliases() do
-    ci: ["deps.unlock --check-unused", "format --check-formatted", "cmd docker compose up --detach --wait", "test"]
+    [ci: ["deps.unlock --check-unused", "format --check-formatted", "cmd docker compose up --detach --wait", "test"]]
 end
 ```
 
@@ -27,9 +27,7 @@ Now just run `mix ci` and it'll run whatever you defined in the alias. This exte
 
 ### Test Runner and ExUnit
 
-`Mix` is also used to run tests, and Elixir includes the testing framework `ExUnit`. So far, it has everything I want from testing framework - assertions, hooks, parallel or sequential tests, easy mocking. The mix tasks for running tests are also great, `mix test --failed` for instance is a wonderfully simple thing that just runs the tests that failed the previous run, and `mix test --seed <seed>` lets you run tests with a specified seeding so that randomized values are consistent.
-
-I'll probably put it in a separate post, but our whole test suite (unit tests and integration-like tests) at work tests 4 separate microservices in just about 3 seconds. Combined with [mix test.watch](https://hexdocs.pm/mix_test_watch/readme.html), this means that I can have a separate shell running the tests continuously while writing code.
+`Mix` is also used to run tests, and Elixir includes the testing framework `ExUnit`. So far, it has everything I want from testing framework - assertions, hooks, parallel or sequential tests, easy mocking[^1]. The mix tasks for running tests are also great, `mix test --failed` for instance is a wonderfully simple thing that just runs the tests that failed the previous run, and `mix test --seed <seed>` lets you run tests with a specified seeding so that randomized values are consistent.
 
 ### Formatter
 
@@ -37,13 +35,13 @@ I don't have much to say here - I think every language should include a formatte
 
 ### Language Server
 
-This is the one feature that the tooling isn't really up to other languages. Don't get me wrong, the language server does work and it gives you go to definition, squiggly lines etc, but it is a tad bit slow and more importantly, it quite often reports issues with dependencies on the top level (`mix.exs`). The only solution I've found is to clear the `.elixir_ls` directory and let it recompile.
+This is the one feature that the tooling isn't really up to other languages. Don't get me wrong, the language server does work and it gives you go to definition, squiggly lines etc, but it's a tad bit slow and more importantly, it quite often reports issues with dependencies on the top level (`mix.exs`). The only solution I've found is to clear the `.elixir_ls` directory and let it recompile.
 
-It's worth mentioning that the language server is getting some love with an effort to bring it in as an [official](https://elixir-lang.org/blog/2024/08/15/welcome-elixir-language-server-team/) part of Elixir, but it's still in alpha and I've had some crashed with it so for now I'm sticking with [elixir-ls](https://github.com/elixir-lsp/elixir-ls).
+It's worth mentioning that the language server is getting some love with an effort to bring it in as an [official](https://elixir-lang.org/blog/2024/08/15/welcome-elixir-language-server-team/) part of Elixir, but it's still in alpha and I've had some crashes with it so for now I'm sticking with [elixir-ls](https://github.com/elixir-lsp/elixir-ls).
 
 ### Standard Library & Documentation
 
-The standard library is good. It has all the necessities, and is very well documented. I'm clumping documentation into this topic since it's a first class citizen of the language. [Doctest](https://hexdocs.pm/ex_unit/ExUnit.DocTest.html) is a fantastic tool for libraries to have up-to-date documentation examples.
+The standard library is good. It has all the necessities, and is very well documented. I'm including documentation into this topic since it's a first class citizen of the language. [Doctest](https://hexdocs.pm/ex_unit/ExUnit.DocTest.html) is a fantastic tool for libraries to have up-to-date documentation examples.
 
 ## Ecosystem
 
@@ -51,7 +49,7 @@ The library ecosystem is both great and... not great. First of all, you can free
 
 The Elixir ecosystem has some very good and mature libraries such as [Phoenix](https://www.phoenixframework.org/), [Broadway](https://hexdocs.pm/broadway/introduction.html), [Ecto](https://hexdocs.pm/ecto/Ecto.html) and [Oban](https://hexdocs.pm/oban/Oban.html). Oban is so good I'm planning to write an appreciation post just for it.
 
-At the same time, many libraries are pre-1.0. An example is [postgrex](https://hexdocs.pm/postgrex/readme.html), which is the default Postgres driver. It was initially published in 2014 and the current version is 0.22. Between 0.21 and 0.22 there was a breaking change (Elixir v1.15+ required). I think this fosters a culture where libraries aren't expected to reach a stable 1.0 stage, which increases developer churn and tech debt.
+At the same time, many libraries are pre-1.0. An example is [postgrex](https://hexdocs.pm/postgrex/readme.html), which is the default Postgres driver. It was initially published in 2014 and the current version is 0.22. Between 0.21 and 0.22 there was a breaking change (Elixir v1.15+ required). In my experience, pre-1.0 libraries tend to change more often which can increase churn and tech debt.
 
 ## The Language Itself
 
@@ -64,7 +62,7 @@ Today, I can't imagine going back to the OOP world, and especially not JS/TS. I 
 def pass_on_error() do
   case bar() do
     {:ok, baz} -> baz
-    {:error, error} -> 
+    {:error, error} ->
       Logger.error(%{message: "Some error", error: error})
       {:error, error}
   end
@@ -85,3 +83,48 @@ end
 ```
 
 You get a clear separation between errors as values that you can handle, and raised errors for unexpected errors that you can't handle. [Saša Jurić's talk](https://www.youtube.com/watch?v=JvBT4XBdoUE) is a great starter on how the language and the runtime behaves, and how the application can keep running at (almost) full speed even though it is repeatedly running into unexpected errors.
+
+### The Pipe Operator
+
+Sometimes I have to write code in Erlang, which doesn't have the pipe operator. I'm not very proficient in it, but I see sequences like this sometimes[^2]:
+
+```erlang
+Foo = <<"foo">>,
+Foo1 = bar(Foo),
+Foo2 = baz(Foo1),
+Foo2.
+```
+
+Compared to using the pipe operator in Elixir:
+
+```elixir
+"foo"
+|> bar()
+|> baz()
+```
+
+Or as a one liner: `"foo" |> bar |> baz`{.language-elixir}
+
+The pipe operator is such a simple concept, and every language should have it.
+
+### Macros
+
+Macros are compile time transformations, and many libraries use them extensively. Aside from some configuration and setting up schemas, this is all that's needed to add a database query API to your application using Ecto:
+
+```elixir
+defmodule App.Repo do
+  use Ecto.Repo,
+    otp_app: :app,
+    adapter: Ecto.Adapters.Postgres
+end
+```
+
+Now you can do `App.Repo.get_by(SomeModule, id: 1)`{.language-elixir} and you'll get all stored `SomeModule`{.language-elixir} where id is 1. In other words, macros are pretty awesome when used like this. It significantly reduces boilerplate, and especially for tests I find it useful to define macros to do some more involved setups (for instance, setting up a Kafka consumer that'll consume messages produced during the test).
+
+### Concurrency
+
+All services I've built rely heavily on [Erlang/OTP](https://www.erlang.org/doc/system/design_principles.html). The application's entry point is the supervisor which will start a number of child applications, such as HTTP routers and Kafka consumers. An incoming request to a router will spawn a new process, and during the process lifetime we can use the same logger instance where we add to the metadata to make sure that relevant information always gets logged. When the process finishes, it exits and no traces remain of it. If the router process (which is a supervisor in itself) crashes because of unexpected errors, the application supervisor starts a new one. This is just a tiny example of how we use OTP, and [Saša Jurić](https://www.youtube.com/watch?v=JvBT4XBdoUE) shows it better.
+
+[^1]: I'll probably write a whole article on it in the future, but our whole test suite (unit tests and integration-like tests) at work tests 4 separate microservices in just about 3 seconds. Combined with [mix test.watch](https://hexdocs.pm/mix_test_watch/readme.html), this means that I can have a separate shell running the tests continuously while writing code.
+
+[^2]: Yes, comma is the delimiter between expressions in Erlang, and you end your functions with a period. You get used to it (and when you forget a comma, the language server completely messes up your formatting).
