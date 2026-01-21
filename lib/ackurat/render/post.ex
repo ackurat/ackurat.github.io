@@ -29,6 +29,13 @@ defmodule Ackurat.Render.Post do
     end
   end
 
+  defp normalize_id(id) do
+    id
+    |> String.replace(~r/[^\w\s-]/, "")
+    |> String.replace(~r/\s+/, "-")
+    |> String.replace(~r/-+/, "-")
+  end
+
   defp table_of_contents(assigns) do
     ~H"""
     <%= if @toc != [] do %>
@@ -44,7 +51,8 @@ defmodule Ackurat.Render.Post do
               ]}>
                 <a
                   href={"##{item.id}"}
-                  class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1"
+                  data-toc-link={item.id}
+                  class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold"
                 >
                   <%= item.text %>
                 </a>
@@ -57,50 +65,95 @@ defmodule Ackurat.Render.Post do
     """
   end
 
+  defp section_tracker(assigns) do
+    ~H"""
+    <script>
+      (function() {
+        let lastHash = location.hash;
+
+        function updateTOC(sectionId) {
+          document.querySelectorAll('[data-toc-link]').forEach(function(link) {
+            link.setAttribute('data-active', link.dataset.tocLink === sectionId);
+          });
+        }
+
+        document.addEventListener('scroll', function() {
+          const sections = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], section[id]');
+          let currentSection = null;
+
+          sections.forEach(function(section) {
+            if (window.scrollY >= section.offsetTop - 100) {
+              currentSection = section;
+            }
+          });
+
+          // If at bottom of page, use the last section
+          if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+            currentSection = sections[sections.length - 1];
+          }
+
+          if (currentSection && currentSection.id) {
+            const newHash = '#' + currentSection.id;
+            if (lastHash !== newHash) {
+              history.replaceState(null, '', location.origin + location.pathname + newHash);
+              lastHash = newHash;
+              updateTOC(currentSection.id);
+            }
+          }
+        });
+
+        if (location.hash) {
+          updateTOC(decodeURIComponent(location.hash.substring(1)));
+        }
+      })();
+    </script>
+    """
+  end
 
   def post(assigns) do
-     ~H"""
-     <.layout
-       title={"#{@title} — #{Content.site_title()}"}
-       description={@description}
-       og_type="article"
-       route={@route}
-       date={@date}
-       keywords={@keywords}
-       wordcount={count_words(@description <>" " <> @body)}
-     >
-       <.table_of_contents toc={Map.get(assigns, :toc, [])} />
+    ~H"""
+    <.layout
+      title={"#{@title} — #{Content.site_title()}"}
+      description={@description}
+      og_type="article"
+      route={@route}
+      date={@date}
+      keywords={@keywords}
+      wordcount={count_words(@description <>" " <> @body)}
+    >
+      <.table_of_contents toc={Map.get(assigns, :toc, [])} />
 
-       <.centered_content>
-         <article class="text-l">
-           <div class="flex flex-col mb-6">
-             <span class="text-base"><%= format_post_date(@date) %></span>
-             <span class="text-3xl"><%= @title %></span>
-             <div>
-               <a class="text-base mr-2" :for={keyword <- @keywords} href={"/keywords/" <> keyword}><%= keyword %></a>
-             </div>
-           </div>
+      <.centered_content>
+        <article class="text-l">
+          <div class="flex flex-col mb-6">
+            <span class="text-base"><%= format_post_date(@date) %></span>
+            <h1 class="text-3xl"><%= @title %></h1>
+            <div>
+              <a class="text-base mr-2" :for={keyword <- @keywords} href={"/keywords/" <> keyword}><%= keyword %></a>
+            </div>
+          </div>
 
-           <%= raw @body %>
-         </article>
+          <%= raw @body %>
+        </article>
 
-         <.footer>
-           <div class="flex justify-between">
-             <%= if get_previous(@id) != :nil do %>
-               <a href={"/" <> get_previous(@id)}>
-                 Previous
-               </a>
-             <% end %>
-             <%= if get_next(@id) != :nil do %>
-               <a href={"/" <> get_next(@id)}>
-                 Next
-               </a>
-             <% end %>
-           </div>
-         </.footer>
-       </.centered_content>
-     </.layout>
-     """
-   end
+        <.footer>
+          <div class="flex justify-between">
+            <%= if get_previous(@id) != :nil do %>
+              <a href={"/" <> get_previous(@id)}>
+                Previous
+              </a>
+            <% end %>
+            <%= if get_next(@id) != :nil do %>
+              <a href={"/" <> get_next(@id)}>
+                Next
+              </a>
+            <% end %>
+          </div>
+        </.footer>
+      </.centered_content>
 
+      <.section_tracker/>
+    </.layout>
+    """
+  end
 end
