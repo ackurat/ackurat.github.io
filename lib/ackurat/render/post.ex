@@ -29,13 +29,6 @@ defmodule Ackurat.Render.Post do
     end
   end
 
-  defp normalize_id(id) do
-    id
-    |> String.replace(~r/[^\w\s-]/, "")
-    |> String.replace(~r/\s+/, "-")
-    |> String.replace(~r/-+/, "-")
-  end
-
   defp table_of_contents(assigns) do
     ~H"""
     <%= if @toc != [] do %>
