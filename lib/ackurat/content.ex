@@ -9,7 +9,7 @@ defmodule Ackurat.Content do
     parser: Parser,
     from: "./pages/**/*.{md,dj}",
     as: :pages,
-    highlighters: [:makeup_elixir, :makeup_js, :makeup_html, :makeup_sql],
+    highlighters: [],
     html_converter: Ackurat.Convert
 
   def site_title() do

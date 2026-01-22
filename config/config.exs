@@ -15,3 +15,5 @@ config :exsync,
   src_monitor: true,
   extra_extensions: [".md", ".js", ".css", ".yml", ".dj"],
   addition_dirs: ["/pages", "/assets"]
+
+config :floki, :html_parser, Floki.HTMLParser.Html5ever
