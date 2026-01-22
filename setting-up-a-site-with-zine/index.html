@@ -39,6 +39,8 @@
         })();
       </script>
       
+        <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+      
     </head>
     <body>
         <header class="flex justify-center py-4">
@@ -71,37 +73,37 @@
       <ol class="list-none space-y-2 text-sm pl-0">
         
           <li class="leading-relaxed ml-0">
-            <a href="#First-Steps" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+            <a href="#First-Steps" data-toc-link="First-Steps" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
               First Steps
             </a>
           </li>
         
           <li class="leading-relaxed ml-0">
-            <a href="#What-I-like-About-Zine" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+            <a href="#What-I-like-About-Zine" data-toc-link="What-I-like-About-Zine" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
               What I like About Zine
             </a>
           </li>
         
           <li class="leading-relaxed ml-0">
-            <a href="#What&#39;s-Next" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+            <a href="#Whats-Next" data-toc-link="Whats-Next" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
               What&#39;s Next
             </a>
           </li>
         
           <li class="leading-relaxed ml-3">
-            <a href="#Tags" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+            <a href="#Tags" data-toc-link="Tags" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
               Tags
             </a>
           </li>
         
           <li class="leading-relaxed ml-3">
-            <a href="#RSS-✅" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+            <a href="#RSS" data-toc-link="RSS" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
               RSS ✅
             </a>
           </li>
         
           <li class="leading-relaxed ml-6">
-            <a href="#Update" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+            <a href="#Update" data-toc-link="Update" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
               Update
             </a>
           </li>
@@ -117,7 +119,7 @@
     <article class="text-l">
       <div class="flex flex-col mb-6">
         <span class="text-base">Oct 27, 2024</span>
-        <span class="text-3xl">Setting up a site with zine</span>
+        <h1 class="text-3xl">Setting up a site with zine</h1>
         <div>
           <a class="text-base mr-2" href="/keywords/zine">zine</a><a class="text-base mr-2" href="/keywords/zig">zig</a>
         </div>
@@ -133,39 +135,39 @@
 <p>I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. <code>SuperMD</code> and <code>SuperHTML</code> are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance <code>Templ</code> to generate HTML, so I’m excited to see how Zine compares.</p>
 </section>
 <section id="Whats-Next">
-<h2><a href="#What's-Next">What’s Next</a></h2>
+<h2><a href="#Whats-Next">What’s Next</a></h2>
 <p>There are some things with the site that are far from finished. For instance, the CSS is a mess, as I’ve used Kristoff’s CSS as a base and then just added some of my own. It needs cleaning up.</p>
 <section id="Tags">
 <h3><a href="#Tags">Tags</a></h3>
 <p>I’m adding tags to this post, but so far there’s no way to filter posts by tags. I’ll have to implement that.</p>
 </section>
 <section id="RSS-✅">
-<h3><a href="#RSS-✅">RSS ✅</a></h3>
+<h3><a href="#RSS">RSS ✅</a></h3>
 <p>I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p>
 <p>The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code>only the main page can be rendered for now, sorry!</code>.</p>
-<pre><code class="makeup html"><span class="p" data-group-id="3810255217-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="3810255217-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="3810255217-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="3810255217-2">&gt;</span><span class="s">
+<pre><code class="makeup html"><span class="p" data-group-id="0740355473-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="0740355473-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="0740355473-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="0740355473-2">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="3810255217-3">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="3810255217-3">&gt;</span><span class="p" data-group-id="3810255217-4">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="3810255217-4">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="3810255217-5">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="3810255217-5">&gt;</span><span class="s">
-</span><span class="p" data-group-id="3810255217-6">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="3810255217-6">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="0740355473-3">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="0740355473-3">&gt;</span><span class="p" data-group-id="0740355473-4">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="0740355473-4">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="0740355473-5">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="0740355473-5">&gt;</span><span class="s">
+</span><span class="p" data-group-id="0740355473-6">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="0740355473-6">&gt;</span><span class="s">
 </span></code></pre>
 <section id="Update">
 <h4><a href="#Update">Update</a></h4>
 <p>I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:</p>
-<pre><code class="makeup html"><span class="p" data-group-id="1489979324-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="1489979324-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="1489979324-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="1489979324-2">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="1489979324-3">&lt;</span><span class="nt">title</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="1489979324-3">&gt;</span><span class="p" data-group-id="1489979324-4">&lt;/</span><span class="nt">title</span><span class="p" data-group-id="1489979324-4">&gt;</span><span class="s">
+<pre><code class="makeup html"><span class="p" data-group-id="4703253193-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="4703253193-1">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="4703253193-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="4703253193-2">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="4703253193-3">&lt;</span><span class="nt">title</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="4703253193-3">&gt;</span><span class="p" data-group-id="4703253193-4">&lt;/</span><span class="nt">title</span><span class="p" data-group-id="4703253193-4">&gt;</span><span class="s">
     </span><span class="c">&lt;!-- 
       Here goes the rest of the RSS info for the post
     --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="1489979324-5">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="1489979324-5">&gt;</span><span class="s">
-      </span><span class="p" data-group-id="1489979324-6">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="1489979324-6">&gt;</span><span class="p" data-group-id="1489979324-7">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="1489979324-7">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="1489979324-8">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="1489979324-8">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="1489979324-9">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="1489979324-9">&gt;</span><span class="s">
-</span><span class="p" data-group-id="1489979324-10">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="1489979324-10">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="4703253193-5">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="4703253193-5">&gt;</span><span class="s">
+      </span><span class="p" data-group-id="4703253193-6">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="4703253193-6">&gt;</span><span class="p" data-group-id="4703253193-7">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="4703253193-7">&gt;</span><span class="s">
+    </span><span class="p" data-group-id="4703253193-8">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="4703253193-8">&gt;</span><span class="s">
+  </span><span class="p" data-group-id="4703253193-9">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="4703253193-9">&gt;</span><span class="s">
+</span><span class="p" data-group-id="4703253193-10">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="4703253193-10">&gt;</span><span class="s">
 </span></code></pre>
 <p>And the corresponding change to the post:</p>
 <pre><code>#### [Heading]($section.id("heading"))
@@ -195,6 +197,47 @@ Text goes here...
   
   </div>
 </div>
+
+  <script>
+  (function() {
+    let lastHash = location.hash;
+
+    function updateTOC(sectionId) {
+      document.querySelectorAll('[data-toc-link]').forEach(function(link) {
+        link.setAttribute('data-active', link.dataset.tocLink === sectionId);
+      });
+    }
+
+    document.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], section[id]');
+      let currentSection = null;
+
+      sections.forEach(function(section) {
+        if (window.scrollY >= section.offsetTop - 100) {
+          currentSection = section;
+        }
+      });
+
+      // If at bottom of page, use the last section
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+        currentSection = sections[sections.length - 1];
+      }
+
+      if (currentSection && currentSection.id) {
+        const newHash = '#' + currentSection.id;
+        if (lastHash !== newHash) {
+          history.replaceState(null, '', location.origin + location.pathname + newHash);
+          lastHash = newHash;
+          updateTOC(currentSection.id);
+        }
+      }
+    });
+
+    if (location.hash) {
+      updateTOC(decodeURIComponent(location.hash.substring(1)));
+    }
+  })();
+</script>
 
         </main>
         <script>

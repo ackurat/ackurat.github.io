@@ -39,6 +39,8 @@
         })();
       </script>
       
+        <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+      
     </head>
     <body>
         <header class="flex justify-center py-4">
@@ -71,19 +73,19 @@
       <ol class="list-none space-y-2 text-sm pl-0">
         
           <li class="leading-relaxed ml-0">
-            <a href="#Why-I-Chose-Gleam" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+            <a href="#Why-I-Chose-Gleam" data-toc-link="Why-I-Chose-Gleam" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
               Why I Chose Gleam
             </a>
           </li>
         
           <li class="leading-relaxed ml-0">
-            <a href="#First-Impressions" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+            <a href="#First-Impressions" data-toc-link="First-Impressions" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
               First Impressions
             </a>
           </li>
         
           <li class="leading-relaxed ml-3">
-            <a href="#Missed-Functionality-#1---list-access-by-index" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1">
+            <a href="#Missed-Functionality-1-list-access-by-index" data-toc-link="Missed-Functionality-1-list-access-by-index" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
               Missed Functionality #1 - list access by index
             </a>
           </li>
@@ -99,7 +101,7 @@
     <article class="text-l">
       <div class="flex flex-col mb-6">
         <span class="text-base">Nov 11, 2024</span>
-        <span class="text-3xl">Exploring gleam through advent of code</span>
+        <h1 class="text-3xl">Exploring gleam through advent of code</h1>
         <div>
           <a class="text-base mr-2" href="/keywords/gleam">gleam</a><a class="text-base mr-2" href="/keywords/advent-of-code">advent-of-code</a>
         </div>
@@ -144,7 +146,7 @@ Decent standard library
 <h2><a href="#First-Impressions">First Impressions</a></h2>
 <p>As I usually work in procedural languages, getting into the strictly functional paradigm has been the biggest hurdle. Don’t get me wrong - I often use the functional style functions of JS, but due to its mutability and dynamic typing, it’s far from Gleam. I’ve previously delved into Elixir, and while it is also functional it’s got the dynamic typing to make it less of a jump. After completing the first 8 days of AoC, I’m getting used to it and I see the light that is immutability. In the codebase I spend most time in at work, there’s plenty of functionality that modifies in-place, causing both confusion and bugs for developers who are new to the code.</p>
 <section id="Missed-Functionality-1---list-access-by-index">
-<h3><a href="#Missed-Functionality-#1---list-access-by-index">Missed Functionality #1 - list access by index</a></h3>
+<h3><a href="#Missed-Functionality-1-list-access-by-index">Missed Functionality #1 - list access by index</a></h3>
 <p>When it comes to AoC, it’s very common to work with arrays/lists, for instance in a matrix:</p>
 <pre><code class="language-python">matrix = [['a', 'b'], ['c', 'd']]
 matrix[0][0] # 'a'
@@ -205,6 +207,47 @@ shift_row_right(matrix, 0, 1) # [['b', 'a'], ['c', 'd']]
   
   </div>
 </div>
+
+  <script>
+  (function() {
+    let lastHash = location.hash;
+
+    function updateTOC(sectionId) {
+      document.querySelectorAll('[data-toc-link]').forEach(function(link) {
+        link.setAttribute('data-active', link.dataset.tocLink === sectionId);
+      });
+    }
+
+    document.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], section[id]');
+      let currentSection = null;
+
+      sections.forEach(function(section) {
+        if (window.scrollY >= section.offsetTop - 100) {
+          currentSection = section;
+        }
+      });
+
+      // If at bottom of page, use the last section
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+        currentSection = sections[sections.length - 1];
+      }
+
+      if (currentSection && currentSection.id) {
+        const newHash = '#' + currentSection.id;
+        if (lastHash !== newHash) {
+          history.replaceState(null, '', location.origin + location.pathname + newHash);
+          lastHash = newHash;
+          updateTOC(currentSection.id);
+        }
+      }
+    });
+
+    if (location.hash) {
+      updateTOC(decodeURIComponent(location.hash.substring(1)));
+    }
+  })();
+</script>
 
         </main>
         <script>
