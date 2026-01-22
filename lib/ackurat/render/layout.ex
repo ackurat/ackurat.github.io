@@ -55,7 +55,7 @@ defmodule Ackurat.Render.Layout do
             document.documentElement.setAttribute('data-theme', theme);
             })();
           </script>
-          <%= if MIX_ENV == "prod" do %>
+          <%= if Mix.env() == :prod do %>
             <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
           <% end %>
         </head>
