@@ -19,7 +19,6 @@ defmodule Ackurat.MixProject do
     ]
   end
 
-
   defp deps do
     [
       {:nimble_publisher, "~> 1.1.0"},
@@ -34,7 +33,10 @@ defmodule Ackurat.MixProject do
       {:bandit, "~> 1.8.0", only: :dev},
       {:exsync, "~> 0.4", only: :dev},
       {:tailwind, "~> 0.2"},
-      {:djot, "~> 0.1.4"}
+      {:djot, "~> 0.1.4"},
+      {:autumn, "~> 0.6.0"},
+      {:floki, "~> 0.38"},
+      {:html5ever, "~> 0.16"}
     ]
   end
 end
