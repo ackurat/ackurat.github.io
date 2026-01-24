@@ -45,7 +45,7 @@ defmodule Ackurat.Render.Post do
                 <a
                   href={"##{item.id}"}
                   data-toc-link={item.id}
-                  class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold"
+                  class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 data-[active='true']:opacity-100 data-[active='true']:font-bold"
                 >
                   <%= item.text %>
                 </a>

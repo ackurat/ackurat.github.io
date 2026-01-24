@@ -1,14 +1,14 @@
 import Config
 
 config :tailwind,
-  version: "3.4.17",
+  version: "4.1.18",
   default: [
     args: ~w(
       --config=tailwind.config.js
-      --input=../assets/css/input.css
-      --output=../output/assets/app.css
+      --input=assets/css/input.css
+      --output=output/assets/app.css
     ),
-    cd: Path.expand("../assets", __DIR__)
+    cd: Path.expand("..", __DIR__)
   ]
 
 config :exsync,
