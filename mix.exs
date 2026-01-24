@@ -22,11 +22,11 @@ defmodule Ackurat.MixProject do
   defp deps do
     [
       {:nimble_publisher, "~> 1.1.0"},
-      {:phoenix_live_view, "~> 1.1.5"},
+      {:phoenix_live_view, "~> 1.1.20"},
       {:xml_builder, "~> 2.4.0"},
       {:yaml_elixir, "~> 2.12.0"},
-      {:html_sanitize_ex, "~> 1.4.3"},
-      {:bandit, "~> 1.8.0", only: :dev},
+      {:html_sanitize_ex, "~> 1.4.4"},
+      {:bandit, "~> 1.10.1", only: :dev},
       {:exsync, "~> 0.4", only: :dev},
       {:tailwind, "~> 0.4.1"},
       {:djot, "~> 0.1.4"},
