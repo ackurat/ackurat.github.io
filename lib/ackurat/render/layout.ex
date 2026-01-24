@@ -50,9 +50,10 @@ defmodule Ackurat.Render.Layout do
           <link rel="stylesheet" href="/assets/app.css" />
           <script>
             (function() {
-            const theme = localStorage.getItem('theme') ||
-                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', theme);
+              const theme = localStorage.getItem('theme');
+              if (theme) {
+                document.documentElement.style.colorScheme = theme;
+              }
             })();
           </script>
           <%= if Mix.env() == :prod do %>
@@ -91,20 +92,23 @@ defmodule Ackurat.Render.Layout do
                 const html = document.documentElement;
 
                 function updateIcon() {
-                  const currentTheme = html.getAttribute('data-theme');
+                  const currentTheme = html.style.colorScheme ||
+                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
                   themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
                 }
 
                 updateIcon();
 
                 themeToggle.addEventListener('click', () => {
-                  const currentTheme = html.getAttribute('data-theme');
+                  const currentTheme = html.style.colorScheme ||
+                      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
                   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                  html.setAttribute('data-theme', newTheme);
+                  html.style.colorScheme = newTheme;
                   localStorage.setItem('theme', newTheme);
                   updateIcon();
                 });
             </script>
+
         </body>
       </html>
     """
