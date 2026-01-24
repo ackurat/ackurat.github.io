@@ -26,6 +26,7 @@
           const theme = localStorage.getItem('theme');
           if (theme) {
             document.documentElement.style.colorScheme = theme;
+            document.documentElement.classList.add(theme)
           }
         })();
       </script>
@@ -33,7 +34,7 @@
         <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
       
     </head>
-    <body>
+    <body class="bg-latte-crust dark:bg-macchiato-base text-latte-text dark:text-macchiato-text min-h-screen font-sans">
         <header class="flex justify-center py-4">
             <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
                 <a href="/">~/</a>
@@ -98,6 +99,7 @@
                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
               html.style.colorScheme = newTheme;
+              html.className = newTheme
               localStorage.setItem('theme', newTheme);
               updateIcon();
             });
