@@ -53,6 +53,7 @@ defmodule Ackurat.Render.Layout do
               const theme = localStorage.getItem('theme');
               if (theme) {
                 document.documentElement.style.colorScheme = theme;
+                document.documentElement.classList.add(theme)
               }
             })();
           </script>
@@ -60,7 +61,7 @@ defmodule Ackurat.Render.Layout do
             <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
           <% end %>
         </head>
-        <body>
+        <body class="bg-latte-crust dark:bg-macchiato-base text-latte-text dark:text-macchiato-text min-h-screen font-sans">
             <header class="flex justify-center py-4">
                 <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
                     <a href="/">~/</a>
@@ -104,6 +105,7 @@ defmodule Ackurat.Render.Layout do
                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
                   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                   html.style.colorScheme = newTheme;
+                  html.className = newTheme
                   localStorage.setItem('theme', newTheme);
                   updateIcon();
                 });
@@ -122,7 +124,7 @@ defmodule Ackurat.Render.Layout do
 
   def footer(assigns) do
     ~H"""
-      <div class="-mx-4 my-2 flex h-1 w-screen footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
+      <div class="-mx-4 my-2 flex h-1 w-screen rounded-full sm:mx-0 sm:w-full bg-linear-to-r dark:from-footer-dark-1 from-footer-light-1 dark:via-footer-dark-2 via-footer-light-2 dark:to-footer-dark-3 to-footer-light-3"></div>
       <footer class="italic">
         <%= render_slot(@inner_block) %>
       </footer>

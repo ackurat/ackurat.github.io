@@ -1,51 +1,44 @@
 @import "tailwindcss";
 
+@source "../lib";
+@source "../pages";
+
+@theme {
+    --color-frappe-base: rgb(48, 52, 70);
+    --color-frappe-blue: rgb(140, 170, 238);
+    --color-frappe-text: rgb(198, 208, 245);
+
+    --color-latte-base: rgb(239, 241, 245);
+    --color-latte-blue: rgb(30, 102, 245);
+    --color-latte-text: rgb(76, 79, 105);
+    --color-latte-crust: rgb(220, 224, 232);
+
+    --color-macchiato-base: rgb(36, 39, 58);
+    --color-macchiato-text: rgb(202, 211, 245);
+    --color-macchiato-blue: rgb(138, 173, 244);
+    --color-macchiato-crust: rgb(24, 25, 38);
+
+    --color-mocha-base: rgb(30, 30, 46);
+    --color-mocha-text: rgb(205, 214, 244);
+    --color-mocha-blue: rgb(137, 180, 250);
+    --color-mocha-crust: rgb(17, 17, 27);
+
+    --color-footer-light-1: rgb(30, 102, 245);
+    --color-footer-light-2: rgb(136, 57, 239);
+    --color-footer-light-3: rgb(230, 69, 83);
+    --color-footer-dark-1: rgb(245, 169, 127);
+    --color-footer-dark-2: rgb(238, 212, 159);
+    --color-footer-dark-3: rgb(166, 218, 149);
+}
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
-    :root {
-        --color-frappe-base: rgb(48, 52, 70);
-        --color-frappe-blue: rgb(140, 170, 238);
-        --color-frappe-text: rgb(198, 208, 245);
-
-        --color-latte-base: rgb(239, 241, 245);
-        --color-latte-blue: rgb(30, 102, 245);
-        --color-latte-text: rgb(76, 79, 105);
-        --color-latte-crust: rgb(220, 224, 232);
-
-        --color-macchiato-base: rgb(36, 39, 58);
-        --color-macchiato-text: rgb(202, 211, 245);
-        --color-macchiato-blue: rgb(138, 173, 244);
-        --color-macchiato-crust: rgb(24, 25, 38);
-
-        --color-mocha-base: rgb(30, 30, 46);
-        --color-mocha-text: rgb(205, 214, 244);
-        --color-mocha-blue: rgb(137, 180, 250);
-        --color-mocha-crust: rgb(17, 17, 27);
-
-        --footer-light-1: rgb(30, 102, 245);
-        --footer-light-2: rgb(136, 57, 239);
-        --footer-light-3: rgb(230, 69, 83);
-        --footer-dark-1: rgb(245, 169, 127);
-        --footer-dark-2: rgb(238, 212, 159);
-        --footer-dark-3: rgb(166, 218, 149);
-    }
-
     html {
-        font-family: system-ui, sans-serif;
         scrollbar-gutter: stable;
-        color-scheme: light dark;
     }
 
     a:hover {
         color: light-dark(var(--color-latte-blue), var(--color-macchiato-blue));
-    }
-
-    body {
-        background: light-dark(
-            var(--color-latte-crust),
-            var(--color-macchiato-base)
-        );
-        color: light-dark(var(--color-latte-text), var(--color-macchiato-text));
-        min-height: 100vh;
     }
 
     article p {
@@ -100,56 +93,5 @@
     article ul ol,
     article ol ul {
         margin: 0.25rem 0;
-    }
-    pre {
-        position: relative;
-    }
-
-    pre code {
-        display: block;
-        overflow-x: auto;
-
-        &::before {
-            background-color: light-dark(
-                var(--color-latte-base),
-                var(--color-mocha-base)
-            );
-            color: light-dark(var(--color-latte-text), var(--color-mocha-text));
-            border-radius: 0.5rem 0.5rem 0 0;
-            position: absolute;
-            top: -1rem;
-            right: 1rem;
-            padding: 0 0.5rem 0 0.5rem;
-            font-size: medium;
-        }
-
-        &.language-elixir::before {
-            content: "elixir";
-        }
-
-        &.sql::before {
-            content: "sql";
-        }
-
-        &.html::before {
-            content: "html";
-        }
-    }
-
-    .footer-gradient {
-        background-image: light-dark(
-            linear-gradient(
-                to right,
-                var(--footer-light-1),
-                var(--footer-light-2),
-                var(--footer-light-3)
-            ),
-            linear-gradient(
-                to right,
-                var(--footer-dark-1),
-                var(--footer-dark-2),
-                var(--footer-dark-3)
-            )
-        );
     }
 }
