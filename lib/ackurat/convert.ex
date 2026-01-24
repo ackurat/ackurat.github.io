@@ -35,7 +35,7 @@ defmodule Ackurat.Convert do
       language: language,
       formatter:
         {:html_multi_themes,
-         themes: [light: "catppuccin_frappe", dark: "catppuccin_macchiato"],
+         themes: [light: "catppuccin_latte", dark: "catppuccin_mocha"],
          default_theme: "light-dark()"}
     )
     |> Floki.parse_fragment!()
@@ -53,7 +53,13 @@ defmodule Ackurat.Convert do
     {"code", code_attrs, code_children} =
       children
       |> Floki.text()
-      |> Autumn.highlight!(language: language)
+      |> Autumn.highlight!(
+        language: language,
+        formatter:
+          {:html_multi_themes,
+           themes: [light: "catppuccin_latte", dark: "catppuccin_mocha"],
+           default_theme: "light-dark()"}
+      )
       |> Floki.parse_fragment!()
       |> Floki.find("code")
       |> hd()
