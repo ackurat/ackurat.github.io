@@ -22,10 +22,6 @@ defmodule Ackurat.MixProject do
   defp deps do
     [
       {:nimble_publisher, "~> 1.1.0"},
-      {:makeup_elixir, "~> 1.0.0"},
-      {:makeup_js, "~> 0.1.0"},
-      {:makeup_html, "~> 0.2.0"},
-      {:makeup_sql, "~> 0.1.0"},
       {:phoenix_live_view, "~> 1.1.5"},
       {:xml_builder, "~> 2.4.0"},
       {:yaml_elixir, "~> 2.12.0"},
