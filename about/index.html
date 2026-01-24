@@ -23,9 +23,10 @@
       <link rel="stylesheet" href="/assets/app.css">
       <script>
         (function() {
-        const theme = localStorage.getItem('theme') ||
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
+          const theme = localStorage.getItem('theme');
+          if (theme) {
+            document.documentElement.style.colorScheme = theme;
+          }
         })();
       </script>
       
@@ -63,10 +64,9 @@
         <a href="/about/">Adam aka Ackurat.</a>
       </span>
       <article class="text-xl">
-        
-<p><img class="size-60 float-right rounded-full" alt="Photo of Adam" src="/images/adam.jpg"></p>
+        <html><head></head><body><p><img class="size-60 float-right rounded-full" alt="Photo of Adam" src="/images/adam.jpg"/></p>
 <p>I’m a software engineer based in Sweden. I specialize in backend development and databases, particularly Elixir and PostgreSQL, and have worked within the payment domain for quite a while. I work at <a href="https://www.kivra.com">Kivra</a>, where I write payment related backend services in Elixir (and sometimes Erlang). You can find me on <a href="https://www.github.com/ackurat">GitHub</a> or <a href="https://www.linkedin.com/in/adamliliemark">LinkedIn</a>.</p>
-
+</body></html>
       </article>
     </div>
   </div>
@@ -78,19 +78,22 @@
             const html = document.documentElement;
 
             function updateIcon() {
-              const currentTheme = html.getAttribute('data-theme');
+              const currentTheme = html.style.colorScheme ||
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
             }
 
             updateIcon();
 
             themeToggle.addEventListener('click', () => {
-              const currentTheme = html.getAttribute('data-theme');
+              const currentTheme = html.style.colorScheme ||
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-              html.setAttribute('data-theme', newTheme);
+              html.style.colorScheme = newTheme;
               localStorage.setItem('theme', newTheme);
               updateIcon();
             });
         </script>
+
     </body>
   </html>

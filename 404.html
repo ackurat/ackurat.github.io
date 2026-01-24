@@ -23,9 +23,10 @@
       <link rel="stylesheet" href="/assets/app.css">
       <script>
         (function() {
-        const theme = localStorage.getItem('theme') ||
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
+          const theme = localStorage.getItem('theme');
+          if (theme) {
+            document.documentElement.style.colorScheme = theme;
+          }
         })();
       </script>
       
@@ -63,9 +64,8 @@
         <a href="/404/">404 - Not Found</a>
       </span>
       <article class="text-xl">
-        
-<p><a href="/">Go to homepage</a></p>
-
+        <html><head></head><body><p><a href="/">Go to homepage</a></p>
+</body></html>
       </article>
     </div>
   </div>
@@ -77,19 +77,22 @@
             const html = document.documentElement;
 
             function updateIcon() {
-              const currentTheme = html.getAttribute('data-theme');
+              const currentTheme = html.style.colorScheme ||
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
             }
 
             updateIcon();
 
             themeToggle.addEventListener('click', () => {
-              const currentTheme = html.getAttribute('data-theme');
+              const currentTheme = html.style.colorScheme ||
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-              html.setAttribute('data-theme', newTheme);
+              html.style.colorScheme = newTheme;
               localStorage.setItem('theme', newTheme);
               updateIcon();
             });
         </script>
+
     </body>
   </html>

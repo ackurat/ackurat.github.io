@@ -21,7 +21,7 @@
       
         <meta itemprop="datePublished" content="2024-10-27T06:00:00Z">
         <meta itemprop="dateModified" content="2024-10-27T06:00:00Z">
-        <meta itemprop="wordCount" content="438">
+        <meta itemprop="wordCount" content="439">
         <meta itemprop="keywords" content="zine,zig">
         <meta property="article:author" content="Adam CL">
         <meta property="article:section" content="Software">
@@ -33,9 +33,10 @@
       <link rel="stylesheet" href="/assets/app.css">
       <script>
         (function() {
-        const theme = localStorage.getItem('theme') ||
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', theme);
+          const theme = localStorage.getItem('theme');
+          if (theme) {
+            document.documentElement.style.colorScheme = theme;
+          }
         })();
       </script>
       
@@ -125,14 +126,16 @@
         </div>
       </div>
 
-      
-<section id="First-Steps">
+      <html><head></head><body><section id="First-Steps">
 <h2><a href="#First-Steps">First Steps</a></h2>
 <p>Were me just copying the Zine creator <a href="https://kristoff.it/">Kristoff’s</a> personal website, and then started tailoring it to my liking. I’m by no means a designer nor a frontend developer, but I’m happy with the result so far. I’ll continue to tweak the layout and design, for instance by implementing my favorite color scheme, Catppuccin.</p>
 </section>
 <section id="What-I-like-About-Zine">
 <h2><a href="#What-I-like-About-Zine">What I like About Zine</a></h2>
-<p>I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. <code>SuperMD</code> and <code>SuperHTML</code> are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance <code>Templ</code> to generate HTML, so I’m excited to see how Zine compares.</p>
+<p>I like the simplicity of Zine, and it’s been really simple to understand how both routing and rendering works. It gets out of my way. <code class="language-plaintext" translate="no" tabindex="0">SuperMD
+</code> and <code class="language-plaintext" translate="no" tabindex="0">SuperHTML
+</code> are also nice to work with, but I’ve yet to see both the full potential of them and the limitations. I’ve previously worked with for instance <code class="language-plaintext" translate="no" tabindex="0">Templ
+</code> to generate HTML, so I’m excited to see how Zine compares.</p>
 </section>
 <section id="Whats-Next">
 <h2><a href="#Whats-Next">What’s Next</a></h2>
@@ -144,41 +147,42 @@
 <section id="RSS-✅">
 <h3><a href="#RSS">RSS ✅</a></h3>
 <p>I’m a big fan of RSS, and it’s my preferred way of reading blogs. I’ve used Kristoff’s RSS implementation as a base, but there’s one limitation that I want to work on - there’s no way to render the full content of a post in the feed, since it’s a subpage. This is a limitation of Zine itself, so if I want to change this I’ll have to dig into the Zine source code and try to implement it.</p>
-<p>The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code>only the main page can be rendered for now, sorry!</code>.</p>
-<pre><code class="makeup html"><span class="p" data-group-id="0740355473-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="0740355473-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="0740355473-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="0740355473-2">&gt;</span><span class="s">
-    </span><span class="c">&lt;!-- 
-      Here goes the rest of the RSS info for the post
-    --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="0740355473-3">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.content()&quot;</span><span class="p" data-group-id="0740355473-3">&gt;</span><span class="p" data-group-id="0740355473-4">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="0740355473-4">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="0740355473-5">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="0740355473-5">&gt;</span><span class="s">
-</span><span class="p" data-group-id="0740355473-6">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="0740355473-6">&gt;</span><span class="s">
-</span></code></pre>
+<p>The limitation can be seen in this excerpt from the RSS template, where I’m trying to render the full content of a post. This errors out with <code class="language-plaintext" translate="no" tabindex="0">only the main page can be rendered for now, sorry!
+</code>.</p>
+<pre class="athl athl-themes light dark" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><code class="language-html" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">ctx</span> <span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:loop</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;<span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">$page.subpages()</span>&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="2">  <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">item</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="3">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;!-- </span>
+</div><div class="line" data-line="4"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">      Here goes the rest of the RSS info for the post</span>
+</div><div class="line" data-line="5"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">    --&gt;</span>
+</div><div class="line" data-line="6">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">description</span> <span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:text</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;<span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">$loop.it.content()</span>&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;/</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">description</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="7">  <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;/</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">item</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="8"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;/</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">ctx</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div></code></pre>
 <section id="Update">
 <h4><a href="#Update">Update</a></h4>
 <p>I’ve implemented a full RSS feed, which is kind of a hack but it ain’t stupid if it works. The solution revolves around fetching the content sections of a page, and then generating the HTML for each section. This is how the XML for the RSS feed looks like now:</p>
-<pre><code class="makeup html"><span class="p" data-group-id="4703253193-1">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$page.subpages()&quot;</span><span class="p" data-group-id="4703253193-1">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="4703253193-2">&lt;</span><span class="nt">item</span><span class="p" data-group-id="4703253193-2">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="4703253193-3">&lt;</span><span class="nt">title</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.title&quot;</span><span class="p" data-group-id="4703253193-3">&gt;</span><span class="p" data-group-id="4703253193-4">&lt;/</span><span class="nt">title</span><span class="p" data-group-id="4703253193-4">&gt;</span><span class="s">
-    </span><span class="c">&lt;!-- 
-      Here goes the rest of the RSS info for the post
-    --&gt;</span><span class="s">
-    </span><span class="p" data-group-id="4703253193-5">&lt;</span><span class="nt">description</span><span class="w"> </span><span class="na">:loop</span><span class="o">=</span><span class="s">&quot;$site.page($loop.it.link()).contentSections()&quot;</span><span class="p" data-group-id="4703253193-5">&gt;</span><span class="s">
-      </span><span class="p" data-group-id="4703253193-6">&lt;</span><span class="nt">ctx</span><span class="w"> </span><span class="na">:text</span><span class="o">=</span><span class="s">&quot;$loop.it.html()&quot;</span><span class="p" data-group-id="4703253193-6">&gt;</span><span class="p" data-group-id="4703253193-7">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="4703253193-7">&gt;</span><span class="s">
-    </span><span class="p" data-group-id="4703253193-8">&lt;/</span><span class="nt">description</span><span class="p" data-group-id="4703253193-8">&gt;</span><span class="s">
-  </span><span class="p" data-group-id="4703253193-9">&lt;/</span><span class="nt">item</span><span class="p" data-group-id="4703253193-9">&gt;</span><span class="s">
-</span><span class="p" data-group-id="4703253193-10">&lt;/</span><span class="nt">ctx</span><span class="p" data-group-id="4703253193-10">&gt;</span><span class="s">
-</span></code></pre>
+<pre class="athl athl-themes light dark" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><code class="language-html" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">ctx</span> <span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:loop</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;<span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">$page.subpages()</span>&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="2">  <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">item</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="3">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">title</span> <span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:text</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;<span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">$loop.it.title</span>&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;/</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">title</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="4">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;!-- </span>
+</div><div class="line" data-line="5"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">      Here goes the rest of the RSS info for the post</span>
+</div><div class="line" data-line="6"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">    --&gt;</span>
+</div><div class="line" data-line="7">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">description</span> <span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:loop</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;<span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">$site.page($loop.it.link()).contentSections()</span>&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="8">      <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">ctx</span> <span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:text</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;<span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">$loop.it.html()</span>&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;/</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">ctx</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="9">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;/</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">description</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="10">  <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;/</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">item</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div><div class="line" data-line="11"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;/</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">ctx</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+</div></code></pre>
 <p>And the corresponding change to the post:</p>
-<pre><code>#### [Heading]($section.id("heading"))
-
-Text goes here...
-</code></pre>
+<pre class="athl athl-themes dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><code class="language-plaintext" translate="no" tabindex="0"><div class="line" data-line="1">#### [Heading]($section.id(&quot;heading&quot;))
+</div><div class="line" data-line="2">
+</div><div class="line" data-line="3">Text goes here...
+</div></code></pre>
 <p>An added benefit of this is that the headers are clickable, which is included in the table of contents of the post.</p>
 </section>
 </section>
 </section>
-
+</body></html>
     </article>
 
     <div class="-mx-4 my-2 flex h-1 w-[100vw] footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
@@ -246,19 +250,22 @@ Text goes here...
             const html = document.documentElement;
 
             function updateIcon() {
-              const currentTheme = html.getAttribute('data-theme');
+              const currentTheme = html.style.colorScheme ||
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
             }
 
             updateIcon();
 
             themeToggle.addEventListener('click', () => {
-              const currentTheme = html.getAttribute('data-theme');
+              const currentTheme = html.style.colorScheme ||
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-              html.setAttribute('data-theme', newTheme);
+              html.style.colorScheme = newTheme;
               localStorage.setItem('theme', newTheme);
               updateIcon();
             });
         </script>
+
     </body>
   </html>
