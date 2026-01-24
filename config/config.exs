@@ -4,7 +4,6 @@ config :tailwind,
   version: "4.1.18",
   default: [
     args: ~w(
-      --config=tailwind.config.js
       --input=assets/css/input.css
       --output=output/assets/app.css
     ),
