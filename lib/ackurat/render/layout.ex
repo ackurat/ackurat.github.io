@@ -122,7 +122,7 @@ defmodule Ackurat.Render.Layout do
 
   def footer(assigns) do
     ~H"""
-      <div class="-mx-4 my-2 flex h-1 w-[100vw] footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
+      <div class="-mx-4 my-2 flex h-1 w-screen footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
       <footer class="italic">
         <%= render_slot(@inner_block) %>
       </footer>

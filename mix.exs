@@ -28,7 +28,7 @@ defmodule Ackurat.MixProject do
       {:html_sanitize_ex, "~> 1.4.3"},
       {:bandit, "~> 1.8.0", only: :dev},
       {:exsync, "~> 0.4", only: :dev},
-      {:tailwind, "~> 0.2"},
+      {:tailwind, "~> 0.4.1"},
       {:djot, "~> 0.1.4"},
       {:autumn, "~> 0.6.0"},
       {:floki, "~> 0.38"},
