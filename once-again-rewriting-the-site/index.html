@@ -74,25 +74,25 @@
       <ol class="list-none space-y-2 text-sm pl-0">
         
           <li class="leading-relaxed ml-0">
-            <a href="#Upcoming-changes" data-toc-link="Upcoming-changes" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+            <a href="#Upcoming-changes" data-toc-link="Upcoming-changes" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 data-[active='true']:opacity-100 data-[active='true']:font-bold">
               Upcoming changes
             </a>
           </li>
         
           <li class="leading-relaxed ml-3">
-            <a href="#Djot-support" data-toc-link="Djot-support" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+            <a href="#Djot-support" data-toc-link="Djot-support" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 data-[active='true']:opacity-100 data-[active='true']:font-bold">
               Djot support
             </a>
           </li>
         
           <li class="leading-relaxed ml-3">
-            <a href="#Less-hand-written-CSS" data-toc-link="Less-hand-written-CSS" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+            <a href="#Less-hand-written-CSS" data-toc-link="Less-hand-written-CSS" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 data-[active='true']:opacity-100 data-[active='true']:font-bold">
               Less hand-written CSS
             </a>
           </li>
         
           <li class="leading-relaxed ml-3">
-            <a href="#Typography-improvements" data-toc-link="Typography-improvements" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+            <a href="#Typography-improvements" data-toc-link="Typography-improvements" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 data-[active='true']:opacity-100 data-[active='true']:font-bold">
               Typography improvements
             </a>
           </li>
@@ -152,7 +152,7 @@
 <pre class="athl athl-themes dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><code class="language-plaintext" translate="no" tabindex="0"><div class="line" data-line="1">This is some markdown with inline Elixir code: &lt;code class=&quot;makeup elixir&quot;&gt;def process(value), do: value&lt;/code&gt;
 </div></code></pre>
 <p>Unfortunately, the markdown parser used by NimblePublisher, <a href="https://github.com/pragdave/earmark">Earmark</a> doesn’t support inline HTML. It’s probably solvable by using a postprocessor, but that feels like a tedious rabbit hole. Instead, I want to take the same <a href="https://www.jonashietala.se/blog/2024/02/02/blogging_in_djot_instead_of_markdown/">path as Jonas</a> and use <a href="https://www.djot.net/">Djot</a> to write content. Djot supports adding <a href="https://htmlpreview.github.io/?https://github.com/jgm/djot/blob/master/doc/syntax.html#inline-attributes">inline attributes</a> which could be used like this:</p>
-<pre class="athl athl-themes dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><code class="language-plaintext" translate="no" tabindex="0"><div class="line" data-line="1">This is some markdown with inline Elixir code: `def process(value), do: value`{.makeup .elixir}
+<pre class="athl athl-themes light dark" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><code class="language-plaintext" translate="no" tabindex="0"><div class="line" data-line="1">This is some markdown with inline Elixir code: `def process(value), do: value`{.makeup .elixir}
 </div></code></pre>
 <p>There are more features of Djot I could use, for instance footnotes.</p>
 </section>
@@ -168,7 +168,7 @@
 </body></html>
     </article>
 
-    <div class="-mx-4 my-2 flex h-1 w-[100vw] footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
+    <div class="-mx-4 my-2 flex h-1 w-screen footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
   <footer class="italic">
     
       <div class="flex justify-between">

@@ -74,19 +74,19 @@
       <ol class="list-none space-y-2 text-sm pl-0">
         
           <li class="leading-relaxed ml-0">
-            <a href="#Why-I-Chose-Gleam" data-toc-link="Why-I-Chose-Gleam" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+            <a href="#Why-I-Chose-Gleam" data-toc-link="Why-I-Chose-Gleam" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 data-[active='true']:opacity-100 data-[active='true']:font-bold">
               Why I Chose Gleam
             </a>
           </li>
         
           <li class="leading-relaxed ml-0">
-            <a href="#First-Impressions" data-toc-link="First-Impressions" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+            <a href="#First-Impressions" data-toc-link="First-Impressions" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 data-[active='true']:opacity-100 data-[active='true']:font-bold">
               First Impressions
             </a>
           </li>
         
           <li class="leading-relaxed ml-3">
-            <a href="#Missed-Functionality-1-list-access-by-index" data-toc-link="Missed-Functionality-1-list-access-by-index" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+            <a href="#Missed-Functionality-1-list-access-by-index" data-toc-link="Missed-Functionality-1-list-access-by-index" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 data-[active='true']:opacity-100 data-[active='true']:font-bold">
               Missed Functionality #1 - list access by index
             </a>
           </li>
@@ -162,7 +162,7 @@ Decent standard library
 </div><div class="line" data-line="8"><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">shift_row_right</span>(<span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">matrix</span>, <span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">0</span>, <span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">1</span>) <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"># [[&#39;b&#39;, &#39;a&#39;], [&#39;c&#39;, &#39;d&#39;]]</span>
 </div></code></pre>
 <p>Performance aside, this is a very simple and neat way of accessing elements in a list. There’s no need to iterate over the rows. In Gleam, you can’t access lists by index. Instead, you have to iterate through the list until you’re on the right index. Pairing this with the immutability means that shifting rows as above is a bit more tedious. For AoC 2016 day 8, this was the solution I came up with for shifting rows with wrap around:</p>
-<pre class="athl athl-themes light dark" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><code class="language-gleam" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">pub</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">fn</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">shift_row_right</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span>
+<pre class="athl athl-themes dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><code class="language-gleam" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">pub</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">fn</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">shift_row_right</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span>
 </div><div class="line" data-line="2">  <span style="color: light-dark(#e64553, #eba0ac); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">matrix</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Matrix</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">value</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
 </div><div class="line" data-line="3">  <span style="color: light-dark(#e64553, #eba0ac); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">row</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Int</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
 </div><div class="line" data-line="4">  <span style="color: light-dark(#e64553, #eba0ac); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">shift</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Int</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
@@ -189,7 +189,7 @@ Decent standard library
 </body></html>
     </article>
 
-    <div class="-mx-4 my-2 flex h-1 w-[100vw] footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
+    <div class="-mx-4 my-2 flex h-1 w-screen footer-gradient rounded-full sm:mx-0 sm:w-full"></div>
   <footer class="italic">
     
       <div class="flex justify-between">
