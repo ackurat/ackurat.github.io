@@ -1,13 +1,12 @@
 %{
   title: "One Year Retrospective of Elixir",
   description: "I've worked with Elixir professionally for one year now, and this post gathers some reflections on the language and its tooling",
-  keywords: ["elixir", "programming"],
-  draft: true,
+  keywords: ["elixir", "programming"]
 }
 
 ---
 
-I've spent about 90% of my professional development in Elixir (the remaining time is a mix of Erlang and Go), and I couldn't be happier. That said, not everything is perfect. My previous experiences with Elixir are limited to a university course in functional programming, which mainly consisted of solving math-like problems, and Advent of Code, which again is focused on solving math-like problems. In other words, I was pretty much a beginner when I joined my current team.
+It's now been about a year since I switched job and went from working primarily in TypeScript to Elixir, and I couldn't be happier with the tech change. That said, not everything is perfect. My previous experience with Elixir is limited to a university course in functional programming, which mainly consisted of solving math-like problems, and Advent of Code, which again is focused on solving math-like problems. In other words, I was pretty much a beginner when I joined my current team.
 
 I generally think that tooling and ecosystem is more important than the language itself, so I'll primarily focus on that in this post.
 
@@ -15,7 +14,7 @@ I generally think that tooling and ecosystem is more important than the language
 
 ### Mix as a Build Tool
 
-`Mix` works great - it's extensible, can compile on multiple cores (since v1.19.4), handles everything from compilation to installation of dependencies and package managers. One thing I really like is that the mixfile of a project, `mix.exs`, is just regular Elixir. This means that I can script the build step freely using the language I already know, and I don't have to shell out into various scripts like I used to do in the `Node` ecosystem. Want to add a CLI task to simplify running tests in CI? Just write an alias function and add it to the `project` in the mixfile:
+`Mix` works great - it's extensible, can compile on multiple cores (since v1.19.4), handles everything from compilation to installation of dependencies and package management. One thing I really like is that the mixfile of a project, `mix.exs`, is just regular Elixir. This means that I can script the build step freely using the language I already know, and I don't have to shell out into various scripts like I used to do in the `Node` ecosystem. Want to add a CLI task to simplify running tests in CI? Just write an alias function and add it to the `project` in the mixfile:
 
 ```elixir
 def aliases() do
@@ -27,7 +26,7 @@ Now just run `mix ci` and it'll run whatever you defined in the alias. This exte
 
 ### Test Runner and ExUnit
 
-`Mix` is also used to run tests, and Elixir includes the testing framework `ExUnit`. So far, it has everything I want from testing framework - assertions, hooks, parallel or sequential tests, easy mocking[^1]. The mix tasks for running tests are also great, `mix test --failed` for instance is a wonderfully simple thing that just runs the tests that failed the previous run, and `mix test --seed <seed>` lets you run tests with a specified seeding so that randomized values are consistent.
+`Mix` is also used to run tests, and Elixir includes the testing framework `ExUnit`. So far, it has everything I want from a testing framework - assertions, hooks, parallel or sequential tests, easy mocking[^1]. The mix tasks for running tests are also great, `mix test --failed` for instance is a wonderfully simple thing that just runs the tests that failed the previous run, and `mix test --seed <seed>` lets you run tests with a specified seeding so that randomized values are consistent.
 
 ### Formatter
 
@@ -49,13 +48,13 @@ The library ecosystem is both great and... not great. First of all, you can free
 
 The Elixir ecosystem has some very good and mature libraries such as [Phoenix](https://www.phoenixframework.org/), [Broadway](https://hexdocs.pm/broadway/introduction.html), [Ecto](https://hexdocs.pm/ecto/Ecto.html) and [Oban](https://hexdocs.pm/oban/Oban.html). Oban is so good I'm planning to write an appreciation post just for it.
 
-At the same time, many libraries are pre-1.0. An example is [postgrex](https://hexdocs.pm/postgrex/readme.html), which is the default Postgres driver. It was initially published in 2014 and the current version is 0.22. Between 0.21 and 0.22 there was a breaking change (Elixir v1.15+ required). In my experience, pre-1.0 libraries tend to change more often which can increase churn and tech debt.
+At the same time, many libraries are pre-1.0. An example is [postgrex](https://hexdocs.pm/postgrex/readme.html), which is the default Postgres driver. It was initially published in 2014 and the current version is 0.22. Between versions 0.21 and 0.22 there was a breaking change (Elixir v1.15+ required). In my experience, pre-1.0 libraries tend to change more often which can increase churn and tech debt.
 
 ## The Language Itself
 
-When I took the course in university for functional programming, I didn't really see the appeal. I was fostered with Java and OOP, and all of a sudden we're writing in an esoteric language that doesn't even have loops. We did pattern matching on lists, recursion and spawned processes from a supervisor we didn't understand. Needless to say, the course wasn't enough to actually understand Elixir (or BEAM).
+When I took the course in university for functional programming, I didn't really see the appeal. I was fostered with Java and OOP, and all of a sudden we're writing in an esoteric language that doesn't even have loops. We did pattern matching on lists, recursion and spawned processes from a supervisor we didn't understand. Needless to say, the course wasn't enough to actually understand Elixir (or [BEAM](https://en.wikipedia.org/wiki/BEAM_%28Erlang_virtual_machine%29)).
 
-Today, I can't imagine going back to the OOP world, and especially not JS/TS. I think I'm past the honeymoon phase now, and I still think the productivity and developer experience is phenomenal. The lack of loops isn't even an issue - just use the enumerable protocol. Pattern matching is a fantastic tool for error handling:
+Today, I can't imagine going back to the OOP world. I think I'm past the honeymoon phase of trying a new language, and I still think the productivity and developer experience is phenomenal. The lack of loops isn't even an issue - just use the enumerable protocol. Pattern matching is a fantastic tool for error handling:
 
 ```elixir
 # Log the error and just pass it along
@@ -86,7 +85,7 @@ You get a clear separation between errors as values that you can handle, and rai
 
 ### The Pipe Operator
 
-Sometimes I have to write code in Erlang, which doesn't have the pipe operator. I'm not very proficient in it, but I see sequences like this sometimes[^2]:
+Sometimes I have to write code in Erlang, which doesn't have the pipe operator. I'm not very proficient in Erlang, but I see sequences like this sometimes[^2]:
 
 ```erlang
 Foo = <<"foo">>,
@@ -119,11 +118,17 @@ defmodule App.Repo do
 end
 ```
 
-Now you can do `App.Repo.get_by(SomeModule, id: 1)`{.language-elixir} and you'll get all stored `SomeModule`{.language-elixir} where id is 1. In other words, macros are pretty awesome when used like this. It significantly reduces boilerplate, and especially for tests I find it useful to define macros to do some more involved setups (for instance, setting up a Kafka consumer that'll consume messages produced during the test).
+Now you can do `App.Repo.get_by(SomeModule, id: 1)`{.language-elixir} and you'll get the stored `SomeModule`{.language-elixir} where id is 1. In other words, macros are pretty awesome when used like this. It significantly reduces boilerplate, and especially for tests I find it useful to define macros to do some more involved setups (for instance, setting up a Kafka consumer that'll consume messages produced during the test).
 
 ### Concurrency
 
-All services I've built rely heavily on [Erlang/OTP](https://www.erlang.org/doc/system/design_principles.html). The application's entry point is the supervisor which will start a number of child applications, such as HTTP routers and Kafka consumers. An incoming request to a router will spawn a new process, and during the process lifetime we can use the same logger instance where we add to the metadata to make sure that relevant information always gets logged. When the process finishes, it exits and no traces remain of it. If the router process (which is a supervisor in itself) crashes because of unexpected errors, the application supervisor starts a new one. This is just a tiny example of how we use OTP, and [Saša Jurić](https://www.youtube.com/watch?v=JvBT4XBdoUE) shows it better.
+Much can be said about the concurrency model of Elixir, utilizing [Erlang/OTP](https://www.erlang.org/doc/system/design_principles.html). However, I won't dive deep into it here. It's mostly transparent when using libraries such as [Plug](https://hexdocs.pm/plug/readme.html) - just put it under the supervision tree and you're good to go. [Saša Jurić's talk](https://www.youtube.com/watch?v=JvBT4XBdoUE) is again a good source for getting a grasp of how it performs.
+
+## Closing Thoughts
+
+Why didn't I switch job earlier? Elixir and its ecosystem offer pretty much everything I want from a microservice backend perspective, and with established libraries like Oban, Ecto and Broadway setting up specialized applications is a breeze.
+
+The ecosystem may be smaller than that of others, but the developer experience is still amazing and with the standard library + the Erlang interoperability I don't feel that it's a hindrance when writing the kind of code I write.
 
 [^1]: I'll probably write a whole article on it in the future, but our whole test suite (unit tests and integration-like tests) at work tests 4 separate microservices in just about 3 seconds. Combined with [mix test.watch](https://hexdocs.pm/mix_test_watch/readme.html), this means that I can have a separate shell running the tests continuously while writing code.
 
