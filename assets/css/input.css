@@ -38,6 +38,12 @@
         scroll-behavior: smooth;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+
     a:hover {
         color: light-dark(var(--color-latte-blue), var(--color-macchiato-blue));
     }

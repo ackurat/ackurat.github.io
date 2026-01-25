@@ -68,8 +68,8 @@ defmodule Ackurat.Render.Layout do
                     <div class="flex flex-wrap gap-4">
                         <a href="/about/">About</a>
                         <a href="/archive/">Archive</a>
-                        <a type="application/rss+xml" href="/index.xml">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24">
+                        <a type="application/rss+xml" href="/index.xml" alt="RSS feed" aria-label="RSS feed">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24" aria-label="RSS icon with radio waves emanating from a dot in the lower left">
                             <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->
                                 <g fill="currentColor" stroke="none" stroke-linejoin="round">
                                     <path d="M1.5 19.5a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/>

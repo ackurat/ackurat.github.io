@@ -36,12 +36,13 @@ defmodule Ackurat.Convert do
       formatter:
         {:html_multi_themes,
          themes: [light: "catppuccin_latte", dark: "catppuccin_mocha"],
-         default_theme: "light-dark()"}
+         default_theme: "light-dark()",
+         pre_class: "relative rounded-lg p-2"}
     )
     |> Floki.parse_fragment!()
     |> Floki.find("pre")
     |> hd()
-    |> add_pre_styles()
+    |> add_code_classes()
     |> add_language_label(language)
   end
 
@@ -72,7 +73,7 @@ defmodule Ackurat.Convert do
         other -> [other]
       end)
 
-    {"code", code_attrs, unwrapped_children}
+    {"code", List.keydelete(code_attrs, "tabindex", 0), unwrapped_children}
   end
 
   defp add_language_label({"pre", pre_attrs, pre_children}, language) when is_binary(language) do
@@ -89,28 +90,34 @@ defmodule Ackurat.Convert do
     {"pre", pre_attrs, [label | pre_children]}
   end
 
-  defp add_pre_styles({"pre", pre_attrs, pre_children}) do
-    updated_attrs = add_or_merge_class(pre_attrs, "relative")
-
-    updated_children =
-      Enum.map(pre_children, fn
+  defp add_code_classes(node) do
+    Floki.traverse_and_update(node, fn child ->
+      case child do
         {"code", code_attrs, code_children} ->
-          {"code", add_or_merge_class(code_attrs, "block overflow-x-auto"), code_children}
+          updated_attrs =
+            code_attrs
+            |> append_classes("block overflow-x-auto")
+            |> add_accessibility_attrs()
+
+          {"code", updated_attrs, code_children}
 
         other ->
           other
-      end)
-
-    {"pre", updated_attrs, updated_children}
+      end
+    end)
   end
 
-  defp add_or_merge_class(attrs, new_classes) do
-    case List.keyfind(attrs, "class", 0) do
-      {"class", existing_classes} ->
-        List.keyreplace(attrs, "class", 0, {"class", existing_classes <> " " <> new_classes})
+  defp append_classes(attrs, additional_classes) do
+    Enum.map(attrs, fn attr ->
+      case attr do
+        {"class", current} -> {"class", current <> " " <> additional_classes}
+        attr -> attr
+      end
+    end)
+  end
 
-      nil ->
-        [{"class", new_classes} | attrs]
-    end
+  defp add_accessibility_attrs(attrs) do
+    attrs
+    |> List.keystore("role", 0, {"role", "code"})
   end
 end
