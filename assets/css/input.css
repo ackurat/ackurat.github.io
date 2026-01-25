@@ -23,6 +23,14 @@
     --color-mocha-blue: rgb(137, 180, 250);
     --color-mocha-crust: rgb(17, 17, 27);
 
+    --color-hc-light-bg: rgb(255, 255, 255);
+    --color-hc-light-text: rgb(0, 0, 0);
+    --color-hc-light-link: rgb(0, 0, 238);
+
+    --color-hc-dark-bg: rgb(0, 0, 0);
+    --color-hc-dark-text: rgb(255, 255, 255);
+    --color-hc-dark-link: rgb(0, 255, 255);
+
     --color-footer-light-1: rgb(30, 102, 245);
     --color-footer-light-2: rgb(136, 57, 239);
     --color-footer-light-3: rgb(230, 69, 83);
@@ -31,6 +39,7 @@
     --color-footer-dark-3: rgb(166, 218, 149);
 }
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant hc (&:where(.hc, .hc *));
 
 @layer base {
     html {

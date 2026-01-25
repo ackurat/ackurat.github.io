@@ -50,10 +50,18 @@ defmodule Ackurat.Render.Layout do
           <link rel="stylesheet" href="/assets/app.css" />
           <script>
             (function() {
-              const theme = localStorage.getItem('theme');
-              if (theme) {
-                document.documentElement.style.colorScheme = theme;
-                document.documentElement.classList.add(theme)
+              const storedTheme = localStorage.getItem('theme');
+              const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+              const theme = storedTheme || systemTheme;
+
+              document.documentElement.style.colorScheme = theme;
+              document.documentElement.classList.add(theme);
+
+              const storedContrast = localStorage.getItem('highContrast') === 'true';
+              const systemContrast = window.matchMedia('(prefers-contrast: more)').matches ? 'hc' : '';
+              const contrast = storedContrast || systemContrast;
+              if (contrast) {
+                document.documentElement.classList.add('hc');
               }
             })();
           </script>
@@ -61,7 +69,7 @@ defmodule Ackurat.Render.Layout do
             <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
           <% end %>
         </head>
-        <body class="bg-latte-crust dark:bg-macchiato-base text-latte-text dark:text-macchiato-text min-h-screen font-sans">
+        <body class="bg-latte-crust dark:bg-macchiato-base hc:bg-white hc:dark:bg-black text-latte-text dark:text-macchiato-text hc:text-black hc:dark:text-white min-h-screen font-sans">
             <header class="flex justify-center py-4" id="top">
                 <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
                     <a href="/">~/</a>
@@ -81,6 +89,9 @@ defmodule Ackurat.Render.Layout do
                         <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
                             <span id="theme-icon"></span>
                         </button>
+                        <button id="contrast-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle high contrast">
+                            <span id="contrast-icon"></span>
+                        </button>
                     </div>
                 </nav>
             </header>
@@ -90,26 +101,49 @@ defmodule Ackurat.Render.Layout do
             <script>
                 const themeToggle = document.getElementById('theme-toggle');
                 const themeIcon = document.getElementById('theme-icon');
+                const contrastToggle = document.getElementById('contrast-toggle');
+                const contrastIcon = document.getElementById('contrast-icon');
                 const html = document.documentElement;
 
-                function updateIcon() {
+                function updateThemeIcon() {
                   const currentTheme = html.style.colorScheme ||
                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
                   themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
                 }
 
-                updateIcon();
+                function updateContrastIcon() {
+                  const isHighContrast = html.classList.contains('hc');
+                  contrastIcon.textContent = isHighContrast ? '◑' : '◐';
+                }
+
+                updateThemeIcon();
+                updateContrastIcon();
 
                 themeToggle.addEventListener('click', () => {
                   const currentTheme = html.style.colorScheme ||
                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
                   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                   html.style.colorScheme = newTheme;
-                  html.className = newTheme
+                  html.classList.remove('light', 'dark');
+                  html.classList.add(newTheme);
                   localStorage.setItem('theme', newTheme);
-                  updateIcon();
+                  updateThemeIcon();
                 });
+
+                contrastToggle.addEventListener('click', () => {
+                  const isHighContrast = html.classList.contains('hc');
+                  if (isHighContrast) {
+                    html.classList.remove('hc');
+                    localStorage.setItem('highContrast', 'false');
+                  } else {
+                    html.classList.add('hc');
+                    localStorage.setItem('highContrast', 'true');
+                  }
+                  updateContrastIcon();
+                });
+
             </script>
+
 
         </body>
       </html>
