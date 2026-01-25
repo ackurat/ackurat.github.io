@@ -35,6 +35,14 @@ defmodule Ackurat.Render.Post do
       <aside class="hidden lg:block fixed left-[calc(50%-624px)] w-64" style="top: calc(5rem + 6.5rem);">
         <nav class="sticky top-4">
           <ol class="list-none space-y-2 text-sm pl-0">
+            <li class="ml-0">
+                <a href="#top">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE -->
+                    <path fill="currentColor" d="M11 16h2v-4.2l1.6 1.6L16 12l-4-4l-4 4l1.4 1.4l1.6-1.6zm1 6q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22"/>
+                  </svg>
+                </a>
+            </li>
             <%= for item <- @toc do %>
               <li class={[
                 "leading-relaxed",
@@ -45,7 +53,7 @@ defmodule Ackurat.Render.Post do
                 <a
                   href={"##{item.id}"}
                   data-toc-link={item.id}
-                  class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 data-[active='true']:opacity-100 data-[active='true']:font-bold"
+                  class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold"
                 >
                   <%= item.text %>
                 </a>
