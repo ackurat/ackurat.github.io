@@ -62,7 +62,7 @@ defmodule Ackurat.Render.Layout do
           <% end %>
         </head>
         <body class="bg-latte-crust dark:bg-macchiato-base text-latte-text dark:text-macchiato-text min-h-screen font-sans">
-            <header class="flex justify-center py-4">
+            <header class="flex justify-center py-4" id="top">
                 <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
                     <a href="/">~/</a>
                     <div class="flex flex-wrap gap-4">
