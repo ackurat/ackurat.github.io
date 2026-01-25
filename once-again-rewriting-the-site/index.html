@@ -33,10 +33,18 @@
       <link rel="stylesheet" href="/assets/app.css">
       <script>
         (function() {
-          const theme = localStorage.getItem('theme');
-          if (theme) {
-            document.documentElement.style.colorScheme = theme;
-            document.documentElement.classList.add(theme)
+          const storedTheme = localStorage.getItem('theme');
+          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          const theme = storedTheme || systemTheme;
+
+          document.documentElement.style.colorScheme = theme;
+          document.documentElement.classList.add(theme);
+
+          const storedContrast = localStorage.getItem('highContrast') === 'true';
+          const systemContrast = window.matchMedia('(prefers-contrast: more)').matches ? 'hc' : '';
+          const contrast = storedContrast || systemContrast;
+          if (contrast) {
+            document.documentElement.classList.add('hc');
           }
         })();
       </script>
@@ -44,15 +52,15 @@
         <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
       
     </head>
-    <body class="bg-latte-crust dark:bg-macchiato-base text-latte-text dark:text-macchiato-text min-h-screen font-sans">
+    <body class="bg-latte-crust dark:bg-macchiato-base hc:bg-white hc:dark:bg-black text-latte-text dark:text-macchiato-text hc:text-black hc:dark:text-white min-h-screen font-sans">
         <header class="flex justify-center py-4" id="top">
             <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
                 <a href="/">~/</a>
                 <div class="flex flex-wrap gap-4">
                     <a href="/about/">About</a>
                     <a href="/archive/">Archive</a>
-                    <a type="application/rss+xml" href="/index.xml">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24">
+                    <a type="application/rss+xml" href="/index.xml" alt="RSS feed" aria-label="RSS feed">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24" aria-label="RSS icon with radio waves emanating from a dot in the lower left">
                         <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->
                             <g fill="currentColor" stroke="none" stroke-linejoin="round">
                                 <path d="M1.5 19.5a3 3 0 1 0 6 0a3 3 0 1 0-6 0"></path>
@@ -63,6 +71,9 @@
                     </a>
                     <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
                         <span id="theme-icon"></span>
+                    </button>
+                    <button id="contrast-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle high contrast">
+                        <span id="contrast-icon"></span>
                     </button>
                 </div>
             </nav>
@@ -124,12 +135,12 @@
       </div>
 
       <html><head></head><body><p>Once again I’m rewriting the site. I never got around to finishing my <a href="https://zine-ssg.io">Zine</a> implementation, partly because I didn’t have time to invest into learning Zig. I’ll soon start a new job where I’ll use <a href="https://elixir-lang.org">Elixir</a> and <a href="https://erlang.org">Erlang</a> as my main languages. I haven’t used Erlang much before, but Elixir has been a lurking favourite, and with my experiments with <a href="https://gleam.run">Gleam</a> I found renewed interest in it.</p>
-<p>The site uses <a href="https://github.com/dashbitco/nimble_publisher">NimblePublisher</a> and <a href="https://github.com/phoenixframework/phoenix_live_view">LiveView</a> <code class="language-plaintext" translate="no" tabindex="0">HEEx
+<p>The site uses <a href="https://github.com/dashbitco/nimble_publisher">NimblePublisher</a> and <a href="https://github.com/phoenixframework/phoenix_live_view">LiveView</a> <code class="language-plaintext" translate="no">HEEx
 </code> templates. The basis for the site is <a href="https://fly.io/phoenix-files/crafting-your-own-static-site-generator-using-phoenix/">Jason Stiebe’s tutorial</a>, and after I had implemented a rudimentary version I forked <a href="https://jorin.me/">Jorin’s website</a> and started rebuilding it to my liking. Kudos to both these for saving me time! Unlike Jorin, I don’t have a desire to create my site generator from scratch, but I’ll happily spend time refactoring and tinkering.</p>
 <section id="Upcoming-changes">
 <h2><a href="#Upcoming-changes">Upcoming changes</a></h2>
 <p>Inspired by <a href="https://www.jonashietala.se/blog/2024/07/09/microfeatures_in_my_blog/">Jonas Hietala’s microfeatures</a>, I have some features I want to implement. Just like he states, microfeatures are fun and a way to learn. For instance, I’ve already implemented headings with automatic linking. It was pretty straight forward - reimplement the parsing of headings to add markdown links, and add a postprocessor to add the anchor ID to the headings:</p>
-<pre class="athl athl-themes light dark relative" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"># parser.ex</span>
+<pre class="athl athl-themes relative rounded-lg p-2 dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"># parser.ex</span>
 </div><div class="line" data-line="2">
 </div><div class="line" data-line="3"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">defp</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">replace_heading</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">line</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
 </div><div class="line" data-line="4">  <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">if</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">String</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">.</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">starts_with?</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">line</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;## &quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
@@ -158,10 +169,10 @@
 <section id="Djot-support">
 <h3><a href="#Djot-support">Djot support</a></h3>
 <p>One microfeature I really like in Jonas’ blog is syntax highlighting in inline code. I could solve this by either writing the inline code as HTML:</p>
-<pre class="athl athl-themes dark light relative" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">plaintext</span><code class="language-plaintext block overflow-x-auto" translate="no" tabindex="0"><div class="line" data-line="1">This is some markdown with inline Elixir code: &lt;code class=&quot;makeup elixir&quot;&gt;def process(value), do: value&lt;/code&gt;
+<pre class="athl athl-themes relative rounded-lg p-2 dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">plaintext</span><code class="language-plaintext block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1">This is some markdown with inline Elixir code: &lt;code class=&quot;makeup elixir&quot;&gt;def process(value), do: value&lt;/code&gt;
 </div></code></pre>
 <p>Unfortunately, the markdown parser used by NimblePublisher, <a href="https://github.com/pragdave/earmark">Earmark</a> doesn’t support inline HTML. It’s probably solvable by using a postprocessor, but that feels like a tedious rabbit hole. Instead, I want to take the same <a href="https://www.jonashietala.se/blog/2024/02/02/blogging_in_djot_instead_of_markdown/">path as Jonas</a> and use <a href="https://www.djot.net/">Djot</a> to write content. Djot supports adding <a href="https://htmlpreview.github.io/?https://github.com/jgm/djot/blob/master/doc/syntax.html#inline-attributes">inline attributes</a> which could be used like this:</p>
-<pre class="athl athl-themes light dark relative" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">plaintext</span><code class="language-plaintext block overflow-x-auto" translate="no" tabindex="0"><div class="line" data-line="1">This is some markdown with inline Elixir code: `def process(value), do: value`{.makeup .elixir}
+<pre class="athl athl-themes relative rounded-lg p-2 dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">plaintext</span><code class="language-plaintext block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1">This is some markdown with inline Elixir code: `def process(value), do: value`{.makeup .elixir}
 </div></code></pre>
 <p>There are more features of Djot I could use, for instance footnotes.</p>
 </section>
@@ -243,26 +254,49 @@
         <script>
             const themeToggle = document.getElementById('theme-toggle');
             const themeIcon = document.getElementById('theme-icon');
+            const contrastToggle = document.getElementById('contrast-toggle');
+            const contrastIcon = document.getElementById('contrast-icon');
             const html = document.documentElement;
 
-            function updateIcon() {
+            function updateThemeIcon() {
               const currentTheme = html.style.colorScheme ||
                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
             }
 
-            updateIcon();
+            function updateContrastIcon() {
+              const isHighContrast = html.classList.contains('hc');
+              contrastIcon.textContent = isHighContrast ? '◑' : '◐';
+            }
+
+            updateThemeIcon();
+            updateContrastIcon();
 
             themeToggle.addEventListener('click', () => {
               const currentTheme = html.style.colorScheme ||
                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
               html.style.colorScheme = newTheme;
-              html.className = newTheme
+              html.classList.remove('light', 'dark');
+              html.classList.add(newTheme);
               localStorage.setItem('theme', newTheme);
-              updateIcon();
+              updateThemeIcon();
             });
+
+            contrastToggle.addEventListener('click', () => {
+              const isHighContrast = html.classList.contains('hc');
+              if (isHighContrast) {
+                html.classList.remove('hc');
+                localStorage.setItem('highContrast', 'false');
+              } else {
+                html.classList.add('hc');
+                localStorage.setItem('highContrast', 'true');
+              }
+              updateContrastIcon();
+            });
+
         </script>
+
 
     </body>
   </html>

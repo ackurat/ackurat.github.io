@@ -33,10 +33,18 @@
       <link rel="stylesheet" href="/assets/app.css">
       <script>
         (function() {
-          const theme = localStorage.getItem('theme');
-          if (theme) {
-            document.documentElement.style.colorScheme = theme;
-            document.documentElement.classList.add(theme)
+          const storedTheme = localStorage.getItem('theme');
+          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          const theme = storedTheme || systemTheme;
+
+          document.documentElement.style.colorScheme = theme;
+          document.documentElement.classList.add(theme);
+
+          const storedContrast = localStorage.getItem('highContrast') === 'true';
+          const systemContrast = window.matchMedia('(prefers-contrast: more)').matches ? 'hc' : '';
+          const contrast = storedContrast || systemContrast;
+          if (contrast) {
+            document.documentElement.classList.add('hc');
           }
         })();
       </script>
@@ -44,15 +52,15 @@
         <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
       
     </head>
-    <body class="bg-latte-crust dark:bg-macchiato-base text-latte-text dark:text-macchiato-text min-h-screen font-sans">
+    <body class="bg-latte-crust dark:bg-macchiato-base hc:bg-white hc:dark:bg-black text-latte-text dark:text-macchiato-text hc:text-black hc:dark:text-white min-h-screen font-sans">
         <header class="flex justify-center py-4" id="top">
             <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
                 <a href="/">~/</a>
                 <div class="flex flex-wrap gap-4">
                     <a href="/about/">About</a>
                     <a href="/archive/">Archive</a>
-                    <a type="application/rss+xml" href="/index.xml">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24">
+                    <a type="application/rss+xml" href="/index.xml" alt="RSS feed" aria-label="RSS feed">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24" aria-label="RSS icon with radio waves emanating from a dot in the lower left">
                         <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->
                             <g fill="currentColor" stroke="none" stroke-linejoin="round">
                                 <path d="M1.5 19.5a3 3 0 1 0 6 0a3 3 0 1 0-6 0"></path>
@@ -63,6 +71,9 @@
                     </a>
                     <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
                         <span id="theme-icon"></span>
+                    </button>
+                    <button id="contrast-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle high contrast">
+                        <span id="contrast-icon"></span>
                     </button>
                 </div>
             </nav>
@@ -84,17 +95,17 @@
       </div>
 
       <html><head></head><body><p>I’ve just set up the site to handle both <a href="https://djot.net">Djot</a> and Markdown for writing content. It was surprisingly easy! This post outlines how to do it using <a href="https://hexdocs.pm/nimble_publisher/">NimblePublisher</a> and a <a href="https://hexdocs.pm/djot/">Djot</a> parser.</p>
-<p>We can <a href="https://hexdocs.pm/nimble_publisher/NimblePublisher.html#module-custom-html-converter">override</a> the HTML converter used by NimblePublisher by simply plugging in our own. Our converter needs to implement the <code class="language-plaintext" translate="no" tabindex="0">convert/4
+<p>We can <a href="https://hexdocs.pm/nimble_publisher/NimblePublisher.html#module-custom-html-converter">override</a> the HTML converter used by NimblePublisher by simply plugging in our own. Our converter needs to implement the <code class="language-plaintext" translate="no">convert/4
 </code> function which returns the HTML as a string.</p>
-<pre class="athl athl-themes dark light relative" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">defmodule</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Convert</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
+<pre class="athl athl-themes relative rounded-lg p-2 light dark" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">defmodule</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Convert</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
 </div><div class="line" data-line="2">  <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">def</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">convert</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">_path</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">body</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">_attrs</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">_optds</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
 </div><div class="line" data-line="3">    <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Djot</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">.</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">to_html!</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">body</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span>
 </div><div class="line" data-line="4">  <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">end</span>
 </div><div class="line" data-line="5"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">end</span>
 </div></code></pre>
-<p>Since Djot is more or less a superset of Markdown, all previous content can be rendered successfully with the Djot parser. With the default HTML converter now defunct, NimblePublisher won’t apply the code highlighter, so we’ll need to add this to our <code class="language-plaintext" translate="no" tabindex="0">convert/4
+<p>Since Djot is more or less a superset of Markdown, all previous content can be rendered successfully with the Djot parser. With the default HTML converter now defunct, NimblePublisher won’t apply the code highlighter, so we’ll need to add this to our <code class="language-plaintext" translate="no">convert/4
 </code> function. Let’s create two small helpers, one to apply highlighting to all block code and one to inline code:</p>
-<pre class="athl athl-themes light dark relative" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">defp</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">highlight_block_code</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">body</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
+<pre class="athl athl-themes relative rounded-lg p-2 light dark" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">defp</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">highlight_block_code</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">body</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
 </div><div class="line" data-line="2">  <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">block_code</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span> <span style="color: light-dark(#ea76cb, #f5c2e7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">~</span>r/&lt;pre&gt;&lt;code<span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(?:</span></span><span style="color: light-dark(#ea76cb, #f5c2e7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">\s</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">+</span></span>class=&quot;language-<span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span></span><span style="color: light-dark(#ea76cb, #f5c2e7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"></span><span style="color: light-dark(#ea76cb, #f5c2e7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">\w</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">*</span></span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span></span>&quot;<span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span></span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">?</span></span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span></span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">[</span></span>^<span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span></span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">]</span></span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">*</span></span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span></span>&lt;<span style="color: light-dark(#ea76cb, #f5c2e7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">\/</span>code&gt;&lt;<span style="color: light-dark(#ea76cb, #f5c2e7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">\/</span>pre&gt;/
 </div><div class="line" data-line="3">
 </div><div class="line" data-line="4">  <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">NimblePublisher</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">.</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">highlight</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">body</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">regex: </span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">block_code</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span>
@@ -112,17 +123,17 @@
 <p>Now we can just pipe the HTML output from the parser through these functions, and we’ll get highlighting. There are a few considerations:</p>
 <ul>
 <li>
-We need the new regexes since the default used in <code class="language-plaintext" translate="no" tabindex="0">NimblePublisher.highlight/2
-</code> doesn’t match anymore - the Djot parser uses an attribute like <code class="language-html" translate="no" tabindex="0">class=&quot;language-elixir&quot;
+We need the new regexes since the default used in <code class="language-plaintext" translate="no">NimblePublisher.highlight/2
+</code> doesn’t match anymore - the Djot parser uses an attribute like <code class="language-html" translate="no">class=&quot;language-elixir&quot;
 </code>.
 </li>
 <li>
-The library I use for highlighting, <a href="https://hexdocs.pm/makeup/">Makeup</a> adds <code class="language-html" translate="no" tabindex="0"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">pre</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
+The library I use for highlighting, <a href="https://hexdocs.pm/makeup/">Makeup</a> adds <code class="language-html" translate="no"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">pre</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&gt;</span>
 </code> tags around code. This messes up the inline code, hence the replace code to remove them.
 </li>
 </ul>
 <p>All that is left to do now is tell NimblePublisher to use the converter, both on markdown and djot:</p>
-<pre class="athl athl-themes dark light relative" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">use</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">NimblePublisher</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
+<pre class="athl athl-themes relative rounded-lg p-2 light dark" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">use</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">NimblePublisher</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
 </div><div class="line" data-line="2">  <span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">from: </span><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;./pages/**/*.{md,dj}&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
 </div><div class="line" data-line="3">  <span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">highlighters: </span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">[</span><span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:makeup_elixir</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">]</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
 </div><div class="line" data-line="4">  <span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">html_converter: </span><span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Convert</span>
@@ -197,26 +208,49 @@ The library I use for highlighting, <a href="https://hexdocs.pm/makeup/">Makeup<
         <script>
             const themeToggle = document.getElementById('theme-toggle');
             const themeIcon = document.getElementById('theme-icon');
+            const contrastToggle = document.getElementById('contrast-toggle');
+            const contrastIcon = document.getElementById('contrast-icon');
             const html = document.documentElement;
 
-            function updateIcon() {
+            function updateThemeIcon() {
               const currentTheme = html.style.colorScheme ||
                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
             }
 
-            updateIcon();
+            function updateContrastIcon() {
+              const isHighContrast = html.classList.contains('hc');
+              contrastIcon.textContent = isHighContrast ? '◑' : '◐';
+            }
+
+            updateThemeIcon();
+            updateContrastIcon();
 
             themeToggle.addEventListener('click', () => {
               const currentTheme = html.style.colorScheme ||
                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
               const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
               html.style.colorScheme = newTheme;
-              html.className = newTheme
+              html.classList.remove('light', 'dark');
+              html.classList.add(newTheme);
               localStorage.setItem('theme', newTheme);
-              updateIcon();
+              updateThemeIcon();
             });
+
+            contrastToggle.addEventListener('click', () => {
+              const isHighContrast = html.classList.contains('hc');
+              if (isHighContrast) {
+                html.classList.remove('hc');
+                localStorage.setItem('highContrast', 'false');
+              } else {
+                html.classList.add('hc');
+                localStorage.setItem('highContrast', 'true');
+              }
+              updateContrastIcon();
+            });
+
         </script>
+
 
     </body>
   </html>

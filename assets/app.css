@@ -7,6 +7,8 @@
     'Noto Color Emoji';
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace;
+    --color-black: #000;
+    --color-white: #fff;
     --spacing: 0.25rem;
     --container-2xl: 42rem;
     --text-sm: 0.875rem;
@@ -346,6 +348,9 @@
   .rounded-full {
     border-radius: calc(infinity * 1px);
   }
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
   .rounded-t-lg {
     border-top-left-radius: var(--radius-lg);
     border-top-right-radius: var(--radius-lg);
@@ -372,6 +377,9 @@
   .to-footer-light-3 {
     --tw-gradient-to: var(--color-footer-light-3);
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
   }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
@@ -523,6 +531,30 @@
       }
     }
   }
+  .hc\:bg-white {
+    &:where(.hc, .hc *) {
+      background-color: var(--color-white);
+    }
+  }
+  .hc\:text-black {
+    &:where(.hc, .hc *) {
+      color: var(--color-black);
+    }
+  }
+  .hc\:dark\:bg-black {
+    &:where(.hc, .hc *) {
+      &:where(.dark, .dark *) {
+        background-color: var(--color-black);
+      }
+    }
+  }
+  .hc\:dark\:text-white {
+    &:where(.hc, .hc *) {
+      &:where(.dark, .dark *) {
+        color: var(--color-white);
+      }
+    }
+  }
   .\[\&\[data-active\=\'true\'\]\]\:font-bold {
     &[data-active='true'] {
       --tw-font-weight: var(--font-weight-bold);
@@ -539,6 +571,11 @@
   html {
     scrollbar-gutter: stable;
     scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
   a:hover {
     color: light-dark(var(--color-latte-blue), var(--color-macchiato-blue));
