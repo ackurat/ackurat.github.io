@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ackurat.github.io</loc>
-    <lastmod>2026-01-25T13:02:07.129191Z</lastmod>
+    <lastmod>2026-01-25T16:27:48.121562Z</lastmod>
   </url>
   <url>
     <loc>https://ackurat.github.io/about/</loc>
-    <lastmod>2026-01-25T13:02:06.658508Z</lastmod>
+    <lastmod>2026-01-25T16:27:47.675541Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ackurat.github.io/one-year-retrospective-of-elixir/</loc>
+    <lastmod>2026-01-19T06:00:00Z</lastmod>
   </url>
   <url>
     <loc>https://ackurat.github.io/using-djot-for-content/</loc>

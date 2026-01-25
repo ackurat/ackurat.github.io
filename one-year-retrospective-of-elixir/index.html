@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>One Year Retrospective of Elixir — ackurat.github.io</title>
+      <meta name="description" content="I&#39;ve worked with Elixir professionally for one year now, and this post gathers some reflections on the language and its tooling">
+      <meta name="author" content="Adam CL">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="/index.xml" rel="alternate" type="application/rss+xml" title="ackurat.github.io">
+      <meta name="ROBOTS" content="INDEX, FOLLOW">
+      <meta property="og:title" content="One Year Retrospective of Elixir — ackurat.github.io">
+      <meta property="og:description" content="I&#39;ve worked with Elixir professionally for one year now, and this post gathers some reflections on the language and its tooling">
+      <meta property="og:type" content="article">
+      <meta property="og:url" content="https://ackurat.github.io/one-year-retrospective-of-elixir/">
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:title" content="One Year Retrospective of Elixir — ackurat.github.io">
+      <meta name="twitter:description" content="I&#39;ve worked with Elixir professionally for one year now, and this post gathers some reflections on the language and its tooling">
+      <meta itemprop="name" content="One Year Retrospective of Elixir — ackurat.github.io">
+      <meta itemprop="description" content="I&#39;ve worked with Elixir professionally for one year now, and this post gathers some reflections on the language and its tooling">
+      
+        <meta itemprop="datePublished" content="2026-01-19T06:00:00Z">
+        <meta itemprop="dateModified" content="2026-01-19T06:00:00Z">
+        <meta itemprop="wordCount" content="1398">
+        <meta itemprop="keywords" content="elixir,programming">
+        <meta property="article:author" content="Adam CL">
+        <meta property="article:section" content="Software">
+        <meta property="article:tag" content="elixir"><meta property="article:tag" content="programming">
+        <meta property="article:published_time" content="2026-01-19T06:00:00Z">
+        <meta property="article:modified_time" content="2026-01-19T06:00:00Z">
+      
+      <link rel="canonical" href="https://ackurat.github.io/one-year-retrospective-of-elixir/">
+      <link rel="stylesheet" href="/assets/app.css">
+      <script>
+        (function() {
+          const storedTheme = localStorage.getItem('theme');
+          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          const theme = storedTheme || systemTheme;
+
+          document.documentElement.style.colorScheme = theme;
+          document.documentElement.classList.add(theme);
+
+          const storedContrast = localStorage.getItem('highContrast') === 'true';
+          const systemContrast = window.matchMedia('(prefers-contrast: more)').matches ? 'hc' : '';
+          const contrast = storedContrast || systemContrast;
+          if (contrast) {
+            document.documentElement.classList.add('hc');
+          }
+        })();
+      </script>
+      
+        <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+      
+    </head>
+    <body class="bg-latte-crust dark:bg-macchiato-base hc:bg-white hc:dark:bg-black text-latte-text dark:text-macchiato-text hc:text-black hc:dark:text-white min-h-screen font-sans">
+        <header class="flex justify-center py-4" id="top">
+            <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
+                <a href="/">~/</a>
+                <div class="flex flex-wrap gap-4">
+                    <a href="/about/">About</a>
+                    <a href="/archive/">Archive</a>
+                    <a type="application/rss+xml" href="/index.xml" alt="RSS feed" aria-label="RSS feed">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24" aria-label="RSS icon with radio waves emanating from a dot in the lower left">
+                        <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->
+                            <g fill="currentColor" stroke="none" stroke-linejoin="round">
+                                <path d="M1.5 19.5a3 3 0 1 0 6 0a3 3 0 1 0-6 0"></path>
+                                <path d="M12.5 22.5c0-6.075-4.925-11-11-11v-3c7.732 0 14 6.268 14 14z" clip-rule="evenodd"></path>
+                                <path d="M19.5 22.5c0-9.941-8.059-18-18-18v-3c11.598 0 21 9.402 21 21z" clip-rule="evenodd"></path>
+                            </g>
+                        </svg>
+                    </a>
+                    <button id="theme-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle theme">
+                        <span id="theme-icon"></span>
+                    </button>
+                    <button id="contrast-toggle" class="cursor-pointer hover:opacity-70 transition-opacity" aria-label="Toggle high contrast">
+                        <span id="contrast-icon"></span>
+                    </button>
+                </div>
+            </nav>
+        </header>
+        <main class="w-full">
+            
+  
+  <aside class="hidden lg:block fixed left-[calc(50%-624px)] w-64" style="top: calc(5rem + 6.5rem);">
+    <nav class="sticky top-4">
+      <ol class="list-none space-y-2 text-sm pl-0">
+        <li class="ml-0">
+            <a href="#top" alt="Scroll to top" aria-label="Scroll to top">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" aria-label="Icon showing an arrow pointing upwards, enclosed in a circle">
+                <!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE -->
+                <path fill="currentColor" d="M11 16h2v-4.2l1.6 1.6L16 12l-4-4l-4 4l1.4 1.4l1.6-1.6zm1 6q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22"></path>
+              </svg>
+            </a>
+        </li>
+        
+          <li class="leading-relaxed ml-0">
+            <a href="#Tooling" data-toc-link="Tooling" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Tooling
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Mix-as-a-Build-Tool" data-toc-link="Mix-as-a-Build-Tool" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Mix as a Build Tool
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Test-Runner-and-ExUnit" data-toc-link="Test-Runner-and-ExUnit" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Test Runner and ExUnit
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Formatter" data-toc-link="Formatter" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Formatter
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Language-Server" data-toc-link="Language-Server" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Language Server
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Standard-Library-Documentation" data-toc-link="Standard-Library-Documentation" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Standard Library &amp; Documentation
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-0">
+            <a href="#Ecosystem" data-toc-link="Ecosystem" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Ecosystem
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-0">
+            <a href="#The-Language-Itself" data-toc-link="The-Language-Itself" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              The Language Itself
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#The-Pipe-Operator" data-toc-link="The-Pipe-Operator" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              The Pipe Operator
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Macros" data-toc-link="Macros" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Macros
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-3">
+            <a href="#Concurrency" data-toc-link="Concurrency" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Concurrency
+            </a>
+          </li>
+        
+          <li class="leading-relaxed ml-0">
+            <a href="#Closing-Thoughts" data-toc-link="Closing-Thoughts" class="no-underline opacity-80 hover:opacity-100 hover:text-[rgb(30,102,245)] dark:hover:text-[rgb(138,173,244)] transition-opacity block py-1 [&[data-active='true']]:opacity-100 [&[data-active='true']]:font-bold">
+              Closing Thoughts
+            </a>
+          </li>
+        
+      </ol>
+    </nav>
+  </aside>
+
+
+  <div class="flex justify-center px-4">
+  <div class="w-full max-w-2xl">
+    
+    <article class="text-l">
+      <div class="flex flex-col mb-6">
+        <span class="text-base">Jan 19, 2026</span>
+        <h1 class="text-3xl">One Year Retrospective of Elixir</h1>
+        <div>
+          <a class="text-base mr-2" href="/keywords/elixir">elixir</a><a class="text-base mr-2" href="/keywords/programming">programming</a>
+        </div>
+      </div>
+
+      <html><head></head><body><p>It’s now been about a year since I switched job and went from working primarily in TypeScript to Elixir, and I couldn’t be happier with the tech change. That said, not everything is perfect. My previous experience with Elixir is limited to a university course in functional programming, which mainly consisted of solving math-like problems, and Advent of Code, which again is focused on solving math-like problems. In other words, I was pretty much a beginner when I joined my current team.</p>
+<p>I generally think that tooling and ecosystem is more important than the language itself, so I’ll primarily focus on that in this post.</p>
+<section id="Tooling">
+<h2><a href="#Tooling">Tooling</a></h2>
+<section id="Mix-as-a-Build-Tool">
+<h3><a href="#Mix-as-a-Build-Tool">Mix as a Build Tool</a></h3>
+<p><code class="language-plaintext" translate="no">Mix
+</code> works great - it’s extensible, can compile on multiple cores (since v1.19.4), handles everything from compilation to installation of dependencies and package management. One thing I really like is that the mixfile of a project, <code class="language-plaintext" translate="no">mix.exs
+</code>, is just regular Elixir. This means that I can script the build step freely using the language I already know, and I don’t have to shell out into various scripts like I used to do in the <code class="language-plaintext" translate="no">Node
+</code> ecosystem. Want to add a CLI task to simplify running tests in CI? Just write an alias function and add it to the <code class="language-plaintext" translate="no">project
+</code> in the mixfile:</p>
+<pre class="athl athl-themes relative rounded-lg p-2 light dark" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">def</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">aliases</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
+</div><div class="line" data-line="2">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">[</span><span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">ci: </span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">[</span><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;deps.unlock --check-unused&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;format --check-formatted&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;cmd docker compose up --detach --wait&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;test&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">]</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">]</span>
+</div><div class="line" data-line="3"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">end</span>
+</div></code></pre>
+<p>Now just run <code class="language-plaintext" translate="no">mix ci
+</code> and it’ll run whatever you defined in the alias. This extensibility is not limited to just running code in your mixfile, as you can extend mix with your own <a href="https://hexdocs.pm/mix/Mix.Task.html">tasks</a>. One simple example is the <a href="https://github.com/ackurat/ackurat.github.io/blob/main/lib/mix/tasks/post.ex">generator</a> I use to create new posts.</p>
+</section>
+<section id="Test-Runner-and-ExUnit">
+<h3><a href="#Test-Runner-and-ExUnit">Test Runner and ExUnit</a></h3>
+<p><code class="language-plaintext" translate="no">Mix
+</code> is also used to run tests, and Elixir includes the testing framework <code class="language-plaintext" translate="no">ExUnit
+</code>. So far, it has everything I want from a testing framework - assertions, hooks, parallel or sequential tests, easy mocking<a id="fnref1" href="#fn1" role="doc-noteref"><sup>1</sup></a>. The mix tasks for running tests are also great, <code class="language-plaintext" translate="no">mix test --failed
+</code> for instance is a wonderfully simple thing that just runs the tests that failed the previous run, and <code class="language-plaintext" translate="no">mix test --seed &lt;seed&gt;
+</code> lets you run tests with a specified seeding so that randomized values are consistent.</p>
+</section>
+<section id="Formatter">
+<h3><a href="#Formatter">Formatter</a></h3>
+<p>I don’t have much to say here - I think every language should include a formatter, and just decide on a format. <a href="https://go.dev">Go</a> does this exactly right, and with Elixir I get the same. I have it run when I save files and then check in CI that everything is formatted.</p>
+</section>
+<section id="Language-Server">
+<h3><a href="#Language-Server">Language Server</a></h3>
+<p>This is the one feature that the tooling isn’t really up to other languages. Don’t get me wrong, the language server does work and it gives you go to definition, squiggly lines etc, but it’s a tad bit slow and more importantly, it quite often reports issues with dependencies on the top level (<code class="language-plaintext" translate="no">mix.exs
+</code>). The only solution I’ve found is to clear the <code class="language-plaintext" translate="no">.elixir_ls
+</code> directory and let it recompile.</p>
+<p>It’s worth mentioning that the language server is getting some love with an effort to bring it in as an <a href="https://elixir-lang.org/blog/2024/08/15/welcome-elixir-language-server-team/">official</a> part of Elixir, but it’s still in alpha and I’ve had some crashes with it so for now I’m sticking with <a href="https://github.com/elixir-lsp/elixir-ls">elixir-ls</a>.</p>
+</section>
+<section id="Standard-Library-Documentation">
+<h3><a href="#Standard-Library-Documentation">Standard Library &amp; Documentation</a></h3>
+<p>The standard library is good. It has all the necessities, and is very well documented. I’m including documentation into this topic since it’s a first class citizen of the language. <a href="https://hexdocs.pm/ex_unit/ExUnit.DocTest.html">Doctest</a> is a fantastic tool for libraries to have up-to-date documentation examples.</p>
+</section>
+</section>
+<section id="Ecosystem">
+<h2><a href="#Ecosystem">Ecosystem</a></h2>
+<p>The library ecosystem is both great and… not great. First of all, you can freely use Erlang libraries, meaning you have access to both a mature standard library and stable packages such as <a href="https://github.com/kafka4beam/brod">brod</a>.</p>
+<p>The Elixir ecosystem has some very good and mature libraries such as <a href="https://www.phoenixframework.org/">Phoenix</a>, <a href="https://hexdocs.pm/broadway/introduction.html">Broadway</a>, <a href="https://hexdocs.pm/ecto/Ecto.html">Ecto</a> and <a href="https://hexdocs.pm/oban/Oban.html">Oban</a>. Oban is so good I’m planning to write an appreciation post just for it.</p>
+<p>At the same time, many libraries are pre-1.0. An example is <a href="https://hexdocs.pm/postgrex/readme.html">postgrex</a>, which is the default Postgres driver. It was initially published in 2014 and the current version is 0.22. Between versions 0.21 and 0.22 there was a breaking change (Elixir v1.15+ required). In my experience, pre-1.0 libraries tend to change more often which can increase churn and tech debt.</p>
+</section>
+<section id="The-Language-Itself">
+<h2><a href="#The-Language-Itself">The Language Itself</a></h2>
+<p>When I took the course in university for functional programming, I didn’t really see the appeal. I was fostered with Java and OOP, and all of a sudden we’re writing in an esoteric language that doesn’t even have loops. We did pattern matching on lists, recursion and spawned processes from a supervisor we didn’t understand. Needless to say, the course wasn’t enough to actually understand Elixir (or <a href="https://en.wikipedia.org/wiki/BEAM_%28Erlang_virtual_machine%29">BEAM</a>).</p>
+<p>Today, I can’t imagine going back to the OOP world. I think I’m past the honeymoon phase of trying a new language, and I still think the productivity and developer experience is phenomenal. The lack of loops isn’t even an issue - just use the enumerable protocol. Pattern matching is a fantastic tool for error handling:</p>
+<pre class="athl athl-themes relative rounded-lg p-2 light dark" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"># Log the error and just pass it along</span>
+</div><div class="line" data-line="2"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">def</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">pass_on_error</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
+</div><div class="line" data-line="3">  <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">case</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">bar</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
+</div><div class="line" data-line="4">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">{</span><span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:ok</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">baz</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">}</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">-&gt;</span> <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">baz</span>
+</div><div class="line" data-line="5">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">{</span><span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:error</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">error</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">}</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">-&gt;</span>
+</div><div class="line" data-line="6">      <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Logger</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">.</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">error</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#ea76cb, #f5c2e7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">%</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">{</span><span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">message: </span><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;Some error&quot;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">error: </span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">error</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">}</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span>
+</div><div class="line" data-line="7">      <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">{</span><span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:error</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">error</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">}</span>
+</div><div class="line" data-line="8">  <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">end</span>
+</div><div class="line" data-line="9"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">end</span>
+</div><div class="line" data-line="10">
+</div><div class="line" data-line="11"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"># Assign baz to either the successful value, or nil</span>
+</div><div class="line" data-line="12"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">def</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">swallow_error</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
+</div><div class="line" data-line="13">  <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">baz</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">case</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">bar</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
+</div><div class="line" data-line="14">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">{</span><span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:ok</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">baz</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">}</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">-&gt;</span> <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">baz</span>
+</div><div class="line" data-line="15">    <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">_</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">-&gt;</span> <span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">nil</span>
+</div><div class="line" data-line="16">  <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">end</span>
+</div><div class="line" data-line="17"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">end</span>
+</div><div class="line" data-line="18">
+</div><div class="line" data-line="19"><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);"># Will raise a MatchError in case the pattern doesn&#39;t match</span>
+</div><div class="line" data-line="20"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">def</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">raise_error</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
+</div><div class="line" data-line="21">  <span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">{</span><span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:ok</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">baz</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">}</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">bar</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span>
+</div><div class="line" data-line="22"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">end</span>
+</div></code></pre>
+<p>You get a clear separation between errors as values that you can handle, and raised errors for unexpected errors that you can’t handle. <a href="https://www.youtube.com/watch?v=JvBT4XBdoUE">Saša Jurić’s talk</a> is a great starter on how the language and the runtime behaves, and how the application can keep running at (almost) full speed even though it is repeatedly running into unexpected errors.</p>
+<section id="The-Pipe-Operator">
+<h3><a href="#The-Pipe-Operator">The Pipe Operator</a></h3>
+<p>Sometimes I have to write code in Erlang, which doesn’t have the pipe operator. I’m not very proficient in Erlang, but I see sequences like this sometimes<a id="fnref2" href="#fn2" role="doc-noteref"><sup>2</sup></a>:</p>
+<pre class="athl athl-themes relative rounded-lg p-2 dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">erlang</span><code class="language-erlang block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1"><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Foo</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span> <span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&lt;&lt;<span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;foo&quot;</span>&gt;&gt;</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
+</div><div class="line" data-line="2"><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Foo1</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">bar</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Foo</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
+</div><div class="line" data-line="3"><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Foo2</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">=</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">baz</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Foo1</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
+</div><div class="line" data-line="4"><span style="color: light-dark(#4c4f69, #cdd6f4); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Foo2</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">.</span>
+</div></code></pre>
+<p>Compared to using the pipe operator in Elixir:</p>
+<pre class="athl athl-themes relative rounded-lg p-2 dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1"><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;foo&quot;</span>
+</div><div class="line" data-line="2"><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">|&gt;</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">bar</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span>
+</div><div class="line" data-line="3"><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">|&gt;</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">baz</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span>
+</div></code></pre>
+<p>Or as a one liner: <code class="language-elixir" translate="no"><span style="color: light-dark(#40a02b, #a6e3a1); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">&quot;foo&quot;</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">|&gt;</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">bar</span> <span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">|&gt;</span> <span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">baz</span>
+</code></p>
+<p>The pipe operator is such a simple concept, and every language should have it.</p>
+</section>
+<section id="Macros">
+<h3><a href="#Macros">Macros</a></h3>
+<p>Macros are compile time transformations, and many libraries use them extensively. Aside from some configuration and setting up schemas, this is all that’s needed to add a database query API to your application using Ecto:</p>
+<pre class="athl athl-themes relative rounded-lg p-2 dark light" style="color: light-dark(#4c4f69, #cdd6f4); background-color: light-dark(#eff1f5, #1e1e2e);"><span class="absolute top-0 right-4 -translate-y-full rounded-t-lg px-2 text-base" style="background-color: light-dark(var(--color-latte-base), var(--color-mocha-base)); color: light-dark(var(--color-latte-text), var(--color-mocha-text));">elixir</span><code class="language-elixir block overflow-x-auto" translate="no" tabindex="0" role="code"><div class="line" data-line="1"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">defmodule</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">App.Repo</span> <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">do</span>
+</div><div class="line" data-line="2">  <span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">use</span> <span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Ecto.Repo</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
+</div><div class="line" data-line="3">    <span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">otp_app: </span><span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">:app</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span>
+</div><div class="line" data-line="4">    <span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">adapter: </span><span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">Ecto.Adapters.Postgres</span>
+</div><div class="line" data-line="5"><span style="color: light-dark(#8839ef, #cba6f7); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">end</span>
+</div></code></pre>
+<p>Now you can do <code class="language-elixir" translate="no"><span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">App.Repo</span><span style="color: light-dark(#04a5e5, #89dceb); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">.</span><span style="color: light-dark(#1e66f5, #89b4fa); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">get_by</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">(</span><span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">SomeModule</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">,</span> <span style="color: light-dark(#dd7878, #f2cdcd); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">id: </span><span style="color: light-dark(#fe640b, #fab387); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">1</span><span style="color: light-dark(#7c7f93, #9399b2); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">)</span>
+</code> and you’ll get the stored <code class="language-elixir" translate="no"><span style="color: light-dark(#df8e1d, #f9e2af); font-weight: light-dark(normal, normal); text-decoration: light-dark(none, none);">SomeModule</span>
+</code> where id is 1. In other words, macros are pretty awesome when used like this. It significantly reduces boilerplate, and especially for tests I find it useful to define macros to do some more involved setups (for instance, setting up a Kafka consumer that’ll consume messages produced during the test).</p>
+</section>
+<section id="Concurrency">
+<h3><a href="#Concurrency">Concurrency</a></h3>
+<p>Much can be said about the concurrency model of Elixir, utilizing <a href="https://www.erlang.org/doc/system/design_principles.html">Erlang/OTP</a>. However, I won’t dive deep into it here. It’s mostly transparent when using libraries such as <a href="https://hexdocs.pm/plug/readme.html">Plug</a> - just put it under the supervision tree and you’re good to go. <a href="https://www.youtube.com/watch?v=JvBT4XBdoUE">Saša Jurić’s talk</a> is again a good source for getting a grasp of how it performs.</p>
+</section>
+</section>
+<section id="Closing-Thoughts">
+<h2><a href="#Closing-Thoughts">Closing Thoughts</a></h2>
+<p>Why didn’t I switch job earlier? Elixir and its ecosystem offer pretty much everything I want from a microservice backend perspective, and with established libraries like Oban, Ecto and Broadway setting up specialized applications is a breeze.</p>
+<p>The ecosystem may be smaller than that of others, but the developer experience is still amazing and with the standard library + the Erlang interoperability I don’t feel that it’s a hindrance when writing the kind of code I write.</p>
+</section>
+<section role="doc-endnotes">
+<hr/>
+<ol>
+<li id="fn1">
+<p>I’ll probably write a whole article on it in the future, but our whole test suite (unit tests and integration-like tests) at work tests 4 separate microservices in just about 3 seconds. Combined with <a href="https://hexdocs.pm/mix_test_watch/readme.html">mix test.watch</a>, this means that I can have a separate shell running the tests continuously while writing code.<a href="#fnref1" role="doc-backlink">↩︎</a></p>
+</li>
+<li id="fn2">
+<p>Yes, comma is the delimiter between expressions in Erlang, and you end your functions with a period. You get used to it (and when you forget a comma, the language server completely messes up your formatting).<a href="#fnref2" role="doc-backlink">↩︎</a></p>
+</li>
+</ol>
+</section>
+</body></html>
+    </article>
+
+    <div class="-mx-4 my-2 flex h-1 w-screen rounded-full sm:mx-0 sm:w-full bg-linear-to-r dark:from-footer-dark-1 from-footer-light-1 dark:via-footer-dark-2 via-footer-light-2 dark:to-footer-dark-3 to-footer-light-3"></div>
+  <footer class="italic">
+    
+      <div class="flex justify-between">
+        
+          <a href="/setting-up-a-site-with-zine">
+            Previous
+          </a>
+        
+        
+          <a href="/using-djot-for-content">
+            Next
+          </a>
+        
+      </div>
+    
+  </footer>
+  
+  </div>
+</div>
+
+  <script>
+  (function() {
+    let lastHash = location.hash;
+
+    function updateTOC(sectionId) {
+      document.querySelectorAll('[data-toc-link]').forEach(function(link) {
+        link.setAttribute('data-active', link.dataset.tocLink === sectionId);
+      });
+    }
+
+    document.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], section[id]');
+      let currentSection = null;
+
+      sections.forEach(function(section) {
+        if (window.scrollY >= section.offsetTop - 100) {
+          currentSection = section;
+        }
+      });
+
+      // If at bottom of page, use the last section
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+        currentSection = sections[sections.length - 1];
+      }
+
+      if (currentSection && currentSection.id) {
+        const newHash = '#' + currentSection.id;
+        if (lastHash !== newHash) {
+          history.replaceState(null, '', location.origin + location.pathname + newHash);
+          lastHash = newHash;
+          updateTOC(currentSection.id);
+        }
+      }
+    });
+
+    if (location.hash) {
+      updateTOC(decodeURIComponent(location.hash.substring(1)));
+    }
+  })();
+</script>
+
+        </main>
+        <script>
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const contrastToggle = document.getElementById('contrast-toggle');
+            const contrastIcon = document.getElementById('contrast-icon');
+            const html = document.documentElement;
+
+            function updateThemeIcon() {
+              const currentTheme = html.style.colorScheme ||
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+              themeIcon.textContent = currentTheme === 'dark' ? '☼' : '☾';
+            }
+
+            function updateContrastIcon() {
+              const isHighContrast = html.classList.contains('hc');
+              contrastIcon.textContent = isHighContrast ? '◑' : '◐';
+            }
+
+            updateThemeIcon();
+            updateContrastIcon();
+
+            themeToggle.addEventListener('click', () => {
+              const currentTheme = html.style.colorScheme ||
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+              const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+              html.style.colorScheme = newTheme;
+              html.classList.remove('light', 'dark');
+              html.classList.add(newTheme);
+              localStorage.setItem('theme', newTheme);
+              updateThemeIcon();
+            });
+
+            contrastToggle.addEventListener('click', () => {
+              const isHighContrast = html.classList.contains('hc');
+              if (isHighContrast) {
+                html.classList.remove('hc');
+                localStorage.setItem('highContrast', 'false');
+              } else {
+                html.classList.add('hc');
+                localStorage.setItem('highContrast', 'true');
+              }
+              updateContrastIcon();
+            });
+
+        </script>
+
+
+    </body>
+  </html>
