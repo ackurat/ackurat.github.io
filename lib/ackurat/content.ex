@@ -29,11 +29,11 @@ defmodule Ackurat.Content do
   end
 
   def site_email() do
-    "mail@mail.com"
+    "dev@liliemark.se"
   end
 
   def site_copyright() do
-    "<span xmlns:cc='http://creativecommons.org/ns#' >This work is licensed under <a href='https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1' target='_blank' rel='license noopener noreferrer' style='display:inline-flex;'>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International<img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1' alt=''><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1' alt=''><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1' alt=''><img style='height:22px!important;margin-left:3px;vertical-align:text-bottom;' src='https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1' alt=''></a></span>"
+    "This work is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-nd/4.0/"
   end
 
   def redirects() do
@@ -97,28 +97,6 @@ defmodule Ackurat.Content do
 
   def not_found_page do
     pages() |> Enum.find(&(&1.id == "404"))
-  end
-
-  def get_reads() do
-    for filename <- File.ls!("pages/reads") do
-      id = Path.rootname(filename)
-      src_path = Path.join("pages/reads/", filename)
-      data = YamlElixir.read_from_file!(src_path)
-      html_path = "/reads/#{id}/index.html"
-
-      %{
-        id: id,
-        date: DateTime.utc_now(),
-        update: data["update"],
-        type: :reads,
-        title: data["title"],
-        description: data["description"],
-        links: data["links"],
-        src_path: src_path,
-        html_path: html_path,
-        route: Path.join("/", Path.dirname(html_path)) <> "/"
-      }
-    end
   end
 
   def all_pages do
