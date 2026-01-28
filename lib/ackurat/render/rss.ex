@@ -23,8 +23,6 @@ defmodule Ackurat.Render.Rss do
          {:link, Content.site_url()},
          {:description, "Recent content on #{Content.site_title()}"},
          {:language, "en-us"},
-         {:managingEditor, "#{Content.site_author()} (#{Content.site_email()})"},
-         {:webMaster, "#{Content.site_author()} (#{Content.site_email()})"},
          {:copyright, Content.site_copyright()},
          {:lastBuildDate, format_rss_date(DateTime.utc_now())},
          {:"atom:link",
@@ -36,7 +34,7 @@ defmodule Ackurat.Render.Rss do
               {:title, post.title},
               {:link, Content.site_url() <> post.route},
               {:pubDate, format_rss_date(post.date)},
-              {:author, "#{Content.site_author()} (#{Content.site_email()})"},
+              {:author, Content.site_email()},
               {:guid, Content.site_url() <> post.route},
               {:description, strip_header_links(post.body)}
             ]}
@@ -49,8 +47,10 @@ defmodule Ackurat.Render.Rss do
     body
     |> Floki.parse_fragment!()
     |> Floki.traverse_and_update(fn
+      {"html", _, [{"head", _, _}, {"body", _, children}]} ->
+        children
+
       {"a", [{"href", "#" <> _}], node} = frag ->
-        IO.inspect(frag)
         {"span", [], node} |> IO.inspect(label: :after)
 
       node ->
