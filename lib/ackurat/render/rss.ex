@@ -51,7 +51,7 @@ defmodule Ackurat.Render.Rss do
         children
 
       {"a", [{"href", "#" <> _}], node} = frag ->
-        {"span", [], node} |> IO.inspect(label: :after)
+        {"span", [], node}
 
       node ->
         node
