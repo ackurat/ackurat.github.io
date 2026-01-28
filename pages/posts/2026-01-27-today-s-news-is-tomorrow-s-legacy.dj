@@ -1,0 +1,16 @@
+%{
+  title: "Today's news is tomorrow's legacy",
+  description: "Are we perpetually creating tech debt that will need replacing?",
+  keywords: ["programming"],
+  draft: true,
+}
+
+---
+
+We recently celebrated the decommissioning of a 10 year old service at work, during which a tech lead uttered the words
+
+> Today's news is tomorrow's legacy
+
+This got me thinking - are we really creating legacy as we go? Are the products we build destined to be replaced within a mere 10 years? Compare this to physical products, where you on one hand have long lasting products (like a hammer or a desk, both of which easily can be passed down to the next generation) and on the other have consumables like a pair of jeans that'll only last so long until the fabric in the crotch starts giving up.
+
+The business requirements may change over time, rendering some software obsolete, and that's okay, but the service we celebrated the decommissioning of was in charge of delivering notifications to end users. The business requirement is still there, so
