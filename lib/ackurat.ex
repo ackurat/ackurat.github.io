@@ -38,9 +38,9 @@ defmodule Ackurat do
     end
   end
 
-  def build_pages(prod) do
+  def build_pages(env) do
     pages = Content.all_pages()
-    active_posts = Content.active_posts(prod)
+    active_posts = Content.active_posts(env)
     all_keywords = Content.all_keywords()
     about_page = Content.about_page()
     assert_uniq_page_ids!(pages)
@@ -77,7 +77,7 @@ defmodule Ackurat do
     write_file(path, safe)
   end
 
-  def build_all(prod \\ :prod) do
+  def build_all(env \\ :prod) do
     Logger.info("Clear output directory")
     File.rm_rf!(@output_dir)
     File.mkdir_p!(@output_dir)
@@ -87,7 +87,7 @@ defmodule Ackurat do
 
     {micro, :ok} =
       :timer.tc(fn ->
-        build_pages(prod)
+        build_pages(env)
       end)
 
     ms = micro / 1000

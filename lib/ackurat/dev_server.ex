@@ -3,7 +3,7 @@ defmodule Ackurat.DevServer do
 
   use Plug.Router
 
-  Ackurat.build_all(Mix.env())
+  Ackurat.build_all(:dev)
   # Recompiling every time.
   # We want to be sure to trigger `build_all`.
   # Performance doesn't really matter.
