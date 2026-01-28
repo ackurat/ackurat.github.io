@@ -38,10 +38,24 @@ defmodule Ackurat.Render.Rss do
               {:pubDate, format_rss_date(post.date)},
               {:author, "#{Content.site_author()} (#{Content.site_email()})"},
               {:guid, Content.site_url() <> post.route},
-              {:description, post.body}
+              {:description, strip_header_links(post.body)}
             ]}
          end}
     ])
     |> XmlBuilder.generate()
+  end
+
+  defp strip_header_links(body) do
+    body
+    |> Floki.parse_fragment!()
+    |> Floki.traverse_and_update(fn
+      {"a", [{"href", "#" <> _}], node} = frag ->
+        IO.inspect(frag)
+        {"span", [], node} |> IO.inspect(label: :after)
+
+      node ->
+        node
+    end)
+    |> Floki.raw_html()
   end
 end

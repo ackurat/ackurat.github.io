@@ -48,7 +48,9 @@ defmodule Ackurat.Content do
   end
 
   def all_posts do
-    @pages |> Enum.filter(&(&1.type == :post)) |> Enum.sort_by(& &1.date, {:desc, Date})
+    @pages
+    |> Enum.filter(&(&1.type == :post))
+    |> Enum.sort_by(& &1.date, {:desc, Date})
   end
 
   def post_by_id(id) do

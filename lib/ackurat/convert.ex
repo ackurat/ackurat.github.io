@@ -1,16 +1,19 @@
 defmodule Ackurat.Convert do
   require Logger
 
-  def convert(_path, body, _attrs, _optds) do
+  def convert(_path, body, _attrs, _opts) do
     Djot.to_html!(body)
     |> Floki.parse_fragment!()
-    |> highlight_code()
+    |> traverse()
     |> Floki.raw_html()
   end
 
-  defp highlight_code(ast) do
+  defp traverse(ast) do
     ast
     |> Floki.traverse_and_update(fn
+      {"html", _, [{"head", _, _}, {"body", _, children}]} ->
+        children
+
       {"pre", _, [{"code", _, _}]} = node ->
         block_code(node)
 
