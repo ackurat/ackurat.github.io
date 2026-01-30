@@ -1,5 +1,7 @@
 import Config
 
+config :ackurat, env: Mix.env()
+
 config :tailwind,
   version: "4.1.18",
   default: [

@@ -43,7 +43,7 @@ defmodule Ackurat.Posts do
   end
 
   def active_posts() do
-    case Mix.env() do
+    case Application.get_env(:ackurat, :env) do
       :prod -> posts() |> Enum.reject(& &1.draft)
       :dev -> posts()
     end

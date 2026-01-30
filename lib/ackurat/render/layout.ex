@@ -72,7 +72,7 @@ defmodule Ackurat.Render.Layout do
               }
             })();
           </script>
-          <%= if Mix.env() == :prod do %>
+          <%= if Application.get_env(:ackurat, :env) == :prod do %>
             <script data-goatcounter="https://ackurat.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
           <% end %>
         </head>
