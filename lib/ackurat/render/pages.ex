@@ -7,8 +7,8 @@ defmodule Ackurat.Render.Pages do
   def index(assigns) do
     ~H"""
     <.layout
-      title={Content.site_title()}
-      description={Content.site_description()}
+      title={""}
+      description={""}
       route="/"
       og_type="website"
     >
@@ -34,8 +34,8 @@ defmodule Ackurat.Render.Pages do
   def keyword(assigns) do
     ~H"""
     <.layout
-      title={Content.site_title()}
-      description={Content.site_description()}
+      title={""}
+      description={""}
       route="/"
       og_type="website"
     >
@@ -57,8 +57,8 @@ defmodule Ackurat.Render.Pages do
   def archive(assigns) do
     ~H"""
     <.layout
-      title={Content.site_title()}
-      description={Content.site_description()}
+      title={}
+      description={}
       route="/"
       og_type="website"
     >

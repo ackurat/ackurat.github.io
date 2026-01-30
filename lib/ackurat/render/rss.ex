@@ -1,6 +1,4 @@
 defmodule Ackurat.Render.Rss do
-  alias Ackurat.Content
-
   def format_rss_date(date = %DateTime{}) do
     Calendar.strftime(date, "%a, %d %b %Y %H:%M:%S %z")
   end
@@ -16,26 +14,32 @@ defmodule Ackurat.Render.Rss do
   end
 
   def rss(posts) do
+    site = Application.fetch_env!(:ackurat, :site)
+
     XmlBuilder.element(:rss, %{version: "2.0", "xmlns:atom": "http://www.w3.org/2005/Atom"}, [
       {:channel,
        [
-         {:title, Content.site_title()},
-         {:link, Content.site_url()},
-         {:description, "Recent content on #{Content.site_title()}"},
+         {:title, site[:title]},
+         {:link, site[:url]},
+         {:description, "Recent content on #{site[:title]}"},
          {:language, "en-us"},
-         {:copyright, Content.site_copyright()},
+         {:copyright, site[:copyright]},
          {:lastBuildDate, format_rss_date(DateTime.utc_now())},
          {:"atom:link",
-          %{href: "#{Content.site_url()}/index.xml", rel: "self", type: "application/rss+xml"}}
+          %{
+            href: "#{site[:url]}/index.xml",
+            rel: "self",
+            type: "application/rss+xml"
+          }}
        ] ++
          for post <- Enum.take(posts, rss_post_limit()) do
            {:item,
             [
               {:title, post.title},
-              {:link, Content.site_url() <> post.route},
+              {:link, site[:url] <> post.route},
               {:pubDate, format_rss_date(post.date)},
-              {:author, Content.site_email()},
-              {:guid, Content.site_url() <> post.route},
+              {:author, site[:email]},
+              {:guid, site[:url] <> post.route},
               {:description, strip_header_links(post.body)}
             ]}
          end}
@@ -50,7 +54,7 @@ defmodule Ackurat.Render.Rss do
       {"html", _, [{"head", _, _}, {"body", _, children}]} ->
         children
 
-      {"a", [{"href", "#" <> _}], node} = frag ->
+      {"a", [{"href", "#" <> _}], node} ->
         {"span", [], node}
 
       node ->

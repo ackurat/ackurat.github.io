@@ -12,43 +12,8 @@ defmodule Ackurat.Content do
     highlighters: [],
     html_converter: Ackurat.Convert
 
-  def site_title() do
-    "ackurat.github.io"
-  end
-
-  def site_description() do
-    "Ackurat's test thing"
-  end
-
-  def site_author() do
-    "Adam CL"
-  end
-
-  def site_url() do
-    "https://ackurat.github.io"
-  end
-
-  def site_email() do
-    "dev@liliemark.se"
-  end
-
-  def site_copyright() do
-    "This work is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-nd/4.0/"
-  end
-
-  def redirects() do
-    %{
-      "/feed.xml" => "/index.xml",
-      "/rss.xml" => "/index.xml",
-      "/feed/index.html" => "/index.xml",
-      "/blog/index.html" => "/",
-      "/post/index.html" => "/",
-      "/posts/index.html" => "/"
-    }
-  end
-
   def all_posts do
-    @pages
+    pages()
     |> Enum.filter(&(&1.type == :post))
     |> Enum.sort_by(& &1.date, {:desc, Date})
   end
@@ -89,9 +54,7 @@ defmodule Ackurat.Content do
     end
   end
 
-  def pages do
-    @pages
-  end
+  def pages, do: @pages
 
   def about_page do
     pages() |> Enum.find(&(&1.id == "about"))
@@ -99,9 +62,5 @@ defmodule Ackurat.Content do
 
   def not_found_page do
     pages() |> Enum.find(&(&1.id == "404"))
-  end
-
-  def all_pages do
-    [about_page()] ++ active_posts()
   end
 end

@@ -1,6 +1,5 @@
 defmodule Ackurat.Render.Layout do
   use Phoenix.Component
-  alias Ackurat.Content
   import Phoenix.HTML
 
   def format_iso_date(date = %DateTime{}) do
@@ -14,22 +13,30 @@ defmodule Ackurat.Render.Layout do
   end
 
   def layout(assigns) do
+    site = Application.fetch_env!(:ackurat, :site)
+    assigns = assign(assigns, :site, site)
+
     ~H"""
     <!DOCTYPE html>
       <html lang="en">
         <head>
           <meta charset="utf-8" />
-          <title><%= @title %></title>
+          <title><%= if @title != "" do %>
+              <%= @title %> @ <%= @site[:title] %>
+            <% else %>
+              <%= @site[:title] %>
+            <% end %>
+          </title>
           <meta name="description" content={@description} />
-          <meta name="author" content={Content.site_author()} />
+          <meta name="author" content={@site[:author]} />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link href="/index.xml" rel="alternate" type="application/rss+xml" title={Content.site_title()} />
+          <link href="/index.xml" rel="alternate" type="application/rss+xml" title={@site[:title]} />
           <meta name="ROBOTS" content="INDEX, FOLLOW" />
           <meta property="og:title" content={@title} />
           <meta property="og:description" content={@description} />
           <meta property="og:type" content={@og_type} />
-          <meta property="og:url" content={"#{Content.site_url()}#{@route}"}>
+          <meta property="og:url" content={"#{@site[:url]}#{@route}"}>
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:title" content={@title} />
           <meta name="twitter:description" content={@description} />
@@ -40,14 +47,14 @@ defmodule Ackurat.Render.Layout do
             <meta itemprop="dateModified" content={format_iso_date(@date)} />
             <meta itemprop="wordCount" content={@wordcount} />
             <meta itemprop="keywords" content={Enum.join(@keywords, ",")} />
-            <meta property="article:author" content={Content.site_author()} />
+            <meta property="article:author" content={@site[:author]} />
             <meta property="article:section" content="Software" />
             <meta :for={keyword <- @keywords} property="article:tag" content={keyword} />
             <meta property="article:published_time" content={format_iso_date(@date)} />
             <meta property="article:modified_time" content={format_iso_date(@date)} />
           <% end %>
-          <link rel="canonical" href={"#{Content.site_url()}#{@route}"} />
-          <link rel="stylesheet" href="/assets/app.css" />
+          <link rel="canonical" href={"#{@site[:url]}#{@route}"} />
+          <link rel="stylesheet" href="/style.css" />
           <script>
             (function() {
               const storedTheme = localStorage.getItem('theme');
@@ -74,9 +81,9 @@ defmodule Ackurat.Render.Layout do
                 <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
                     <a href="/">~/</a>
                     <div class="flex flex-wrap gap-4">
-                        <a href="/about/">About</a>
-                        <a href="/archive/">Archive</a>
-                        <a type="application/rss+xml" href="/index.xml" alt="RSS feed" aria-label="RSS feed">
+                        <a href="/about/">/about</a>
+                        <a href="/archive/">/archive</a>
+                        <a type="application/rss+xml" href="/feed" alt="RSS feed" aria-label="RSS feed">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24" aria-label="RSS icon with radio waves emanating from a dot in the lower left">
                             <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->
                                 <g fill="currentColor" stroke="none" stroke-linejoin="round">
@@ -178,7 +185,7 @@ defmodule Ackurat.Render.Layout do
   def page(assigns) do
     ~H"""
     <.layout
-      title={"#{@title} — #{Content.site_title()}"}
+      title={@title}
       description={@description}
       og_type="website"
       route={@route}
@@ -197,35 +204,26 @@ defmodule Ackurat.Render.Layout do
     """
   end
 
+  # TODO - prerender this on compilation
   def sitemap(pages) do
+    site = Application.fetch_env!(:ackurat, :site)
+
     {:urlset,
      %{
        xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9",
        "xmlns:xhtml": "http://www.w3.org/1999/xhtml"
      },
      [
-       {:url, [{:loc, Content.site_url()}, {:lastmod, format_iso_date(DateTime.utc_now())}]}
+       {:url,
+        [
+          {:loc, site[:url]},
+          {:lastmod, format_iso_date(DateTime.utc_now())}
+        ]}
        | for page <- pages do
-           {:url,
-            [{:loc, Content.site_url() <> page.route}, {:lastmod, format_iso_date(page.date)}]}
+           {:url, [{:loc, site[:url] <> page.route}, {:lastmod, format_iso_date(page.date)}]}
          end
      ]}
     |> XmlBuilder.document()
     |> XmlBuilder.generate()
-  end
-
-  def redirect(assigns) do
-    ~H"""
-    <!DOCTYPE html>
-    <html lang="en-us">
-      <head>
-        <title><%= @target%></title>
-        <link rel="canonical" href={@target}>
-        <meta name="robots" content="noindex">
-        <meta charset="utf-8">
-        <meta http-equiv="refresh" content={"0; url=#{@target}"}>
-      </head>
-    </html>
-    """
   end
 end

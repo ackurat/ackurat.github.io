@@ -114,7 +114,7 @@ defmodule Ackurat.Render.Post do
   def post(assigns) do
     ~H"""
     <.layout
-      title={"#{@title} — #{Content.site_title()}"}
+      title={@title}
       description={@description}
       og_type="article"
       route={@route}

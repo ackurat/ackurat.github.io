@@ -8,7 +8,12 @@ defmodule Ackurat.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      releases: [
+        unix: [
+          include_executables_for: [:unix]
+        ]
+      ]
     ]
   end
 
@@ -24,9 +29,8 @@ defmodule Ackurat.MixProject do
       {:nimble_publisher, "~> 1.1.0"},
       {:phoenix_live_view, "~> 1.1.20"},
       {:xml_builder, "~> 2.4.0"},
-      {:yaml_elixir, "~> 2.12.0"},
       {:html_sanitize_ex, "~> 1.4.4"},
-      {:bandit, "~> 1.10.1", only: :dev},
+      {:bandit, "~> 1.10.2"},
       {:exsync, "~> 0.4", only: :dev},
       {:tailwind, "~> 0.4.1"},
       {:djot, "~> 0.1.4"},
