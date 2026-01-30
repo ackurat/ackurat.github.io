@@ -7,7 +7,7 @@
 ---
 
 
-I've just set up the site to handle both [Djot](https://djot.net) and Markdown for writing content. It was surprisingly easy! This post outlines how to do it using [NimblePublisher](https://hexdocs.pm/nimble_publisher/) and a [Djot](https://hexdocs.pm/djot/) parser.
+I've just set up the site to handle both [Djot](https://djot.net) and Markdown for writing Posts. It was surprisingly easy! This post outlines how to do it using [NimblePublisher](https://hexdocs.pm/nimble_publisher/) and a [Djot](https://hexdocs.pm/djot/) parser.
 
 We can [override](https://hexdocs.pm/nimble_publisher/NimblePublisher.html#module-custom-html-converter) the HTML converter used by NimblePublisher by simply plugging in our own. Our converter needs to implement the `convert/4` function which returns the HTML as a string.
 
@@ -20,7 +20,7 @@ end
 ```
 
 Since Djot is more or less a superset of Markdown, all previous content can be rendered successfully with the Djot parser. With the default HTML converter now defunct, NimblePublisher won't apply the code highlighter, so we'll need to add this to our `convert/4` function. Let's create two small helpers, one to apply highlighting to all block code and one to inline code:
- 
+
 ``` elixir
 defp highlight_block_code(body) do
   block_code = ~r/<pre><code(?:\s+class="language-(\w*)")?>([^<]*)<\/code><\/pre>/

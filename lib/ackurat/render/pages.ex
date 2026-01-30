@@ -1,6 +1,6 @@
 defmodule Ackurat.Render.Pages do
   use Phoenix.Component
-  alias Ackurat.Content
+  alias Ackurat.Posts
   import Ackurat.Render.Layout
   import Ackurat.Render.Post
 
@@ -42,7 +42,7 @@ defmodule Ackurat.Render.Pages do
       <.centered_content>
         <.heading><%= assigns %></.heading>
         <div>
-          <a :for={post <- Content.posts_by_keyword(assigns)} href={post.route}>
+          <a :for={post <- Posts.posts_by_keyword(assigns)} href={post.route}>
             <div class="mt-4">
               <span class="text-base"><%= format_post_date(post.date) %></span>
               <div class="text-xl font-bold"><%= post.title %></div>

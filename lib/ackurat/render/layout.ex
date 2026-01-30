@@ -81,8 +81,8 @@ defmodule Ackurat.Render.Layout do
                 <nav class="flex justify-between items-center gap-4 pb-6 px-2 text-lg font-bold tracking-wider w-full max-w-2xl">
                     <a href="/">~/</a>
                     <div class="flex flex-wrap gap-4">
-                        <a href="/about/">/about</a>
-                        <a href="/archive/">/archive</a>
+                        <a href="/about">/about</a>
+                        <a href="/archive">/archive</a>
                         <a type="application/rss+xml" href="/feed" alt="RSS feed" aria-label="RSS feed">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-[1em] w-auto inline-block align-middle -mt-0.5" viewBox="0 0 24 24" aria-label="RSS icon with radio waves emanating from a dot in the lower left">
                             <!-- Icon from Logos free icons by Streamline - https://creativecommons.org/licenses/by/4.0/ -->

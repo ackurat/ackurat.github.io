@@ -51,7 +51,7 @@ One microfeature I really like in Jonas' blog is syntax highlighting in inline c
 This is some markdown with inline Elixir code: <code class="makeup elixir">def process(value), do: value</code>
 ```
 
-Unfortunately, the markdown parser used by NimblePublisher, [Earmark](https://github.com/pragdave/earmark) doesn't support inline HTML. It's probably solvable by using a postprocessor, but that feels like a tedious rabbit hole. Instead, I want to take the same [path as Jonas](https://www.jonashietala.se/blog/2024/02/02/blogging_in_djot_instead_of_markdown/) and use [Djot](https://www.djot.net/) to write content. Djot supports adding [inline attributes](https://htmlpreview.github.io/?https://github.com/jgm/djot/blob/master/doc/syntax.html#inline-attributes) which could be used like this:
+Unfortunately, the markdown parser used by NimblePublisher, [Earmark](https://github.com/pragdave/earmark) doesn't support inline HTML. It's probably solvable by using a postprocessor, but that feels like a tedious rabbit hole. Instead, I want to take the same [path as Jonas](https://www.jonashietala.se/blog/2024/02/02/blogging_in_djot_instead_of_markdown/) and use [Djot](https://www.djot.net/) to write Posts. Djot supports adding [inline attributes](https://htmlpreview.github.io/?https://github.com/jgm/djot/blob/master/doc/syntax.html#inline-attributes) which could be used like this:
 
 ```
 This is some markdown with inline Elixir code: `def process(value), do: value`{.makeup .elixir}

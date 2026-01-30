@@ -1,6 +1,6 @@
 defmodule Ackurat.Render.Post do
   use Phoenix.Component
-  alias Ackurat.Content
+  alias Ackurat.Posts
   import Ackurat.Render.Layout
   import Phoenix.HTML
 
@@ -13,18 +13,18 @@ defmodule Ackurat.Render.Post do
   end
 
   def get_adjacent(id) do
-    {prev, next} = Content.adjacent_posts(id)
+    {prev, next} = Posts.adjacent_posts(id)
     {prev, next}
   end
 
   def get_previous(id) do
-    case Content.adjacent_posts(id) do
+    case Posts.adjacent_posts(id) do
       {prev, _} -> prev
     end
   end
 
   def get_next(id) do
-    case Content.adjacent_posts(id) do
+    case Posts.adjacent_posts(id) do
       {_, next} -> next
     end
   end

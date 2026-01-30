@@ -1,7 +1,7 @@
 defmodule Ackurat.Router do
   use Plug.Router
 
-  alias Ackurat.Content
+  alias Ackurat.Posts
   alias Ackurat.Render.Layout
   alias Ackurat.Render.Post
   alias Ackurat.Render.Pages
@@ -63,9 +63,7 @@ defmodule Ackurat.Router do
   end
 
   get "/" do
-    env = if Mix.env() == :prod, do: :prod, else: :dev
-    posts = Content.active_posts(env) |> Enum.take(5)
-
+    posts = Posts.active_posts() |> Enum.take(5)
     html = render_to_string(Pages.index(%{posts: posts}))
 
     conn
@@ -75,9 +73,8 @@ defmodule Ackurat.Router do
   end
 
   get "/archive" do
-    env = if Mix.env() == :prod, do: :prod, else: :dev
-    posts = Content.active_posts(env)
-    tags = Content.all_keywords()
+    posts = Posts.active_posts()
+    tags = Posts.all_keywords()
 
     html = render_to_string(Pages.archive(%{posts: posts, tags: tags}))
 
@@ -99,7 +96,7 @@ defmodule Ackurat.Router do
   end
 
   get "/feed" do
-    xml = Ackurat.Render.Rss.rss(Content.active_posts())
+    xml = Ackurat.Render.Rss.rss(Posts.active_posts())
 
     conn
     |> put_resp_header("content-type", "application/xml")
@@ -108,7 +105,7 @@ defmodule Ackurat.Router do
   end
 
   get "/sitemap.xml" do
-    xml = Ackurat.Render.Layout.sitemap(Content.pages())
+    xml = Ackurat.Render.Layout.sitemap(Ackurat.Content.content())
 
     conn
     |> put_resp_header("content-type", "application/xml")
@@ -116,79 +113,45 @@ defmodule Ackurat.Router do
     |> send_resp(200, xml)
   end
 
-  get "/*path" do
-    route = "/" <> Enum.join(conn.path_info, "/") <> "/"
-
-    case Enum.find(Content.pages(), fn page -> page.route == route end) do
-      nil ->
-        not_found_page = Content.not_found_page()
-
-        html =
-          render_to_string(
-            Layout.page(%{
-              title: not_found_page.title,
-              description: not_found_page.description,
-              body: not_found_page.body,
-              route: not_found_page.route
-            })
-          )
-
-        conn
-        |> put_resp_header("content-type", "text/html; charset=utf-8")
-        |> put_resp_header("cache-control", "no-cache")
-        |> send_resp(404, html)
-
-      page ->
-        html =
-          case page.type do
-            :post ->
-              render_to_string(
-                Post.post(%{
-                  title: page.title,
-                  description: page.description,
-                  body: page.body,
-                  route: page.route,
-                  date: page.date,
-                  keywords: page.keywords,
-                  id: page.id,
-                  toc: page.toc || []
-                })
-              )
-
-            :page ->
-              render_to_string(
-                Layout.page(%{
-                  title: page.title,
-                  description: page.description,
-                  body: page.body,
-                  route: page.route
-                })
-              )
-          end
-
-        conn
-        |> put_resp_header("content-type", "text/html; charset=utf-8")
-        |> put_resp_header("cache-control", "public, max-age=3600")
-        |> send_resp(200, html)
-    end
-  end
-
-  match _ do
-    not_found_page = Content.not_found_page()
+  get "/posts/:id" do
+    post = Posts.post_by_id(id)
 
     html =
       render_to_string(
-        Layout.page(%{
-          title: not_found_page.title,
-          description: not_found_page.description,
-          body: not_found_page.body,
-          route: not_found_page.route
+        Post.post(%{
+          title: post.title,
+          description: post.description,
+          body: post.body,
+          route: post.route,
+          date: post.date,
+          keywords: post.keywords,
+          id: post.id,
+          toc: post.toc || []
         })
       )
 
     conn
     |> put_resp_header("content-type", "text/html; charset=utf-8")
-    |> put_resp_header("cache-control", "no-cache")
-    |> send_resp(404, html)
+    |> put_resp_header("cache-control", "public, max-age=3600")
+    |> send_resp(200, html)
+  end
+
+  get "/:slug" do
+    page = Ackurat.Pages.get_by_slug(slug)
+
+    html =
+      render_to_string(
+        Layout.page(%{
+          title: page.title,
+          description: page.description,
+          body: page.body,
+          route: page.route
+        })
+      )
+
+    conn
+    |> put_resp_header("content-type", "text/html; charset=utf-8")
+    |> put_resp_header("cache-control", "public, max-age=3600")
+    |> send_resp(200, html)
   end
 end
