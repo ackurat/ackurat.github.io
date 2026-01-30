@@ -56,15 +56,14 @@ defmodule Ackurat.Router do
     end
   end
 
-  defp render_to_string(component) do
+  defp render(component) do
     component
     |> Phoenix.HTML.Safe.to_iodata()
-    |> IO.iodata_to_binary()
   end
 
   get "/" do
     posts = Posts.active_posts() |> Enum.take(5)
-    html = render_to_string(Pages.index(%{posts: posts}))
+    html = render(Pages.index(%{posts: posts}))
 
     conn
     |> put_resp_header("content-type", "text/html; charset=utf-8")
@@ -76,7 +75,7 @@ defmodule Ackurat.Router do
     posts = Posts.active_posts()
     tags = Posts.all_keywords()
 
-    html = render_to_string(Pages.archive(%{posts: posts, tags: tags}))
+    html = render(Pages.archive(%{posts: posts, tags: tags}))
 
     conn
     |> put_resp_header("content-type", "text/html; charset=utf-8")
@@ -87,7 +86,7 @@ defmodule Ackurat.Router do
   get "/keywords/:keyword" do
     keyword = conn.path_params["keyword"]
 
-    html = render_to_string(Pages.keyword(keyword))
+    html = render(Pages.keyword(keyword))
 
     conn
     |> put_resp_header("content-type", "text/html; charset=utf-8")
@@ -117,7 +116,7 @@ defmodule Ackurat.Router do
     post = Posts.post_by_id(id)
 
     html =
-      render_to_string(
+      render(
         Post.post(%{
           title: post.title,
           description: post.description,
@@ -140,7 +139,7 @@ defmodule Ackurat.Router do
     page = Ackurat.Pages.get_by_slug(slug)
 
     html =
-      render_to_string(
+      render(
         Layout.page(%{
           title: page.title,
           description: page.description,

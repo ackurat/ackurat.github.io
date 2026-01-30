@@ -1,8 +1,10 @@
 defmodule Ackurat.Pages do
   use NimblePublisher,
     build: Ackurat.Page,
-    from: Application.app_dir(:ackurat, "priv/pages/**/*.md"),
-    as: :pages
+    from: Application.app_dir(:ackurat, "priv/pages/**/*.{md,dj}"),
+    as: :pages,
+    highlighters: [],
+    html_converter: Ackurat.Convert
 
   def pages, do: @pages
 

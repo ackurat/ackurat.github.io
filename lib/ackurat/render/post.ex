@@ -140,12 +140,12 @@ defmodule Ackurat.Render.Post do
         <.footer>
           <div class="flex justify-between">
             <%= if get_previous(@id) != :nil do %>
-              <a href={"/" <> get_previous(@id)}>
+              <a href={"/posts/" <> get_previous(@id)}>
                 Previous
               </a>
             <% end %>
             <%= if get_next(@id) != :nil do %>
-              <a href={"/" <> get_next(@id)}>
+              <a href={"/posts/" <> get_next(@id)}>
                 Next
               </a>
             <% end %>

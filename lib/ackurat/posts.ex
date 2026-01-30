@@ -11,16 +11,10 @@ defmodule Ackurat.Posts do
     highlighters: [],
     html_converter: Ackurat.Convert
 
-  def posts, do: @posts
-
-  def all_posts do
-    posts()
-    |> Enum.filter(&(&1.type == :post))
-    |> Enum.sort_by(& &1.date, {:desc, Date})
-  end
+  def posts, do: @posts |> Enum.sort_by(& &1.date, {:desc, Date})
 
   def post_by_id(id) do
-    all_posts() |> Enum.find(&(&1.id == id))
+    posts() |> Enum.find(&(&1.id == id))
   end
 
   def posts_by_keyword(keyword) do
@@ -35,7 +29,7 @@ defmodule Ackurat.Posts do
   end
 
   def adjacent_posts(id) do
-    posts = all_posts()
+    posts = posts()
     idx = posts |> Enum.find_index(&(&1.id == id))
     previous = posts |> Enum.fetch(idx - 1)
     next = posts |> Enum.fetch(idx + 1)
@@ -50,16 +44,8 @@ defmodule Ackurat.Posts do
 
   def active_posts() do
     case Mix.env() do
-      :prod -> all_posts() |> Enum.reject(& &1.draft)
-      :dev -> all_posts()
+      :prod -> posts() |> Enum.reject(& &1.draft)
+      :dev -> posts()
     end
-  end
-
-  def about_page do
-    posts() |> Enum.find(&(&1.id == "about"))
-  end
-
-  def not_found_page do
-    posts() |> Enum.find(&(&1.id == "404"))
   end
 end

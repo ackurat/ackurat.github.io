@@ -195,7 +195,7 @@ defmodule Ackurat.Render.Layout do
           <.heading>
             <a href={@route}><%= @title %></a>
           </.heading>
-          <article class="text-xl">
+          <article class="text-l">
             <%= raw @body %>
           </article>
         </div>
