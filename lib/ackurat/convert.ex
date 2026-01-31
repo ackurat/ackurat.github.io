@@ -34,7 +34,7 @@ defmodule Ackurat.Convert do
 
     children
     |> Floki.text()
-    |> Autumn.highlight!(
+    |> Lumis.highlight!(
       language: language,
       formatter:
         {:html_multi_themes,
@@ -59,7 +59,7 @@ defmodule Ackurat.Convert do
     {"code", code_attrs, code_children} =
       children
       |> Floki.text()
-      |> Autumn.highlight!(
+      |> Lumis.highlight!(
         language: language,
         formatter:
           {:html_multi_themes,

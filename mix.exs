@@ -34,7 +34,7 @@ defmodule Ackurat.MixProject do
       {:exsync, "~> 0.4", only: :dev},
       {:tailwind, "~> 0.4.1"},
       {:djot, "~> 0.1.4"},
-      {:autumn, "~> 0.6.0"},
+      {:lumis, "~> 0.1.0"},
       {:floki, "~> 0.38"},
       {:html5ever, "~> 0.16"}
     ]
