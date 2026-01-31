@@ -3,8 +3,11 @@ MIX_ENV = "prod"
 
 [tasks]
 fetch = "git pull origin release"
-release = "mix release ackurat --overwrite"
-replace = "sudo systemctl reload ackurat"
+release = [
+    "mix release ackurat --overwrite",
+    "sudo mv _build /opt/ackurat/app"
+    ]
+replace = "sudo systemctl restart ackurat"
 
 [tools]
 elixir = "1.19.5-otp-28"
