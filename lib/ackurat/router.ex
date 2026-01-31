@@ -153,4 +153,10 @@ defmodule Ackurat.Router do
     |> put_resp_header("cache-control", "public, max-age=3600")
     |> send_resp(200, html)
   end
+
+  match _ do
+    conn
+    |> put_resp_header("cache-control", "public, max-age=3600")
+    |> send_resp(404, "not found")
+  end
 end
