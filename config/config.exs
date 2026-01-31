@@ -15,10 +15,10 @@ config :tailwind,
 config :floki, :html_parser, Floki.HTMLParser.Html5ever
 
 config :ackurat, :site,
-  title: "ackurat.github.io",
-  description: "Ackurat",
+  title: "dev.liliemark.se",
+  description: "A personal website",
   author: "Adam CL",
-  url: "https://ackurat.github.io",
+  url: "https://dev.liliemark.se",
   email: "dev@liliemark.se",
   copyright:
     "This work is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-nd/4.0/"

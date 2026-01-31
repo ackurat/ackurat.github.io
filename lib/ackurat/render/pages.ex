@@ -57,7 +57,7 @@ defmodule Ackurat.Render.Pages do
   def archive(assigns) do
     ~H"""
     <.layout
-      title={}
+      title={"Archive"}
       description={}
       route="/"
       og_type="website"

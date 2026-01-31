@@ -1,0 +1,12 @@
+[env]
+MIX_ENV = "prod"
+
+[tasks]
+fetch = "git pull origin release"
+release = "mix release ackurat --overwrite"
+replace = "sudo systemctl reload ackurat"
+
+[tools]
+elixir = "1.19.5-otp-28"
+erlang = "28.3.1"
+nodejs = "24.7.0"

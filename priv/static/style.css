@@ -276,9 +276,9 @@
   .table {
     display: table;
   }
-  .size-60 {
-    width: calc(var(--spacing) * 60);
-    height: calc(var(--spacing) * 60);
+  .size-30 {
+    width: calc(var(--spacing) * 30);
+    height: calc(var(--spacing) * 30);
   }
   .h-1 {
     height: calc(var(--spacing) * 1);
